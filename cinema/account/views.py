@@ -14,12 +14,20 @@ def login_user(request):
                     if user.is_superuser:
                         return redirect('admin')
                     else:
-                        return redirect('')
+                        return redirect('mainpage')
             else:
                 return render(request, 'account/login_error.html')
     else:
         form = LoginForm()
     return render(request, 'account/login.html', {'form': form})
+
+def logout_user(request):
+    if request.user.is_superuser:
+        logout(request)
+        return redirect('login')
+    else:
+        logout(request)
+        return redirect('mainpage')
 
 
 def register(request):

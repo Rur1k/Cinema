@@ -10,8 +10,8 @@
 </head>
 
 <body>
-  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+`  <header class="d-flex  align-items-center  justify-content-md-between py-2 mb-6 border-bottom">
+      <a href="/" class="d-flex align-items-center col-md-2 mb-2 mb-md-0 text-dark text-decoration-none">
         <h1>CINEMA</h1>
       </a>
 
@@ -24,7 +24,7 @@
         <li>
           <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Dropdown
+                О кинотеатре
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -36,15 +36,8 @@
 
       <div class="col-md-4 text-end">
           {% if request.user.is_authenticated %}
-                <div class="btn">В логине</div>
-            {% if not request.user.is_superuser %}
-                <button type="button" class="btn btn-outline-primary me-2">Управление</button>
-            {% endif %}
-            {% if request.user.is_superuser %}
-                <button type="button" class="btn btn-outline-primary me-2">Управление</button>
-            {% endif %}
-
-          <button type="button" class="btn btn-primary">Выход</button>
+          <div class="btn">В логине</div>
+          <button type="button" class="btn btn-primary" onclick="location.href='{% url 'logout' %}'">Выход</button>
           {% else %}
             <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='{% url 'login' %}'">Вход</button>
             <button type="button" class="btn btn-primary" onclick="location.href='{% url 'register' %}'">Регистрация</button>
@@ -54,6 +47,10 @@
 
   {% block content %}
   {% endblock %}
-<script src="{% static 'js/bootstrap.bundle.js'%}"></script>
+
+    <script src="{% static 'js/bootstrap.bundle.js'%}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'js/popper.min.js'%}"></script>
+
 </body>
 </html>
