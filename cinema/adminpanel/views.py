@@ -13,14 +13,16 @@ def films(request):
 
 def add_film(request):
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = FilmForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_film = form.save(commit=False)
+            new_film.save()
             return redirect('films')
-
-    form = FilmForm()
-
-    data = {
-        'form': form,
-    }
-    return render(request, "adminpanel/add_film.html", data)
+        else:
+            return render(request, "adminpanel/add_film.html")
+    else:
+        form = FilmForm()
+        data = {
+            'form': form,
+        }
+        return render(request, "adminpanel/add_film.html", data)

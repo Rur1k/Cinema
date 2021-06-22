@@ -1,6 +1,5 @@
-from django.forms import ModelForm, TextInput, Textarea, Select
-from .models import Film
 from django import forms
+from .models import Film
 
 class FilmForm(forms.ModelForm):
     class Meta:
@@ -25,22 +24,80 @@ class FilmForm(forms.ModelForm):
                   'format_film',
                   ]
 
-        film_name = forms.CharField()
-        relese_year = forms.DateField()
-        country = forms.CharField()
-        producer = forms.CharField()
-        director = forms.CharField()
-        screenwriter = forms.CharField()
-        composer = forms.CharField()
-        operator = forms.CharField()
-        genre = forms.MultipleChoiceField()
-        budget = forms.CharField()
-        age = forms.CharField()
-        time_film = forms.CharField()
-        description_film = forms.CharField(widget=forms.Textarea)
-        main_picture = forms.ImageField()
-        status_film = forms.ChoiceField()
-        date_premiere = forms.DateField()
-        trailer = forms.URLField()
-        format_film = forms.MultipleChoiceField()
 
+
+        widgets = {
+            'film_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Название фильма'
+            }),
+            'relese_year': forms.DateInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Год выхода',
+                'type': 'date',
+            }),
+            'country': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Страна производсва'
+            }),
+            'producer': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Продюсер',
+            }),
+            'director': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Режисер',
+            }),
+            'screenwriter': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Сценарист'
+            }),
+            'composer': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Композитор'
+            }),
+            'operator': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Оператор'
+            }),
+            'genre': forms.SelectMultiple(attrs={
+                'class': 'form-control',
+                'placeholder': 'Жанр'
+            }),
+            'budget': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Бюджет'
+            }),
+            'age': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Возраст просмотра'
+            }),
+            'time_film': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Длительность фильма'
+            }),
+            'description_film': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Описание фильма'
+            }),
+            'main_picture': forms.ClearableFileInput(attrs={
+                'class': '',
+            }),
+            'status_film': forms.Select(attrs={
+                'class': 'form-control',
+                'placeholder': 'Статус фильма'
+            }),
+            'date_premiere': forms.DateInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Дата примьеры',
+                'type': 'date',
+            }),
+            'trailer': forms.URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ссылка на трейлер youtube'
+            }),
+            'format_film': forms.SelectMultiple(attrs={
+                'class': 'form-control',
+                'placeholder': 'Формат фильма'
+            }),
+        }
