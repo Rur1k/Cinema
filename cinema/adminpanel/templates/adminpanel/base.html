@@ -34,7 +34,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{% static 'dist/img/AdminLTELogo.png' %}" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="{% static 'img/logo.png' %}" alt="AdminLTELogo" height="60" width="60">
   </div>
 
   <!-- Navbar -->
@@ -45,7 +45,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Сайт</a>
+        <a href="{% url 'mainpage' %}" class="nav-link">Сайт</a>
       </li>
     </ul>
 
@@ -64,7 +64,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="{% static 'dist/img/AdminLTELogo.png'%}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="{% static 'img/logo.png'%}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">CinemaAdmin</span>
     </a>
 
@@ -77,7 +77,7 @@
                with font-awesome or any other icon font library -->
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{% url 'admin' %}" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Статистика
@@ -93,7 +93,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{% url 'films' %}" class="nav-link">
               <i class="nav-icon fas fa-film"></i>
               <p>
                 Фильмы
@@ -151,11 +151,26 @@
     </div>
   </aside>
 
+    <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">{% block name %}{% endblock %}</h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+<section class="content">
 {% block content %}
 
 
 
 {% endblock %}
+</section>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <strong>Copyright &copy; 2021 Galaxy Cinema Admin.</strong>

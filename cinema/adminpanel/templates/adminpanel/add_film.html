@@ -1,0 +1,53 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Новый фильм{% endblock %}
+
+{% block name %}Добавление нового фильма{% endblock %}
+
+{% block content %}
+
+<div class="add-film">
+  <form method="POST">
+    {% csrf_token %}
+    <h4>Название фильма:</h4>
+    {{ form.film_name }}
+    <h4>Год выхода:</h4>
+    {{ form.relese_year }}
+    <h4>Страна производсва:</h4>
+    {{ form.country }}
+    <h4>Продюсер:</h4>
+    {{ form.producer }}
+    <h4>Режисер:</h4>
+    {{ form.director }}
+    <h4>Сценарист:</h4>
+    {{ form.screenwriter }}
+    <h4>Копрозитор:</h4>
+    {{ form.composer }}
+    <h4>Опратор:</h4>
+    {{ form.operator }}
+    <h4>Жанр:</h4>
+    {{ form.genre }}
+    <h4>Бюджет:</h4>
+    {{ form.budget }}
+    <h4>Возрастное ограничение:</h4>
+    {{ form.age }}
+    <h4>Длительность фильма:</h4>
+    {{ form.time_film }}
+    <h4>Описание фильма:</h4>
+    {{ form.description_film }}
+    <h4>Главная картинка:</h4>
+    {{ form.main_picture }}
+    <h4>Статус фильма:</h4>
+    {{ form.status_film }}
+    <h4>Дата примьеры:</h4>
+    {{ form.date_premiere }}
+    <h4>Трейлер фильма:</h4>
+    {{ form.trailer }}
+    <h4>Форма фильма:</h4>
+    {{ form.format_film }}
+    <input type="submit" class="btn btn-outline-primary me-2" value="Добавить">
+  </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Фильмы{% endblock %}
+
+{% block name %}Фильмы{% endblock %}
+
+{% block content %}
+
+<div class="col-md-3 text-end">
+    <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='{% url 'add_film' %}'">Добавить фильм</button><br><br>
+</div>
+
+<h2>Список фильмов текущих:</h2>
+
+<div class="row">
+    {% for film in films%}
+    <div class="p-2 bd-bd-highlight">
+        <a href="#">
+          <img src="{{ film.main_picture.url }}" width="200" height="295"><br>
+          <text>{{ film.film_name }}</text>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+<h2>Список фильмов которые покажут скоро:</h2>
+
+<h2>Архив фильмов:</h2>
+
+{% endblock %}
