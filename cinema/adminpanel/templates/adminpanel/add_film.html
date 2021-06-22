@@ -8,7 +8,7 @@
 {% block content %}
 
 <div class="add-film">
-  <form method="POST">
+  <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
       {{ form.film_name }}<br>
       {{ form.relese_year }}<br>
@@ -28,6 +28,7 @@
       {{ form.date_premiere }}<br>
       {{ form.trailer }}<br>
       {{ form.format_film }}<br>
+      {{ form.errors }}
 
     <input type="submit" class="btn btn-outline-primary me-2" value="Добавить">
   </form>

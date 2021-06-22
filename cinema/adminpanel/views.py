@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Film
 from .forms import FilmForm
 
@@ -13,16 +13,15 @@ def films(request):
 
 def add_film(request):
     if request.method == 'POST':
-        form = FilmForm(request.POST)
+        form = FilmForm(request.POST, request.FILES)
         if form.is_valid():
-            new_film = form.save(commit=False)
-            new_film.save()
+            form.save()
             return redirect('films')
         else:
-            return render(request, "adminpanel/add_film.html")
-    else:
-        form = FilmForm()
-        data = {
-            'form': form,
-        }
-        return render(request, "adminpanel/add_film.html", data)
+            print(form.errors)
+
+    form = FilmForm()
+    data = {
+        'form': form,
+    }
+    return render(request, "adminpanel/add_film.html", data)

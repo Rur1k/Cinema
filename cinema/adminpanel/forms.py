@@ -24,8 +24,6 @@ class FilmForm(forms.ModelForm):
                   'format_film',
                   ]
 
-
-
         widgets = {
             'film_name': forms.TextInput(attrs={
                 'class': 'form-control',
