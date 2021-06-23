@@ -29,10 +29,9 @@ class FilmForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Название фильма'
             }),
-            'relese_year': forms.DateInput(attrs={
+            'relese_year': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Год выхода',
-                'type': 'date',
+                'placeholder': 'Год выхода'
             }),
             'country': forms.TextInput(attrs={
                 'class': 'form-control',

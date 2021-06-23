@@ -4,14 +4,16 @@ header {
     margin-right: 10%;
 }
 
-.container{
-    background-color: grey;
+.container-main{
+    background-color: #0e1822;
     margin-left: 10%;
     margin-right: 10%;
+    padding: 1.5%
 }
 
 .container-bottom {
-    background-color: white;
+    background-color: grey;
     margin-left: 10%;
     margin-right: 10%;
+    padding: 1.5%
 }

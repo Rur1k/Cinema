@@ -1,0 +1,32 @@
+{% extends 'userpage/base_userpage.html' %}
+{% load static %}
+{% block title %}{{ film.film_name }}{% endblock %}
+
+{% block content %}
+<div class="text-white">
+  <iframe width="330" height="200"
+    src="{{ film.trailer }}"
+    frameborder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+</iframe>
+    {{ form.film_name }}<br>
+      {{ film.relese_year }}<br>
+      {{ film.country }}<br>
+      {{ film.producer }}<br>
+      {{ film.director }}<br>
+      {{ film.screenwriter }}<br>
+      {{ film.composer }}<br>
+      {{ film.operator }}<br>
+      {{ film.genre }}<br>
+      {{ film.budget }}<br>
+      {{ film.age }}<br>
+      {{ film.time_film }}<br>
+      {{ film.description_film }}<br>
+      {{ film.main_picture }}<br> <br>
+      {{ film.status_film }}<br>
+      {{ film.date_premiere }}<br>
+      {{ film.trailer }}<br>
+      {{ film.format_film }}<br>
+  </div>
+{% endblock %}

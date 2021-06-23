@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.admin, name='admin'),
     path('films/', views.films, name='films'),
     path('addfilm/', views.add_film, name='add_film'),
+    path('edit/<int:pk>', views.UpdateFilmView.as_view(), name='editfilm')
 ]

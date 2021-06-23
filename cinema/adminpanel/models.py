@@ -36,7 +36,7 @@ class Seo_block(models.Model):
 class Film(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
     film_name = models.CharField('Название фильма', max_length=64)
-    relese_year = models.DateField('Год выхода')
+    relese_year = models.CharField('Год выхода', max_length=64)
     country = models.CharField('Страна производитель', max_length=64)
     producer = models.CharField('Продюсер', max_length=255)
     director = models.CharField('Режисер', max_length=255)
