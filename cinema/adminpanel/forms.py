@@ -27,7 +27,7 @@ class FilmForm(forms.ModelForm):
         widgets = {
             'film_name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Название фильма'
+                'placeholder': 'Название фильма',
             }),
             'relese_year': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -58,8 +58,7 @@ class FilmForm(forms.ModelForm):
                 'placeholder': 'Оператор'
             }),
             'genre': forms.SelectMultiple(attrs={
-                'class': 'form-control',
-                'placeholder': 'Жанр'
+                'class': 'form-select form-select-lg mb-3',
             }),
             'budget': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -79,6 +78,7 @@ class FilmForm(forms.ModelForm):
             }),
             'main_picture': forms.ClearableFileInput(attrs={
                 'class': '',
+                'id': 'img',
             }),
             'status_film': forms.Select(attrs={
                 'class': 'form-control',
