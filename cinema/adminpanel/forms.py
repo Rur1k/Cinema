@@ -58,7 +58,10 @@ class FilmForm(forms.ModelForm):
                 'placeholder': 'Оператор'
             }),
             'genre': forms.SelectMultiple(attrs={
-                'class': 'form-select form-select-lg mb-3',
+                'class': 'select',
+                'id': 'genre-select',
+                'multiple': 'multiple',
+                'v-model': 'selected'
             }),
             'budget': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -95,6 +98,7 @@ class FilmForm(forms.ModelForm):
             }),
             'format_film': forms.SelectMultiple(attrs={
                 'class': 'form-control',
-                'placeholder': 'Формат фильма'
+                'id': 'format-select',
+                'multiple': 'multiple'
             }),
         }

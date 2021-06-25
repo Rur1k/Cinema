@@ -1,0 +1,13 @@
+.multiselect-native-select{
+    width: 100%;
+}
+
+.multiselect-container{
+    width: 300px;
+    height: 200px;
+    overflow: auto;
+}
+
+.singleMultiple {
+  width: 300px;
+}
