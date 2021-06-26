@@ -5,6 +5,16 @@ from adminpanel.models import Film
 def main_page(request):
     return render(request, 'userpage/base_userpage.html')
 
+def hall(request):
+    rows = range(1, 13)
+    columns = range(1, 21)
+    data = {
+        'rows': rows,
+        'columns': columns,
+    }
+
+    return render(request, 'userpage/hall.html', data)
+
 
 def poster(request):
     context = {

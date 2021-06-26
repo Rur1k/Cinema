@@ -17,3 +17,42 @@ header {
     margin-right: 10%;
     padding: 1.5%
 }
+
+.cinema-row{
+    padding: 2px 0;
+}
+
+.cinema-row-label{
+    min-width: 60px;
+    display: inline-block;
+}
+
+.cinema-seat{
+    display: inline-block;
+}
+
+.cinema-seat input[type=checkbox] {
+    visibility: hidden;
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px,1px,1px,1px);
+}
+
+.cinema-seat input[type=checkbox] + label {
+    color: white;
+    border: 1px solid grey;
+    border-radius: 10%;
+    width: 30px;
+    height 30px;
+    text-align: center;
+    padding: 5px;
+}
+
+.cinema-seat input[type=checkbox]:checked + label {
+    color: darkorange;
+    border: 1px solid orange;
+    background-color: white;
+}

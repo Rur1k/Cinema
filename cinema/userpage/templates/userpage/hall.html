@@ -1,0 +1,37 @@
+{% extends 'userpage/base_userpage.html' %}
+{% load static %}
+{% block title %}Схема кинозала{% endblock %}
+
+{% block content %}
+
+
+<h1 class="text-white">Схема зала:</h1>
+<div class="row js-seat-container text-white">
+    <div class="col-md-10">
+        {% for row in rows %}
+        <div class="cinema-row">
+            <div class="cinema-row-label">Ряд {{ row }}</div>
+            {% for column in columns %}
+                <div class="cinema-seat">
+                    <input type="checkbox" id="check-{{ row }}-{{ column }}">
+                    <label for="check-{{ row }}-{{ column }}"
+                           class="js-seat-selector"
+                           data-seat-row="{{row}}"
+                           data-seat-col="{{ column }}">{{ column }}</label>
+                </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="col-md-2">
+        Выбранные места:
+        <div class="js-seat-result-container">
+
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
