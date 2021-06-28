@@ -27,6 +27,14 @@ class Format_film(models.Model):
 
 class Cinema(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
+    cinema_name = models.CharField('Название кинотеатра', max_length=64, null=True)
+    description_cinema = models.TextField('Описание зала', null=True)
+    conditions = models.TextField('Условия', null=True)
+    logo = models.ImageField(upload_to='static/img/cinema', null=True)
+    top_banner = models.ImageField(upload_to='static/img/cinema', null=True)
+
+    def __str__(self):
+        return self.cinema_name
 
 
 class Seo_block(models.Model):
@@ -56,5 +64,8 @@ class Film(models.Model):
 
     def __str__(self):
         return self.film_name
+
+
+
 
 
