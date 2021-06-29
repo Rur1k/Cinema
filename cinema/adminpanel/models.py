@@ -66,6 +66,17 @@ class Film(models.Model):
         return self.film_name
 
 
+class Cinema_hall(models.Model):
+    id = models.AutoField(unique=True, primary_key=True)
+    cinema_id = models.IntegerField('Ид зала', null=True)
+    number_hall = models.CharField('Номер зала', max_length=16)
+    create_date = models.DateTimeField(auto_now_add=True)
+    description_hall = models.TextField('Описание зала')
+    top_banner = models.ImageField(upload_to='static/img/cinema/hall')
+    row = models.IntegerField('Количесво рядов')
+    col = models.IntegerField('Количесов мест в ряду')
+
+
 
 
 

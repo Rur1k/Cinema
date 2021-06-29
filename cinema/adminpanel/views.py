@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Film, Cinema
-from .forms import FilmForm, CinemaForm
+from .models import Film, Cinema, Cinema_hall
+from .forms import FilmForm, CinemaForm, CinemaHallForm
 from django.views.generic import DetailView, UpdateView, DeleteView
 
 def admin(request):
@@ -58,9 +58,16 @@ def add_cinema(request):
     return render(request, "adminpanel/add_cinema.html", data)
 
 def cinema_info(request, cinema_id):
-    context = {
-        'cinema': Cinema.objects.get(id=cinema_id)
-    }
+    Halls = Cinema_hall.objects.filter(cinema_id=cinema_id)
+    if len(Halls) != 0:
+        context = {
+            'cinema': Cinema.objects.get(id=cinema_id),
+            'hall_list': Cinema_hall.objects.filter(cinema_id=cinema_id)
+        }
+    else:
+        context = {
+            'cinema': Cinema.objects.get(id=cinema_id),
+        }
     return render(request, 'adminpanel/cinema.html', context)
 
 class UpdateCinemaView(UpdateView):
@@ -68,3 +75,23 @@ class UpdateCinemaView(UpdateView):
     success_url = '../../admin/cinemas'
     template_name = 'adminpanel/add_cinema.html'
     form_class = CinemaForm
+
+
+def add_cinema_hall(request, cinema_id):
+    if request.method == 'POST':
+        form = CinemaHallForm(request.POST, request.FILES)
+        if form.is_valid():
+            save_to_cinema = form.save(commit=False)
+            save_to_cinema.cinema_id = cinema_id
+            save_to_cinema.save()
+            return redirect('cinema_info', cinema_id)
+        else:
+            print(form.errors)
+
+    form = CinemaHallForm()
+    data = {
+        'form': form,
+    }
+    return render(request, "adminpanel/add_hall.html", data)
+
+

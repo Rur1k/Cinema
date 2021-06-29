@@ -27,7 +27,24 @@
         </div>
     </div>
     <div>
-        <h1>Залы</h1>
+        <h1>Список залов</h1>
+        <table class="table table-bordered">
+            <thead>
+                <th scope="col">Название</th>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Эл. упр</th>
+            </thead>
+            <tbody>
+                {% for hall in hall_list %}
+                    <td>{{ hall.number_hall }}</td>
+                    <td>{{ hall.create_date }}</td>
+                    <td>Редактировать/Удалить</td>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="col-md-3 text-end">
+            <button type="button" class="btn btn-dark" onclick="location.href='{% url 'add_hall' cinema.id %}'">Добавить зал</button><br><br>
+        </div>
     </div>
   </div>
 {% endblock %}

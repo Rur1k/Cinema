@@ -1,5 +1,5 @@
 from django import forms
-from .models import Film, Cinema
+from .models import Film, Cinema, Cinema_hall
 
 class FilmForm(forms.ModelForm):
     class Meta:
@@ -136,4 +136,40 @@ class CinemaForm(forms.ModelForm):
                 'class': '',
                 'id': 'img',
             })
+        }
+
+
+class CinemaHallForm(forms.ModelForm):
+    class Meta:
+        model = Cinema_hall
+        fields = [
+            'number_hall',
+            'description_hall',
+            'top_banner',
+            'row',
+            'col',
+        ]
+
+        widgets = {
+            'number_hall': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Номера зала',
+            }),
+            'description_hall': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Описание зала'
+            }),
+            'top_banner': forms.ClearableFileInput(attrs={
+                'class': '',
+                'id': 'img',
+            }),
+            'row': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Количесов рядов'
+            }),
+            'col': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Количестов мест в ряду'
+            }),
+
         }

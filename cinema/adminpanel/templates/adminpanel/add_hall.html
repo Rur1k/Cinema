@@ -1,0 +1,50 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Добавление/Редактирование{% endblock %}
+
+{% block name %}Добавление/Редактирование зала{% endblock %}
+
+{% block content %}
+<div class="add-hall">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label">Номер зала: </label>
+           <div class="col-sm-10">
+               {{ form.number_hall }}
+           </div>
+      </div><br>
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label">Описание зала: </label>
+           <div class="col-sm-10">
+                {{ form.description_hall }}
+           </div>
+      </div><br>
+
+     <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label"> Верхний баннер: </label>
+         <div class="col-sm-10">
+             <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
+             {{ form.top_banner}}
+         </div>
+     </div> <br>
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label">Количесов рядом: </label>
+           <div class="col-sm-10">
+                {{ form.row }}
+           </div>
+      </div><br>
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label">Мест в ряду: </label>
+           <div class="col-sm-10">
+                {{ form.col }}
+           </div>
+      </div><br>
+
+    <input type="submit" class="btn btn-dark" value="Добавить/Сохранить"><br>
+  </form>
+</div>
+{% endblock %}
