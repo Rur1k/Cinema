@@ -94,4 +94,26 @@ def add_cinema_hall(request, cinema_id):
     }
     return render(request, "adminpanel/add_hall.html", data)
 
+def hall_info(request, hall_id):
+    hall_info_all = Cinema_hall.objects.get(id=hall_id)
+    row = hall_info_all.row + 1
+    col = hall_info_all.col + 1
+
+    rows = range(1, row)
+    columns = range(1, col)
+
+    data = {
+        'hall': hall_info_all,
+        'rows': rows,
+        'columns': columns,
+    }
+
+    return render(request, 'adminpanel/hall.html', data)
+
+
+class UpdateCinemaHallView(UpdateView):
+    model = Cinema_hall
+    success_url = '../../admin/cinemas'
+    template_name = 'adminpanel/add_hall.html'
+    form_class = CinemaHallForm
 
