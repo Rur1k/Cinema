@@ -1,5 +1,6 @@
 from django import forms
-from .models import Film, Cinema, Cinema_hall
+from .models import Film, Cinema, Cinema_hall, ImageFilm
+
 
 class FilmForm(forms.ModelForm):
     class Meta:
@@ -173,3 +174,14 @@ class CinemaHallForm(forms.ModelForm):
             }),
 
         }
+
+
+class ImageFilmForm(forms.ModelForm):
+    class Meta:
+        model = ImageFilm
+
+        fields = {
+            'image'
+        }
+
+        image = forms.ImageField()

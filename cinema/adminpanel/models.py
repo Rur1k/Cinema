@@ -77,6 +77,11 @@ class Cinema_hall(models.Model):
     col = models.IntegerField('Количесов мест в ряду')
 
 
+class ImageFilm(models.Model):
+    film = models.ForeignKey(Film, default=None, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='static/img/film', blank=True)
+
+
 
 
 
