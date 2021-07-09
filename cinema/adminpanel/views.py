@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Film, Cinema, Cinema_hall
-from .forms import FilmForm, CinemaForm, CinemaHallForm, ImageFilmForm
+from .forms import FilmForm, CinemaForm, CinemaHallForm
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.forms import formset_factory
 
@@ -16,27 +16,19 @@ def films(request):
 
 
 def add_film(request):
-    ImageFilmFormSet = formset_factory(ImageFilmForm, extra=2)
-
     if request.method == 'POST':
         form = FilmForm(request.POST, request.FILES)
-        formset = ImageFilmFormSet(request.POST, request.FILES)
-        if form.is_valid() and formset.is_valid():
+        if form.is_valid():
             film_form = form.save(commit=False)
-            image_form = formset.save(commit=False)
-            image_form.film = film_form.id
             film_form.save()
-            image_form.save()
             return redirect('films')
         else:
             print(form.errors)
             print(formset.errors)
 
-    formset = ImageFilmFormSet()
     form = FilmForm()
     data = {
         'form': form,
-        'formset': formset,
     }
     return render(request, "adminpanel/add_film.html", data)
 

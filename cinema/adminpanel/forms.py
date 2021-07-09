@@ -1,5 +1,5 @@
 from django import forms
-from .models import Film, Cinema, Cinema_hall, ImageFilm
+from .models import Film, Cinema, Cinema_hall
 
 
 class FilmForm(forms.ModelForm):
@@ -19,6 +19,11 @@ class FilmForm(forms.ModelForm):
                   'time_film',
                   'description_film',
                   'main_picture',
+                  'picture_1',
+                  'picture_2',
+                  'picture_3',
+                  'picture_4',
+                  'picture_5',
                   'status_film',
                   'date_premiere',
                   'trailer',
@@ -84,6 +89,11 @@ class FilmForm(forms.ModelForm):
                 'class': '',
                 'id': 'img',
             }),
+            'picture_1': forms.ClearableFileInput(),
+            'picture_2': forms.ClearableFileInput(),
+            'picture_3': forms.ClearableFileInput(),
+            'picture_4': forms.ClearableFileInput(),
+            'picture_5': forms.ClearableFileInput(),
             'status_film': forms.Select(attrs={
                 'class': 'form-control',
                 'placeholder': 'Статус фильма'
@@ -175,13 +185,3 @@ class CinemaHallForm(forms.ModelForm):
 
         }
 
-
-class ImageFilmForm(forms.ModelForm):
-    class Meta:
-        model = ImageFilm
-
-        fields = {
-            'image'
-        }
-
-        image = forms.ImageField()

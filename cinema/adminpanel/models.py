@@ -57,6 +57,11 @@ class Film(models.Model):
     time_film = models.CharField('Длительность фильма', max_length=64)
     description_film = models.TextField('Описание фильма')
     main_picture = models.ImageField(upload_to='static/img/film')
+    picture_1 = models.ImageField(upload_to='static/img/film', null=True)
+    picture_2 = models.ImageField(upload_to='static/img/film', null=True)
+    picture_3 = models.ImageField(upload_to='static/img/film', null=True)
+    picture_4 = models.ImageField(upload_to='static/img/film', null=True)
+    picture_5 = models.ImageField(upload_to='static/img/film', null=True)
     status_film = models.ForeignKey(Status_film, on_delete=models.CASCADE)
     date_premiere = models.DateField('Дата примьеры')
     trailer = models.URLField('Трейлер фильма')
@@ -77,9 +82,6 @@ class Cinema_hall(models.Model):
     col = models.IntegerField('Количесов мест в ряду')
 
 
-class ImageFilm(models.Model):
-    film = models.ForeignKey(Film, default=None, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='static/img/film', blank=True)
 
 
 
