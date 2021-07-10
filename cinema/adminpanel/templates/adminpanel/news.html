@@ -1,0 +1,32 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Новости{% endblock %}
+
+{% block name %}Новости{% endblock %}
+
+{% block content %}
+<div>
+        <h1>Новости</h1>
+        <table class="table table-bordered">
+            <thead>
+                <th scope="col">Название</th>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Эл. упр</th>
+            </thead>
+            <tbody>
+                {% for news in news_list %}
+                    <td>{{ news.name_news }}</td>
+                    <td>{{ news.create_date }}</td>
+                    <td>{{ news.status_news }}</td>
+                    <td><a href="">Редактировать</a>/Удалить</td>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="col-md-3 text-end">
+            <button type="button" class="btn btn-dark" onclick="location.href='{% url 'add_news' %}'">Добавить новость</button><br><br>
+        </div>
+    </div>
+
+{% endblock%}

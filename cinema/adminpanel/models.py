@@ -16,6 +16,13 @@ class Status_film(models.Model):
     def __str__(self):
         return self.name
 
+class Status_main(models.Model):
+    id = models.AutoField(unique=True, primary_key=True)
+    name = models.CharField('Статус глобальный', max_length=64)
+
+    def __str__(self):
+        return self.name
+
 
 class Format_film(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
@@ -82,7 +89,20 @@ class Cinema_hall(models.Model):
     col = models.IntegerField('Количесов мест в ряду')
 
 
-
+class News(models.Model):
+    id = models.AutoField(unique=True, primary_key=True)
+    name_news = models.CharField('Название новости', max_length=64)
+    description_news = models.TextField('Описание новости')
+    main_picture = models.ImageField(upload_to='static/img/cinema/news', null=True)
+    picture_1 = models.ImageField(upload_to='static/img/cinema/news', null=True)
+    picture_2 = models.ImageField(upload_to='static/img/cinema/news', null=True)
+    picture_3 = models.ImageField(upload_to='static/img/cinema/news', null=True)
+    picture_4 = models.ImageField(upload_to='static/img/cinema/news', null=True)
+    picture_5 = models.ImageField(upload_to='static/img/cinema/news', null=True)
+    url_youtube = models.URLField('Видео новости', null=True)
+    create_date = models.DateTimeField(auto_now_add=True)
+    pub_date = models.DateField('Дата активации')
+    status_news = models.ForeignKey(Status_main, on_delete=models.CASCADE)
 
 
 

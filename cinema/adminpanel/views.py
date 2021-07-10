@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
-from .models import Film, Cinema, Cinema_hall
-from .forms import FilmForm, CinemaForm, CinemaHallForm
+from .models import Film, Cinema, Cinema_hall, News
+from .forms import FilmForm, CinemaForm, CinemaHallForm, NewsForm
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.forms import formset_factory
 
 def admin(request):
     return render(request, 'adminpanel/statistics.html')
+
 
 def films(request):
     context = {
@@ -46,6 +47,7 @@ def cinemas(request):
     }
     return render(request, 'adminpanel/cinemas.html', context)
 
+
 def add_cinema(request):
     if request.method == 'POST':
         form = CinemaForm(request.POST, request.FILES)
@@ -61,6 +63,7 @@ def add_cinema(request):
     }
     return render(request, "adminpanel/add_cinema.html", data)
 
+
 def cinema_info(request, cinema_id):
     Halls = Cinema_hall.objects.filter(cinema_id=cinema_id)
     if len(Halls) != 0:
@@ -73,6 +76,7 @@ def cinema_info(request, cinema_id):
             'cinema': Cinema.objects.get(id=cinema_id),
         }
     return render(request, 'adminpanel/cinema.html', context)
+
 
 class UpdateCinemaView(UpdateView):
     model = Cinema
@@ -98,6 +102,7 @@ def add_cinema_hall(request, cinema_id):
     }
     return render(request, "adminpanel/add_hall.html", data)
 
+
 def hall_info(request, hall_id):
     hall_info_all = Cinema_hall.objects.get(id=hall_id)
     row = hall_info_all.row + 1
@@ -121,3 +126,25 @@ class UpdateCinemaHallView(UpdateView):
     template_name = 'adminpanel/add_hall.html'
     form_class = CinemaHallForm
 
+
+def news_list(request):
+    context = {
+        'news_list': News.objects.all()
+    }
+    return render(request, 'adminpanel/news.html', context)
+
+
+def add_news(request):
+    if request.method == 'POST':
+        form = NewsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('news')
+        else:
+            print(form.errors)
+
+    form = NewsForm()
+    data = {
+        'form': form,
+    }
+    return render(request, "adminpanel/add_news.html", data)

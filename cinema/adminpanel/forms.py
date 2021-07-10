@@ -1,5 +1,5 @@
 from django import forms
-from .models import Film, Cinema, Cinema_hall
+from .models import Film, Cinema, Cinema_hall, News
 
 
 class FilmForm(forms.ModelForm):
@@ -185,3 +185,50 @@ class CinemaHallForm(forms.ModelForm):
 
         }
 
+
+class NewsForm(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = [
+            'name_news',
+            'description_news',
+            'main_picture',
+            'picture_1',
+            'picture_2',
+            'picture_3',
+            'picture_4',
+            'picture_5',
+            'url_youtube',
+            'pub_date',
+            'status_news',
+        ]
+
+        widgets = {
+            'name_news': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Название новости',
+            }),
+            'description_news': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Описание новости'
+            }),
+            'main_picture': forms.ClearableFileInput(attrs={
+                'class': '',
+                'id': 'img',
+            }),
+            'picture_1': forms.ClearableFileInput(),
+            'picture_2': forms.ClearableFileInput(),
+            'picture_3': forms.ClearableFileInput(),
+            'picture_4': forms.ClearableFileInput(),
+            'picture_5': forms.ClearableFileInput(),
+            'status_news': forms.Select(attrs={
+                'class': 'form-control',
+                'placeholder': 'Статус новости'
+            }),
+            'pub_date': forms.DateInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Дата активации',
+                'type': 'date',
+            }),
+
+        }

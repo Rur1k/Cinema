@@ -13,4 +13,6 @@ urlpatterns = [
     path('cinema/<int:cinema_id>/addhall', views.add_cinema_hall, name='add_hall'),
     path('cinema/hall/<int:hall_id>', views.hall_info, name='hall_info'),
     path('edit_hall/<int:pk>', views.UpdateCinemaHallView.as_view(), name='edit_hall'),
+    path('news/', views.news_list, name='news'),
+    path('addnews/', views.add_news, name='add_news'),
 ]
