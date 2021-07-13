@@ -20,19 +20,25 @@
           <img src="{{ film.main_picture.url }}" width="200" height="295"><br>
           <text>{{ film.film_name }}</text>
         </a>
+        <br>
+        <a href="{% url 'delete_film' film.id %}">Удалить</a>
     </div>
     {% endfor %}
 </div>
 
 <h2>Список фильмов которые покажут скоро:</h2>
+<div class="row">
     {% for film in films_pending %}
     <div class="p-2 bd-bd-highlight">
         <a href="{% url 'editfilm' film.id %}">
           <img src="{{ film.main_picture.url }}" width="200" height="295"><br>
           <text>{{ film.film_name }}</text>
         </a>
+        <br>
+        <a href="{% url 'delete_film' film.id %}">Удалить</a>
     </div>
     {% endfor %}
+</div>
 <h2>Архив фильмов:</h2>
 
 {% endblock %}

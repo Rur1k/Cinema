@@ -1,0 +1,83 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Добавление/Редактирование{% endblock %}
+
+{% block name %}Добавление/Редактирование акции{% endblock %}
+
+{% block content %}
+<div class="add-news">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label">Статус акции: </label>
+           <div class="col-sm-10">
+                {{ form.status_stock }}
+           </div>
+       </div><br>
+
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label">Название акции: </label>
+           <div class="col-sm-10">
+               {{ form.name_stock }}
+           </div>
+      </div><br>
+
+      <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label">Дата публикации: </label>
+          <div class="col-sm-10">
+               {{ form.pub_date }}
+          </div>
+      </div><br>
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label">Описание: </label>
+           <div class="col-sm-10">
+                {{ form.description_stock }}
+           </div>
+      </div><br>
+
+      <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label"> Главная картинка: </label>
+          <div class="col-sm-10">
+              <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
+              {{ form.main_picture}}
+          </div>
+      </div> <br>
+
+      <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label"> Галерея картинок: </label>
+          <div class="col-sm-10">
+              <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
+              {{ form.picture_1}}
+          </div>
+          <div class="col-sm-10">
+              <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
+              {{ form.picture_2}}
+          </div>
+          <div class="col-sm-10">
+              <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
+              {{ form.picture_3}}
+          </div>
+          <div class="col-sm-10">
+              <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
+              {{ form.picture_4}}
+          </div>
+          <div class="col-sm-10">
+              <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
+              {{ form.picture_5}}
+          </div>
+      </div> <br>
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label">Ссылка на видео: </label>
+           <div class="col-sm-10">
+                {{ form.url_youtube }}
+           </div>
+       </div><br>
+
+    <input type="submit" class="btn btn-dark" value="Добавить/Сохранить"><br>
+  </form>
+</div>
+{% endblock %}

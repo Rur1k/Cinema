@@ -1,0 +1,22 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Удаление акции{{ stock.name_stock }}{% endblock %}
+
+{% block name %}Удаление акции{% endblock %}
+
+{% block content %}
+<div>
+  {% if request.user.is_authenticated %}
+  <h1>Удаление акции: "{{ stock.name_stock }}"</h1>
+  <p>Вы уверены что хотите удалить акцию?</p>
+
+  <form method="POST">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-dark" value="Удалить акцию">
+  </form>
+  {% else %}
+  <p>Для удаления акции надо <a href="{% url 'login' %}">авторизоватся.</a></p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Film, Cinema, Cinema_hall, News
-from .forms import FilmForm, CinemaForm, CinemaHallForm, NewsForm
+from .models import Film, Cinema, Cinema_hall, News, Stock
+from .forms import FilmForm, CinemaForm, CinemaHallForm, NewsForm, StockForm
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.forms import formset_factory
 
@@ -39,6 +39,12 @@ class UpdateFilmView(UpdateView):
     success_url = '../../admin/films'
     template_name = 'adminpanel/add_film.html'
     form_class = FilmForm
+
+
+class FilmDeleteView(DeleteView):
+    model = Film
+    success_url = '../../admin/deletedone/'
+    template_name = 'adminpanel/delete_film.html'
 
 
 def cinemas(request):
@@ -148,3 +154,62 @@ def add_news(request):
         'form': form,
     }
     return render(request, "adminpanel/add_news.html", data)
+
+
+class UpdateNewsView(UpdateView):
+    model = News
+    success_url = '../../admin/news'
+    template_name = 'adminpanel/add_news.html'
+    form_class = NewsForm
+
+
+def stocks(request):
+    context = {
+        'stocks': Stock.objects.all()
+    }
+    return render(request, 'adminpanel/stocks.html', context)
+
+
+def add_stock(request):
+    if request.method == 'POST':
+        form = StockForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('stocks')
+        else:
+            print(form.errors)
+
+    form = StockForm()
+    data = {
+        'form': form,
+    }
+    return render(request, "adminpanel/add_stock.html", data)
+
+
+class UpdateStockView(UpdateView):
+    model = Stock
+    success_url = '../../admin/stocks'
+    template_name = 'adminpanel/add_stock.html'
+    form_class = StockForm
+
+
+def delete_done(request):
+    return render(request, 'adminpanel/delete_done.html')
+
+
+class HallDeleteView(DeleteView):
+    model = Cinema_hall
+    success_url = '../../admin/deletedone/'
+    template_name = 'adminpanel/delete_hall.html'
+
+
+class NewsDeleteView(DeleteView):
+    model = News
+    success_url = '../../admin/deletedone/'
+    template_name = 'adminpanel/delete_news.html'
+
+
+class StockDeleteView(DeleteView):
+    model = Stock
+    success_url = '../../admin/deletedone/'
+    template_name = 'adminpanel/delete_stock.html'

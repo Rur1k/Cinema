@@ -1,0 +1,22 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Удаление фильма {{ film.film_name }}{% endblock %}
+
+{% block name %}Удаление фильма{% endblock %}
+
+{% block content %}
+<div>
+  {% if request.user.is_authenticated %}
+  <h1>Удаление фильма: "{{ film.film_name }}"</h1>
+  <p>Вы уверены что хотье удалить фильм?</p>
+
+  <form method="POST">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-dark" value="Удалить фильм">
+  </form>
+  {% else %}
+  <p>Для удаления фильма надо <a href="{% url 'login' %}">авторизоватся.</a></p>
+  {% endif %}
+</div>
+{% endblock %}

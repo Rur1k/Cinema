@@ -105,5 +105,21 @@ class News(models.Model):
     status_news = models.ForeignKey(Status_main, on_delete=models.CASCADE)
 
 
+class Stock(models.Model):
+    id = models.AutoField(unique=True, primary_key=True)
+    name_stock = models.CharField('Название акции', max_length=64)
+    description_stock = models.TextField('Описание акции')
+    main_picture = models.ImageField(upload_to='static/img/cinema/stock', null=True)
+    picture_1 = models.ImageField(upload_to='static/img/cinema/stock', null=True)
+    picture_2 = models.ImageField(upload_to='static/img/cinema/stock', null=True)
+    picture_3 = models.ImageField(upload_to='static/img/cinema/stock', null=True)
+    picture_4 = models.ImageField(upload_to='static/img/cinema/stock', null=True)
+    picture_5 = models.ImageField(upload_to='static/img/cinema/stock', null=True)
+    url_youtube = models.URLField('Видео акции', null=True)
+    create_date = models.DateTimeField(auto_now_add=True)
+    pub_date = models.DateField('Дата активации')
+    status_stock = models.ForeignKey(Status_main, on_delete=models.CASCADE)
+
+
 
 

@@ -1,0 +1,32 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Акции{% endblock %}
+
+{% block name %}Акции{% endblock %}
+
+{% block content %}
+<div>
+        <h1>Список акций</h1>
+        <table class="table table-bordered">
+            <thead>
+                <th scope="col">Название</th>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Эл. упр</th>
+            </thead>
+            {% for stock in stocks %}
+                <tbody>
+                    <td>{{ stock.name_stock }}</td>
+                    <td>{{ stock.create_date }}</td>
+                    <td>{{ stock.status_stock }}</td>
+                    <td><a href="{% url 'edit_stock' stock.id %}">Редактировать</a>/<a href="{% url 'delete_stock' stock.id %}">Удалить</a></td>
+                </tbody>
+            {% endfor %}
+        </table>
+        <div class="col-md-3 text-end">
+            <button type="button" class="btn btn-dark" onclick="location.href='{% url 'add_stock' %}'">Добавить акцию</button><br><br>
+        </div>
+    </div>
+
+{% endblock%}

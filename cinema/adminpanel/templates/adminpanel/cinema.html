@@ -34,13 +34,13 @@
                 <th scope="col">Дата создания</th>
                 <th scope="col">Эл. упр</th>
             </thead>
-            <tbody>
                 {% for hall in hall_list %}
+                <tbody>
                     <td>{{ hall.number_hall }}</td>
                     <td>{{ hall.create_date }}</td>
-                    <td><a href="{% url 'hall_info' hall.id%}">Редактировать</a>/Удалить</td>
+                    <td><a href="{% url 'hall_info' hall.id%}">Редактировать</a>/<a href="{% url 'delete_hall' hall.id %}">Удалить</a></td>
+                 </tbody>
                 {% endfor %}
-            </tbody>
         </table>
         <div class="col-md-3 text-end">
             <button type="button" class="btn btn-dark" onclick="location.href='{% url 'add_hall' cinema.id %}'">Добавить зал</button><br><br>
