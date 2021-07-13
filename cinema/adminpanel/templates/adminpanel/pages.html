@@ -1,0 +1,31 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Страницы{% endblock %}
+
+{% block name %}Страницы{% endblock %}
+
+{% block content %}
+<div>
+        <table class="table table-bordered">
+            <thead>
+                <th scope="col">Название</th>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Эл. упр</th>
+            </thead>
+            {% for page in pages %}
+                <tbody>
+                    <td>{{ page.name_page }}</td>
+                    <td>{{ page.create_date }}</td>
+                    <td>{{ page.status_page }}</td>
+                    <td><a href="">Редактировать</a>/<a href="">Удалить</a></td>
+                </tbody>
+            {% endfor %}
+        </table>
+        <div class="col-md-3 text-end">
+            <button type="button" class="btn btn-dark" onclick="location.href='{% url 'add_news' %}'">Добавить страницу</button><br><br>
+        </div>
+    </div>
+
+{% endblock%}

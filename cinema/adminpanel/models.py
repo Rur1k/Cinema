@@ -121,5 +121,21 @@ class Stock(models.Model):
     status_stock = models.ForeignKey(Status_main, on_delete=models.CASCADE)
 
 
+class Page(models.Model):
+    id = models.AutoField(unique=True, primary_key=True)
+    status_delete = models.ImageField("Возможность удаления", default=1)
+    name_page = models.CharField('Название страницы', max_length=32)
+    description_page = models.TextField('Описание')
+    main_picture = models.ImageField(upload_to='static/img/cinema/pages', null=True)
+    picture_1 = models.ImageField(upload_to='static/img/cinema/pages', null=True)
+    picture_2 = models.ImageField(upload_to='static/img/cinema/pages', null=True)
+    picture_3 = models.ImageField(upload_to='static/img/cinema/pages', null=True)
+    picture_4 = models.ImageField(upload_to='static/img/cinema/pages', null=True)
+    picture_5 = models.ImageField(upload_to='static/img/cinema/pages', null=True)
+    create_date = models.DateTimeField(auto_now_add=True)
+    status_page = models.ForeignKey(Status_main, on_delete=models.CASCADE)
+
+
+
 
 

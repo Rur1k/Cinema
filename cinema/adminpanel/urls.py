@@ -24,4 +24,5 @@ urlpatterns = [
     path('delete_hall/<int:pk>', views.HallDeleteView.as_view(), name='delete_hall'),
     path('delete_news/<int:pk>', views.NewsDeleteView.as_view(), name='delete_news'),
     path('delete_stock/<int:pk>', views.StockDeleteView.as_view(), name='delete_stock'),
+    path('pages/', views.pages, name='pages'),
 ]

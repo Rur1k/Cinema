@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Film, Cinema, Cinema_hall, News, Stock
+from .models import Film, Cinema, Cinema_hall, News, Stock, Page
 from .forms import FilmForm, CinemaForm, CinemaHallForm, NewsForm, StockForm
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.forms import formset_factory
@@ -213,3 +213,10 @@ class StockDeleteView(DeleteView):
     model = Stock
     success_url = '../../admin/deletedone/'
     template_name = 'adminpanel/delete_stock.html'
+
+
+def pages(request):
+    context = {
+        'pages': Page.objects.all()
+    }
+    return render(request, 'adminpanel/pages.html', context)
