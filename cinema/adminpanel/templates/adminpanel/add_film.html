@@ -107,8 +107,9 @@
        <div class="mb-2 row">
            <label class="col-sm-2 col-form-label text-right">Главное изображение: </label>
            <div class="col-sm-10">
-              <img id="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
-              {{ form.main_picture }}
+               <input id="upload-btn" type="image" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/><br>
+               <div hidden="hidden">{{ form.main_picture }}</div>
+               <span id="upload-text">Файл не загружен</span>
            </div>
        </div> <br>
 
@@ -168,6 +169,24 @@
 
 
     <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script>
+            const uploadFile = document.getElementById("img");
+            const uploadBtn = document.getElementById("upload-btn");
+            const uploadText = document.getElementById("upload-text");
+
+            uploadBtn.addEventListener("click", function () {
+                uploadFile.click();
+            });
+
+            uploadFile.addEventListener("change", function () {
+                if(uploadFile.value) {
+                    uploadText.innerText = uploadFile.value.match(/[\/\\]([\w\d\s\.\-(\)]+$/)[1];
+                }else {
+                    uploadText.innerText = "Файл не выбран";
+                }
+            });
+    </script>
+
     <script>
         $('#img').change(function () {
             var input = $(this)[0];

@@ -261,7 +261,7 @@ class StockForm(forms.ModelForm):
                 'placeholder': 'Описание акции'
             }),
             'main_picture': forms.ClearableFileInput(attrs={
-                'class': '',
+                'type': 'file',
                 'id': 'img',
             }),
             'picture_1': forms.ClearableFileInput(),
