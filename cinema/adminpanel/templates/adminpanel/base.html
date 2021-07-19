@@ -38,6 +38,9 @@
 </head>
 
   <body class="hold-transition sidebar-mini layout-fixed">
+
+  {% if request.user.is_superuser %}
+
     <div class="wrapper">
 
       <!-- Preloader -->
@@ -167,14 +170,14 @@
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
-              <div class="col-sm-6">
-                <h1 class="m-0">{% block name %}{% endblock %}</h1>
+              <div class="col-sm-12">
+                <h1 class="all-name-adminpanel">{% block name %}{% endblock %}</h1>
               </div><!-- /.col -->
             </div><!-- /.row -->
           </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-      <section class="content">
+      <section class="container-fluid inline-block">
       {% block content %}
 
 
@@ -182,21 +185,24 @@
       {% endblock %}
       </section>
 
-      <!-- /.content-wrapper -->
-      <footer class="main-footer">
-        <strong>Copyright &copy; 2021 Cinema Admin.</strong>
-        <div class="float-right d-none d-sm-inline-block">
-          <b>Version</b> 1.0.0
-        </div>
-      </footer>
+        <footer class="footer navbar-fixed-bottom">
+          <div class="footer-bottom">
+            <div class="container">
+              <div class="row">
+                <p class="pull-left">Copyright © 2021</p>
+                <p class="pull-right">Tishchenko Nikita</p>
+              </div>
+            </div>
+          </div>
+        </footer>
 
-      <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-        </aside>
+
       <!-- /.control-sidebar -->
 
     <!-- ./wrapper -->
+
+
+
 
       <!-- jQuery -->
       <script src="{% static 'plugins/jquery/jquery.min.js'%}"></script>
@@ -237,6 +243,8 @@
       <script src = "{% static 'js/bootstrap.min.js'%}" > </script>
       <script src = "{% static 'js/bootstrap-multiselect.js'%}" > </script>
       <script src="{% static 'js/rowandseat-film.js'%}"></script>
-
+  {% else %}
+        <p>Вы не авторизированы как администратор, пожалуйста <a href="{% url 'login' %}">авторизуйтесь как админстратор</a></p>
+  {% endif %}
   </body>
 </html>

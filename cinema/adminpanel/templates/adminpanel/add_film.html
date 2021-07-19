@@ -12,154 +12,156 @@
       {{ formset.management_data }}
       {% csrf_token %}
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Название фильма: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Название фильма: </label>
            <div class="col-sm-10">
                {{ form.film_name }}
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Год выхода: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Год выхода: </label>
            <div class="col-sm-10">
                 {{ form.relese_year }}
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Страна производства: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Страна производства: </label>
            <div class="col-sm-10">
                 {{ form.country }}
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Продюсер: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Продюсер: </label>
            <div class="col-sm-10">
                 {{ form.producer }}
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Режисер: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Режисер: </label>
            <div class="col-sm-10">
                 {{ form.director }}
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Сценарист: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Сценарист: </label>
            <div class="col-sm-10">
                 {{ form.screenwriter }}
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Композитор: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Композитор: </label>
            <div class="col-sm-10">
                 {{ form.composer }}
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Оператор: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Оператор: </label>
            <div class="col-sm-10">
                 {{ form.operator }}
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Жанр: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Жанр: </label>
            <div class="col-sm-10">
                {{ form.genre }}
 
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Бюджет: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Бюджет: </label>
            <div class="col-sm-10">
                 {{ form.budget }}
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Возраст просмотра: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Возраст просмотра: </label>
            <div class="col-sm-10">
                 {{ form.age }}
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Длительность фильма: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Длительность фильма: </label>
            <div class="col-sm-10">
                 {{ form.time_film }}
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Описание фильма: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Описание фильма: </label>
            <div class="col-sm-10">
                 {{ form.description_film }}
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Главное изображение: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Главное изображение: </label>
            <div class="col-sm-10">
               <img id="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
               {{ form.main_picture }}
            </div>
        </div> <br>
 
-        <div class="mb-3 row">
-            <label class="col-sm-2 col-form-label">Галерея картинок: </label>
-            <div class="col-sm-10">
-                {{ form.picture_1 }}
-            </div>
-            <div class="col-sm-10">
-                {{ form.picture_2 }}
-            </div>
-            <div class="col-sm-10">
-                {{ form.picture_3 }}
-            </div>
-            <div class="col-sm-10">
-                {{ form.picture_4 }}
-            </div>
-            <div class="col-sm-10">
-                {{ form.picture_5 }}
+        <div class="mb-2 row">
+            <div class="row">
+                <label class="col-sm-2 col-form-label text-right">Галерея картинок: </label>
+                    <div class="col">
+                        {{ form.picture_1 }}
+                    </div>
+                    <div class="col">
+                        {{ form.picture_2 }}
+                    </div>
+                    <div class="col">
+                        {{ form.picture_3 }}
+                    </div>
+                    <div class="col">
+                        {{ form.picture_4 }}
+                    </div>
+                    <div class="col">
+                        {{ form.picture_5 }}
+                    </div>
             </div>
        </div> <br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Статус фильма: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Статус фильма: </label>
            <div class="col-sm-10">
                 {{ form.status_film }}
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Дата примьеры: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Дата примьеры: </label>
            <div class="col-sm-10">
                 {{ form.date_premiere }}
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Трейлер: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Трейлер: </label>
            <div class="col-sm-10">
                 {{ form.trailer }}
            </div>
        </div><br>
 
-       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Формат фильма: </label>
+       <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Формат фильма: </label>
            <div class="col-sm-10">
                 {{ form.format_film }}
            </div>
        </div><br>
 
-        <input type="submit" class="btn btn-dark" value="Добавить/Сохранить"><br>
+        <input type="submit" class="btn btn-dark float-right" value="Добавить/Сохранить"><br>
   </form>
 </div>
 
