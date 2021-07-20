@@ -7,7 +7,7 @@
 
 {% block content %}
 <div class="col-md-3 float-right">
-    <button type="button" class="btn-news-stock btn btn-dark float-right" onclick="location.href=''">Создать Новую</button>
+    <button type="button" class="btn-news-stock btn btn-dark float-right" onclick="location.href='{% url 'add_page' %}'">Создать Новую</button>
     <br><br><br>
 </div>
 <div>
@@ -18,14 +18,28 @@
                 <th scope="col">Статус</th>
                 <th scope="col">Эл. упр</th>
             </thead>
+            {% for mainpage in main_page %}
+            <tbody>
+                    <td>{{ mainpage.name_page }}</td>
+                    <td>{{ mainpage.create_date }}</td>
+                    <td>{{ mainpage.status_page }}</td>
+                    <td>
+                        <a href=""><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    </td>
+                </tbody>
+            {% endfor %}
             {% for page in pages %}
                 <tbody>
                     <td>{{ page.name_page }}</td>
                     <td>{{ page.create_date }}</td>
                     <td>{{ page.status_page }}</td>
                     <td>
-                        <a href=""><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        <a href=""><i class="nav-icon fas fa-trash fa-2x"></i></a>
+                        {% if page.status_delete == 1 %}
+                            <a href="{% url 'edit_page' page.id %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                            <a href=""><i class="nav-icon fas fa-trash fa-2x"></i></a>
+                        {% else %}
+                            <a href="{% url 'edit_page' page.id %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        {% endif %}
                     </td>
                 </tbody>
             {% endfor %}

@@ -25,4 +25,6 @@ urlpatterns = [
     path('delete_news/<int:pk>', views.NewsDeleteView.as_view(), name='delete_news'),
     path('delete_stock/<int:pk>', views.StockDeleteView.as_view(), name='delete_stock'),
     path('pages/', views.pages, name='pages'),
+    path('addpage/', views.add_page, name='add_page'),
+    path('editpage/<int:pk>', views.UpdatePageView.as_view(), name='edit_page'),
 ]

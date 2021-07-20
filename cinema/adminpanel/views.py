@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Film, Cinema, Cinema_hall, News, Stock, Page
-from .forms import FilmForm, CinemaForm, CinemaHallForm, NewsForm, StockForm
+from .models import Film, Cinema, Cinema_hall, News, Stock, Page, MainPage
+from .forms import FilmForm, CinemaForm, CinemaHallForm, NewsForm, StockForm, PageForm
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.forms import formset_factory
 
@@ -217,6 +217,30 @@ class StockDeleteView(DeleteView):
 
 def pages(request):
     context = {
+        'main_page': MainPage.objects.all(),
         'pages': Page.objects.all()
     }
     return render(request, 'adminpanel/pages.html', context)
+
+
+def add_page(request):
+    if request.method == 'POST':
+        form = PageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('pages')
+        else:
+            print(form.errors)
+
+    form = PageForm()
+    data = {
+        'form': form,
+    }
+    return render(request, "adminpanel/add_page.html", data)
+
+
+class UpdatePageView(UpdateView):
+    model = Page
+    success_url = '../../admin/pages'
+    template_name = 'adminpanel/add_page.html'
+    form_class = PageForm

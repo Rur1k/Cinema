@@ -123,7 +123,7 @@ class Stock(models.Model):
 
 class Page(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
-    status_delete = models.ImageField("Возможность удаления", default=1)
+    status_delete = models.IntegerField("Возможность удаления", default=1)
     name_page = models.CharField('Название страницы', max_length=32)
     description_page = models.TextField('Описание')
     main_picture = models.ImageField(upload_to='static/img/cinema/pages', null=True)
@@ -134,6 +134,18 @@ class Page(models.Model):
     picture_5 = models.ImageField(upload_to='static/img/cinema/pages', null=True)
     create_date = models.DateTimeField(auto_now_add=True)
     status_page = models.ForeignKey(Status_main, on_delete=models.CASCADE)
+
+
+class MainPage(models.Model):
+    id = models.AutoField(unique=True, primary_key=True)
+    status_delete = models.IntegerField("Возможность удаления", default=0)
+    name_page = models.CharField('Название страницы', max_length=32, default='Главная страница')
+    phone_one = models.CharField('Номер телефона 1', max_length=32)
+    phone_two = models.CharField('Номер телефона 2', max_length=32)
+    seo_text = models.TextField('Описание')
+    create_date = models.DateTimeField(auto_now_add=True)
+    status_page = models.ForeignKey(Status_main, on_delete=models.CASCADE)
+
 
 
 

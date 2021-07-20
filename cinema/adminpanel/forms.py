@@ -1,5 +1,5 @@
 from django import forms
-from .models import Film, Cinema, Cinema_hall, News, Stock
+from .models import Film, Cinema, Cinema_hall, News, Stock, Page, MainPage
 
 
 class FilmForm(forms.ModelForm):
@@ -279,4 +279,43 @@ class StockForm(forms.ModelForm):
                 'type': 'date',
             }),
 
+        }
+
+
+class PageForm(forms.ModelForm):
+    class Meta:
+        model = Page
+        fields = [
+            'name_page',
+            'description_page',
+            'main_picture',
+            'picture_1',
+            'picture_2',
+            'picture_3',
+            'picture_4',
+            'picture_5',
+            'status_page',
+        ]
+
+        widgets = {
+            'name_page': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Название',
+            }),
+            'description_page': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Описание'
+            }),
+            'main_picture': forms.ClearableFileInput(attrs={
+                'type': 'file',
+                'id': 'img',
+            }),
+            'picture_1': forms.ClearableFileInput(),
+            'picture_2': forms.ClearableFileInput(),
+            'picture_3': forms.ClearableFileInput(),
+            'picture_4': forms.ClearableFileInput(),
+            'picture_5': forms.ClearableFileInput(),
+            'status_page': forms.Select(attrs={
+                'class': 'form-control',
+            }),
         }
