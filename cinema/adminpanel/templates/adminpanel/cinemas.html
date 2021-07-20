@@ -3,25 +3,22 @@
 
 {% block title %}Кинотеатры{% endblock %}
 
-{% block name %}Кинотеатры{% endblock %}
+{% block name %}Список кинотеатров{% endblock %}
 
 {% block content %}
-
-<div class="col-md-3 text-end">
-    <button type="button" class="btn btn-dark" onclick="location.href='{% url 'add_cinema' %}'">Добавить кинотеатр</button><br><br>
-</div>
-
-<h2>Список кинотеатров:</h2>
 
 <div class="row">
     {% for cinema in cinemas %}
     <div class="p-2 bd-bd-highlight">
         <a href="{% url 'cinema_info' cinema.id %}">
-          <img src="{{ cinema.logo.url }}" width="200" height="200"><br>
-          <text>{{ cinema.cinema_name }}</text>
+            <img src="{{ cinema.logo.url }}" width="200" height="200"><br>
+            <label class="label-cinema">{{ cinema.cinema_name }}</label>
         </a>
     </div>
     {% endfor %}
+    <div class="col-md-3 text-end">
+    <button type="button" class="btn-add-cinema btn btn-dark" onclick="location.href='{% url 'add_cinema' %}'">Добавить</button>
+    </div>
 </div>
 
 {% endblock %}

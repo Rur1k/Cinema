@@ -3,11 +3,15 @@
 
 {% block title %}Новости{% endblock %}
 
-{% block name %}Новости{% endblock %}
+{% block name %}Список новостей{% endblock %}
 
 {% block content %}
+<div class="col-md-3 float-right">
+    <button type="button" class="btn-news-stock btn btn-dark float-right" onclick="location.href='{% url 'add_news' %}'">Создать новость</button>
+    <br><br><br>
+</div>
 <div>
-        <h1>Новости</h1>
+
         <table class="table table-bordered">
             <thead>
                 <th scope="col">Название</th>
@@ -20,13 +24,13 @@
                     <td>{{ news.name_news }}</td>
                     <td>{{ news.create_date }}</td>
                     <td>{{ news.status_news }}</td>
-                    <td><a href="{% url 'edit_news' news.id %}">Редактировать</a>/<a href="{% url 'delete_news' news.id %}">Удалить</a></td>
+                    <td>
+                        <a href="{% url 'edit_news' news.id %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <a href="{% url 'delete_news' news.id %}"><i class="nav-icon fas fa-trash fa-2x"></i></a>
+                    </td>
                 </tbody>
             {% endfor %}
         </table>
-        <div class="col-md-3 text-end">
-            <button type="button" class="btn btn-dark" onclick="location.href='{% url 'add_news' %}'">Добавить новость</button><br><br>
-        </div>
-    </div>
+</div>
 
 {% endblock%}

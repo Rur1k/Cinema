@@ -10,7 +10,7 @@
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Статус новости: </label>
+           <label class="col-sm-2 col-form-label text-right">Статус новости: </label>
            <div class="col-sm-10">
                 {{ form.status_news }}
            </div>
@@ -18,28 +18,28 @@
 
 
       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Название новости: </label>
+           <label class="col-sm-2 col-form-label text-right">Название новости: </label>
            <div class="col-sm-10">
                {{ form.name_news }}
            </div>
       </div><br>
 
       <div class="mb-3 row">
-          <label class="col-sm-2 col-form-label">Дата публикации: </label>
+          <label class="col-sm-2 col-form-label text-right">Дата публикации: </label>
           <div class="col-sm-10">
                {{ form.pub_date }}
           </div>
       </div><br>
 
       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Описание: </label>
+           <label class="col-sm-2 col-form-label text-right">Описание: </label>
            <div class="col-sm-10">
                 {{ form.description_news }}
            </div>
       </div><br>
 
       <div class="mb-3 row">
-          <label class="col-sm-2 col-form-label"> Главная картинка: </label>
+          <label class="col-sm-2 col-form-label text-right"> Главная картинка: </label>
           <div class="col-sm-10">
               <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
               {{ form.main_picture}}
@@ -47,37 +47,41 @@
       </div> <br>
 
       <div class="mb-3 row">
-          <label class="col-sm-2 col-form-label"> Галерея картинок: </label>
-          <div class="col-sm-10">
-              <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
-              {{ form.picture_1}}
-          </div>
-          <div class="col-sm-10">
-              <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
-              {{ form.picture_2}}
-          </div>
-          <div class="col-sm-10">
-              <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
-              {{ form.picture_3}}
-          </div>
-          <div class="col-sm-10">
-              <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
-              {{ form.picture_4}}
-          </div>
-          <div class="col-sm-10">
-              <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
-              {{ form.picture_5}}
+          <div class="row">
+              <label class="col-sm-2 col-form-label text-right">Галерея картинок:</label>
+              <div class="col">
+                  <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
+                  {{ form.picture_1}}
+              </div>
+              <div class="col">
+                  <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
+                  {{ form.picture_2}}
+              </div>
+              <div class="col">
+                  <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
+                  {{ form.picture_3}}
+              </div>
+              <div class="col">
+                  <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
+                  {{ form.picture_4}}
+              </div>
+              <div class="col">
+                  <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
+                  {{ form.picture_5}}
+            </div>
           </div>
       </div> <br>
 
       <div class="mb-3 row">
-           <label class="col-sm-2 col-form-label">Ссылка на видео: </label>
+           <label class="col-sm-2 col-form-label text-right">Ссылка на видео: </label>
            <div class="col-sm-10">
                 {{ form.url_youtube }}
            </div>
        </div><br>
 
-    <input type="submit" class="btn btn-dark" value="Добавить/Сохранить"><br>
+      <div class="mb-3 row">
+          <input type="submit" class="button-add-mass btn btn-dark" value="Добавить/Сохранить"><br>
+      </div>
   </form>
 </div>
 {% endblock %}

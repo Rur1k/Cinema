@@ -3,11 +3,14 @@
 
 {% block title %}Акции{% endblock %}
 
-{% block name %}Акции{% endblock %}
+{% block name %}Список Акции{% endblock %}
 
 {% block content %}
+<div class="col-md-3 float-right">
+    <button type="button" class="btn-news-stock btn btn-dark float-right" onclick="location.href='{% url 'add_stock' %}'">Создать Акцию</button>
+    <br><br><br>
+</div>
 <div>
-        <h1>Список акций</h1>
         <table class="table table-bordered">
             <thead>
                 <th scope="col">Название</th>
@@ -20,13 +23,12 @@
                     <td>{{ stock.name_stock }}</td>
                     <td>{{ stock.create_date }}</td>
                     <td>{{ stock.status_stock }}</td>
-                    <td><a href="{% url 'edit_stock' stock.id %}">Редактировать</a>/<a href="{% url 'delete_stock' stock.id %}">Удалить</a></td>
+                    <td>
+                        <a href="{% url 'edit_stock' stock.id %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <a href="{% url 'delete_stock' stock.id %}"><i class="nav-icon fas fa-trash fa-2x"></i></a></td>
                 </tbody>
             {% endfor %}
         </table>
-        <div class="col-md-3 text-end">
-            <button type="button" class="btn btn-dark" onclick="location.href='{% url 'add_stock' %}'">Добавить акцию</button><br><br>
-        </div>
     </div>
 
 {% endblock%}

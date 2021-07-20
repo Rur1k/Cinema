@@ -3,9 +3,13 @@
 
 {% block title %}Страницы{% endblock %}
 
-{% block name %}Страницы{% endblock %}
+{% block name %}Список страниц{% endblock %}
 
 {% block content %}
+<div class="col-md-3 float-right">
+    <button type="button" class="btn-news-stock btn btn-dark float-right" onclick="location.href=''">Создать Новую</button>
+    <br><br><br>
+</div>
 <div>
         <table class="table table-bordered">
             <thead>
@@ -19,13 +23,13 @@
                     <td>{{ page.name_page }}</td>
                     <td>{{ page.create_date }}</td>
                     <td>{{ page.status_page }}</td>
-                    <td><a href="">Редактировать</a>/<a href="">Удалить</a></td>
+                    <td>
+                        <a href=""><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <a href=""><i class="nav-icon fas fa-trash fa-2x"></i></a>
+                    </td>
                 </tbody>
             {% endfor %}
         </table>
-        <div class="col-md-3 text-end">
-            <button type="button" class="btn btn-dark" onclick="location.href='{% url 'add_news' %}'">Добавить страницу</button><br><br>
-        </div>
     </div>
 
 {% endblock%}

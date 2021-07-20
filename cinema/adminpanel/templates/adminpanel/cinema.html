@@ -6,7 +6,7 @@
 {% block name %}Кинотеарт {{ cinema.cinema_name }}{% endblock %}
 
 {% block content %}
-<div class="col-md-3 text-end">
+<div class="button-add-mass col-md-3 text-end">
     <button type="button" class="btn btn-dark" onclick="location.href='{% url 'edit_cinema' cinema.id %}'">Редактировать основную информацию</button><br><br>
 </div>
 
@@ -26,8 +26,12 @@
             <text><b>Условия:: </b>{{ cinema.conditions }}</text><br>
         </div>
     </div>
-    <div>
-        <h1>Список залов</h1>
+    <div class="row">
+
+        <div class="button-add-mass col-md-3">
+            <h1 class="button-add-mass">Список залов</h1>
+        </div>
+
         <table class="table table-bordered">
             <thead>
                 <th scope="col">Название</th>
@@ -38,12 +42,16 @@
                 <tbody>
                     <td>{{ hall.number_hall }}</td>
                     <td>{{ hall.create_date }}</td>
-                    <td><a href="{% url 'hall_info' hall.id%}">Редактировать</a>/<a href="{% url 'delete_hall' hall.id %}">Удалить</a></td>
+                    <td>
+                        <a href="{% url 'hall_info' hall.id%}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <a href="{% url 'delete_hall' hall.id %}"><i class="nav-icon fas fa-trash fa-2x"></i></a>
+                    </td>
                  </tbody>
                 {% endfor %}
         </table>
-        <div class="col-md-3 text-end">
-            <button type="button" class="btn btn-dark" onclick="location.href='{% url 'add_hall' cinema.id %}'">Добавить зал</button><br><br>
+
+        <div class="button-add-mass col-md-2">
+            <button type="button" class="button-add-mass btn btn-dark" onclick="location.href='{% url 'add_hall' cinema.id %}'">Создать зал</button><br><br>
         </div>
     </div>
   </div>
