@@ -86,14 +86,23 @@ class FilmForm(forms.ModelForm):
                 'placeholder': 'Описание фильма'
             }),
             'main_picture': forms.ClearableFileInput(attrs={
-                'class': '',
-                'id': 'img',
+                'class id': 'main_img',
             }),
-            'picture_1': forms.ClearableFileInput(),
-            'picture_2': forms.ClearableFileInput(),
-            'picture_3': forms.ClearableFileInput(),
-            'picture_4': forms.ClearableFileInput(),
-            'picture_5': forms.ClearableFileInput(),
+            'picture_1': forms.ClearableFileInput(attrs={
+                'class id': 'picture_1',
+            }),
+            'picture_2': forms.ClearableFileInput(attrs={
+                'class id': 'picture_2',
+            }),
+            'picture_3': forms.ClearableFileInput(attrs={
+                'class id': 'picture_3',
+            }),
+            'picture_4': forms.ClearableFileInput(attrs={
+                'class id': 'picture_4',
+            }),
+            'picture_5': forms.ClearableFileInput(attrs={
+                'class id': 'picture_5',
+            }),
             'status_film': forms.Select(attrs={
                 'class': 'form-control',
                 'placeholder': 'Статус фильма'
@@ -140,13 +149,11 @@ class CinemaForm(forms.ModelForm):
                 'placeholder': 'Условия'
             }),
             'logo': forms.ClearableFileInput(attrs={
-                'class': '',
-                'id': 'img',
+                'class id': 'picture_1',
             }),
             'top_banner': forms.ClearableFileInput(attrs={
-                'class': '',
-                'id': 'img',
-            })
+                'class id': 'main_img',
+            }),
         }
 
 
@@ -171,8 +178,7 @@ class CinemaHallForm(forms.ModelForm):
                 'placeholder': 'Описание зала'
             }),
             'top_banner': forms.ClearableFileInput(attrs={
-                'class': '',
-                'id': 'img',
+                'class id': 'main_img',
             }),
             'row': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -213,14 +219,23 @@ class NewsForm(forms.ModelForm):
                 'placeholder': 'Описание новости'
             }),
             'main_picture': forms.ClearableFileInput(attrs={
-                'class': '',
-                'id': 'img',
+                'class id': 'main_img',
             }),
-            'picture_1': forms.ClearableFileInput(),
-            'picture_2': forms.ClearableFileInput(),
-            'picture_3': forms.ClearableFileInput(),
-            'picture_4': forms.ClearableFileInput(),
-            'picture_5': forms.ClearableFileInput(),
+            'picture_1': forms.ClearableFileInput(attrs={
+                'class id': 'picture_1',
+            }),
+            'picture_2': forms.ClearableFileInput(attrs={
+                'class id': 'picture_2',
+            }),
+            'picture_3': forms.ClearableFileInput(attrs={
+                'class id': 'picture_3',
+            }),
+            'picture_4': forms.ClearableFileInput(attrs={
+                'class id': 'picture_4',
+            }),
+            'picture_5': forms.ClearableFileInput(attrs={
+                'class id': 'picture_5',
+            }),
             'status_news': forms.Select(attrs={
                 'class': 'form-control',
                 'placeholder': 'Статус новости'
@@ -229,6 +244,10 @@ class NewsForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Дата активации',
                 'type': 'date',
+            }),
+            'url_youtube': forms.URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ссылка на новость в youtube'
             }),
 
         }
@@ -261,14 +280,23 @@ class StockForm(forms.ModelForm):
                 'placeholder': 'Описание акции'
             }),
             'main_picture': forms.ClearableFileInput(attrs={
-                'type': 'file',
-                'id': 'img',
+                'class id': 'main_img',
             }),
-            'picture_1': forms.ClearableFileInput(),
-            'picture_2': forms.ClearableFileInput(),
-            'picture_3': forms.ClearableFileInput(),
-            'picture_4': forms.ClearableFileInput(),
-            'picture_5': forms.ClearableFileInput(),
+            'picture_1': forms.ClearableFileInput(attrs={
+                'class id': 'picture_1',
+            }),
+            'picture_2': forms.ClearableFileInput(attrs={
+                'class id': 'picture_2',
+            }),
+            'picture_3': forms.ClearableFileInput(attrs={
+                'class id': 'picture_3',
+            }),
+            'picture_4': forms.ClearableFileInput(attrs={
+                'class id': 'picture_4',
+            }),
+            'picture_5': forms.ClearableFileInput(attrs={
+                'class id': 'picture_5',
+            }),
             'status_stock': forms.Select(attrs={
                 'class': 'form-control',
                 'placeholder': 'Статус новости'
@@ -277,6 +305,10 @@ class StockForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Дата активации',
                 'type': 'date',
+            }),
+            'url_youtube': forms.URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ссылка на акцию в youtube'
             }),
 
         }
@@ -307,14 +339,52 @@ class PageForm(forms.ModelForm):
                 'placeholder': 'Описание'
             }),
             'main_picture': forms.ClearableFileInput(attrs={
-                'type': 'file',
-                'id': 'img',
+                'class id': 'main_img',
             }),
-            'picture_1': forms.ClearableFileInput(),
-            'picture_2': forms.ClearableFileInput(),
-            'picture_3': forms.ClearableFileInput(),
-            'picture_4': forms.ClearableFileInput(),
-            'picture_5': forms.ClearableFileInput(),
+            'picture_1': forms.ClearableFileInput(attrs={
+                'class id': 'picture_1',
+            }),
+            'picture_2': forms.ClearableFileInput(attrs={
+                'class id': 'picture_2',
+            }),
+            'picture_3': forms.ClearableFileInput(attrs={
+                'class id': 'picture_3',
+            }),
+            'picture_4': forms.ClearableFileInput(attrs={
+                'class id': 'picture_4',
+            }),
+            'picture_5': forms.ClearableFileInput(attrs={
+                'class id': 'picture_5',
+            }),
+            'status_page': forms.Select(attrs={
+                'class': 'form-control',
+            }),
+        }
+
+
+class MainPageForm(forms.ModelForm):
+    class Meta:
+        model = MainPage
+        fields = [
+            'phone_one',
+            'phone_two',
+            'seo_text',
+            'status_page',
+        ]
+
+        widgets = {
+            'phone_one': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Телефон 1',
+            }),
+            'phone_two': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Телефон 2',
+            }),
+            'seo_text': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'текст'
+            }),
             'status_page': forms.Select(attrs={
                 'class': 'form-control',
             }),

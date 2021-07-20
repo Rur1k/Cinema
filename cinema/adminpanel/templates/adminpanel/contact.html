@@ -1,0 +1,24 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Контакты{% endblock %}
+
+{% block name %}Контактные данные кинотеатров{% endblock %}
+
+{% block content %}
+<div class="col-md-3 float-right">
+    <button type="button" class="btn-news-stock btn btn-dark float-right" onclick="location.href=''">Добавить контакты</button>
+    <br><br><br>
+</div>
+<div>
+
+        <table class="table table-bordered">
+            <thead>
+                <th scope="col">Название</th>
+                <th scope="col">Адресс</th>
+                <th scope="col">Эл. упр</th>
+            </thead>
+        </table>
+</div>
+
+{% endblock%}

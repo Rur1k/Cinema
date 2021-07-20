@@ -27,4 +27,6 @@ urlpatterns = [
     path('pages/', views.pages, name='pages'),
     path('addpage/', views.add_page, name='add_page'),
     path('editpage/<int:pk>', views.UpdatePageView.as_view(), name='edit_page'),
+    path('editmainpage/<int:pk>', views.UpdateMainPageView.as_view(), name='edit_mainpage'),
+    path('contact/', views.ContactCinema, name='contact'),
 ]

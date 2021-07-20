@@ -147,6 +147,17 @@ class MainPage(models.Model):
     status_page = models.ForeignKey(Status_main, on_delete=models.CASCADE)
 
 
+class ContactPage(models.Model):
+    id = models.AutoField(unique=True, primary_key=True)
+    status_delete = models.IntegerField("Возможность удаления", default=0)
+    name_page = models.CharField('Название страницы', max_length=32, default='Контакты')
+    create_date = models.DateTimeField(auto_now_add=True)
+    status_page = models.ForeignKey(Status_main, on_delete=models.CASCADE)
+
+
+
+
+
 
 
 

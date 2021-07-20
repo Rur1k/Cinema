@@ -26,8 +26,10 @@
      <div class="mb-3 row">
         <label class="col-sm-2 col-form-label text-right"> Верхний баннер: </label>
          <div class="col-sm-10">
-             <img class="img-preview" src="{% static 'img/default/default-img.png' %}" width="200" height="200"/>
-             {{ form.top_banner}}
+             <img id="upload-btn" src="{% static 'img/default/default-img.png' %}" width="150" height="150"/>
+             <div hidden="hidden">
+                {{ form.top_banner}}
+             </div>
          </div>
      </div> <br>
 
@@ -48,4 +50,34 @@
     </div>
   </form>
 </div>
+
+    <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script>
+    const uploadFile = document.getElementById("main_img");
+    const uploadBtn = document.getElementById("upload-btn");
+
+    uploadBtn.addEventListener("click", function () {
+    uploadFile.click();
+    });
+
+</script>
+<script>
+    $('#main_img').change(function () {
+            var input = $(this)[0];
+            if (input.files && input.files[0]) {
+                if (input.files[0].type.match('image.*')) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#upload-btn').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    console.log('ошибка, не изображение');
+                }
+            } else {
+                console.log('хьюстон у нас проблема');
+            }
+        });
+
+</script>
 {% endblock %}

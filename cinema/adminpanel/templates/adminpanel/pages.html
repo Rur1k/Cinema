@@ -24,9 +24,19 @@
                     <td>{{ mainpage.create_date }}</td>
                     <td>{{ mainpage.status_page }}</td>
                     <td>
-                        <a href=""><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <a href="{% url 'edit_mainpage' mainpage.id%}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                     </td>
-                </tbody>
+            </tbody>
+            {% endfor %}
+            {% for contact in contact_page %}
+            <tbody>
+                    <td>{{ contact.name_page }}</td>
+                    <td>{{ contact.create_date }}</td>
+                    <td>{{ contact.status_page }}</td>
+                    <td>
+                        <a href="{% url 'contact' %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    </td>
+            </tbody>
             {% endfor %}
             {% for page in pages %}
                 <tbody>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Film, Cinema, Cinema_hall, News, Stock, Page, MainPage
-from .forms import FilmForm, CinemaForm, CinemaHallForm, NewsForm, StockForm, PageForm
+from .models import Film, Cinema, Cinema_hall, News, Stock, Page, MainPage, ContactPage
+from .forms import FilmForm, CinemaForm, CinemaHallForm, NewsForm, StockForm, PageForm, MainPageForm
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.forms import formset_factory
 
@@ -217,8 +217,9 @@ class StockDeleteView(DeleteView):
 
 def pages(request):
     context = {
+        'contact_page': ContactPage.objects.all(),
         'main_page': MainPage.objects.all(),
-        'pages': Page.objects.all()
+        'pages': Page.objects.all().order_by("id"),
     }
     return render(request, 'adminpanel/pages.html', context)
 
@@ -244,3 +245,14 @@ class UpdatePageView(UpdateView):
     success_url = '../../admin/pages'
     template_name = 'adminpanel/add_page.html'
     form_class = PageForm
+
+
+class UpdateMainPageView(UpdateView):
+    model = MainPage
+    success_url = '../../admin/pages'
+    template_name = 'adminpanel/edit_main_page.html'
+    form_class = MainPageForm
+
+
+def ContactCinema(request):
+    return render(request, 'adminpanel/contact.html')
