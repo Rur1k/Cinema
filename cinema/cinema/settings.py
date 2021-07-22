@@ -68,13 +68,21 @@ WSGI_APPLICATION = 'cinema.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'cinema_db',
+    #     'USER': 'admin_cinema',
+    #     'PASSWORD': '1qaz@WSX',
+    #     'HOST': 'localhost',
+    #     'PORT': '',
+    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'cinema_db',
-        'USER': 'admin_cinema',
-        'PASSWORD': '1qaz@WSX',
-        'HOST': 'localhost',
-        'PORT': '',
+        'USER': 'admin',
+        'PASSWORD': 'devpass',
+        'HOST': 'postgresdb',
+        'PORT': 5432,
     }
 }
 
