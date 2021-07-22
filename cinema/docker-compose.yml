@@ -22,3 +22,15 @@ services:
       - postgresdb
     ports:
       - "8000:8000"
+
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - postgresdb
+      - web
+    ports:
+      - "80:80"
+    volumes:
+      - ./static/:/static
