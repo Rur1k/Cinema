@@ -80,7 +80,7 @@ class Film(models.Model):
 
 class Cinema_hall(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
-    cinema_id = models.IntegerField('Ид зала', null=True)
+    cinema_id = models.ForeignKey(Cinema, on_delete=models.CASCADE)
     number_hall = models.CharField('Номер зала', max_length=16)
     create_date = models.DateTimeField(auto_now_add=True)
     description_hall = models.TextField('Описание зала')
@@ -154,6 +154,23 @@ class ContactPage(models.Model):
     create_date = models.DateTimeField(auto_now_add=True)
     status_page = models.ForeignKey(Status_main, on_delete=models.CASCADE)
 
+
+class FilmSession(models.Model):
+    id = models.AutoField(unique=True, primary_key=True)
+    hall = models.ForeignKey(Cinema_hall, on_delete=models.CASCADE)
+    film = models.ForeignKey(Film, on_delete=models.CASCADE)
+    datetime = models.DateTimeField()
+    price_ticket = models.IntegerField('Цена билета')
+
+
+class Ticket(models.Model):
+    id = models.AutoField(unique=True, primary_key=True)
+    film_session = models.ForeignKey(FilmSession, on_delete=models.CASCADE)
+    film = models.CharField('Название фильма', max_length=32)
+    datetime = models.CharField('Дата и время сеанса', max_length=32)
+    price = models.IntegerField('Цена билета')
+    row = models.IntegerField('Ряд')
+    seat = models.IntegerField('Место')
 
 
 

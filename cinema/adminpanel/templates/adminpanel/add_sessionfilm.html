@@ -1,0 +1,39 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Добавление/Редактирование{% endblock %}
+
+{% block name %}Добавление/Редактирование сессии{% endblock %}
+
+{% block content %}
+<div class="add-news">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label text-right">Дата и время сеанса: </label>
+           <div class="col-sm-10">
+                {{ form.datetime }}
+           </div>
+       </div><br>
+
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label text-right">Фильм: </label>
+           <div class="col-sm-10">
+               {{ form.film }}
+           </div>
+      </div><br>
+
+      <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label text-right">Цена билета: </label>
+          <div class="col-sm-10">
+               {{ form.price_ticket }}
+          </div>
+      </div><br>
+
+      <div class="mb-3 row">
+          <input type="submit" class="button-add-mass btn btn-dark" value="Добавить/Сохранить"><br>
+      </div>
+  </form>
+</div>
+{% endblock %}

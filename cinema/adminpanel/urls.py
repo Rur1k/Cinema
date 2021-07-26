@@ -29,4 +29,5 @@ urlpatterns = [
     path('editpage/<int:pk>', views.UpdatePageView.as_view(), name='edit_page'),
     path('editmainpage/<int:pk>', views.UpdateMainPageView.as_view(), name='edit_mainpage'),
     path('contact/', views.ContactCinema, name='contact'),
+    path('hall/<int:hall_id>/addsessionfilm/', views.add_film_session, name='add_filmsession'),
 ]

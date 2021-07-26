@@ -6,9 +6,8 @@
 {% block name %}{{ hall.number_hall }}{% endblock %}
 
 {% block content %}
-
-    <div class="col-md-3 text-end">
-        <button type="button" class="button-add-mass btn btn-dark" onclick="location.href='{% url 'edit_hall' hall.id %}'">Редактировать зал</button><br><br>
+    <div class="col-md-12 text-center">
+        <button type="button" class="button-add-mass btn btn-dark text-center" onclick="location.href='{% url 'edit_hall' hall.id %}'">Редактировать зал</button><br><br>
     </div>
 
     <div class="hall-info">
@@ -21,12 +20,12 @@
       </div>
     </div>
 
-    <div class="button-add-mass">
-        <h1>Схема зала:</h1>
+    <div class="col-md-12 text-center">
+        <h1 class="">Схема зала</h1>
     </div>
 
-    <div class="row js-seat-container">
-        <div class="col-md-10">
+    <div class="col-md-12 row js-seat-container text-center">
+        <div class="col-md-12">
             {% for row in rows %}
             <div class="cinema-row">
                 <div class="cinema-row-label">Ряд {{ row }}</div>
@@ -42,32 +41,36 @@
             </div>
             {% endfor %}
         </div>
-        <div class="col-md-2">
-            Выбранные места:
-            <div class="js-seat-result-container">
-
-            </div>
-        </div>
     </div>
+    <br>
+    <div class="col-md-12 film-session text-center">
+         <h1>Сеансы в зале</h1>
+        <div class="col-md-11 text-right">
+            <button type="button" class="btn btn-dark" onclick="location.href='{% url 'add_filmsession' hall.id %}'">Добавить сеанс</button><br><br>
+        </div>
 
-    <div class="film-session">
-         <h1>Сеансы в зале:</h1>
             <table class="table table-bordered">
                 <thead>
                     <th scope="col">Постер</th>
                     <th scope="col">Название</th>
-                    <th scope="col">Период показа</th>
-                    <th scope="col">Цена</th>
+                    <th scope="col">Дата и время сеанса</th>
+                    <th scope="col">Цена(грн)</th>
                     <th scope="col">Управление</th>
                 </thead>
-                <tbody>
-
-                </tbody>
+                {% for film_session in session %}
+                    <tbody>
+                        <td><img src="{{ film_session.film.main_picture.url }}" width="120" height="200"></td>
+                        <td>{{ film_session.film.film_name }}</td>
+                        <td>{{ film_session.datetime }}</td>
+                        <td>{{ film_session.price_ticket }}</td>
+                        <td>
+                            <a href=""><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                            <a href=""><i class="nav-icon fas fa-trash fa-2x"></i></a>
+                        </td>
+                     </tbody>
+                {% endfor %}
             </table>
-            <div class="col-md-3 text-end">
-                <button type="button" class="btn btn-dark" onclick="location.href=''%}'">Добавить сеансы</button><br><br>
-            </div>
-        </div>
     </div>
+
 
 {% endblock%}

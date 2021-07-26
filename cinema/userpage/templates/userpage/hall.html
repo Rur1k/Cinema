@@ -29,9 +29,26 @@
 
         </div>
     </div>
+
+    <div class="js-selected-seat-template" hidden="hidden">
+        {{ django_context_varable }}
+        {% verbatim %}
+            {{#each addedSeats}}
+            <div>
+                Ряд:{{row}} Место:{{seat}}
+            </div>
+            {{/each}}
+            {{#if addedSeats}}
+            <div>
+                Итог: {{sum}}
+            </div>
+            {{/if}}
+        {% endverbatim %}
+    </div>
+
 </div>
 
 
-
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 
 {% endblock %}

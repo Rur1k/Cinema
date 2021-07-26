@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Film, Cinema, Cinema_hall, News, Stock, Page, MainPage, ContactPage
-from .forms import FilmForm, CinemaForm, CinemaHallForm, NewsForm, StockForm, PageForm, MainPageForm
+from .models import Film, Cinema, Cinema_hall, News, Stock, Page, MainPage, ContactPage, FilmSession
+from .forms import FilmForm, CinemaForm, CinemaHallForm, NewsForm, StockForm, PageForm, MainPageForm, FilmSessionForm
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.forms import formset_factory
+
 
 def admin(request):
     return render(request, 'adminpanel/statistics.html')
@@ -93,10 +94,11 @@ class UpdateCinemaView(UpdateView):
 
 def add_cinema_hall(request, cinema_id):
     if request.method == 'POST':
+        cinema = Cinema.objects.get(id=cinema_id)
         form = CinemaHallForm(request.POST, request.FILES)
         if form.is_valid():
             save_to_cinema = form.save(commit=False)
-            save_to_cinema.cinema_id = cinema_id
+            save_to_cinema.cinema_id = cinema
             save_to_cinema.save()
             return redirect('cinema_info', cinema_id)
         else:
@@ -111,6 +113,8 @@ def add_cinema_hall(request, cinema_id):
 
 def hall_info(request, hall_id):
     hall_info_all = Cinema_hall.objects.get(id=hall_id)
+    session = FilmSession.objects.filter(hall=hall_id)
+
     row = hall_info_all.row + 1
     col = hall_info_all.col + 1
 
@@ -118,6 +122,7 @@ def hall_info(request, hall_id):
     columns = range(1, col)
 
     data = {
+        'session': session,
         'hall': hall_info_all,
         'rows': rows,
         'columns': columns,
@@ -256,3 +261,22 @@ class UpdateMainPageView(UpdateView):
 
 def ContactCinema(request):
     return render(request, 'adminpanel/contact.html')
+
+
+def add_film_session(request, hall_id):
+    if request.method == 'POST':
+        cinema_hall = Cinema_hall.objects.get(id=hall_id)
+        form = FilmSessionForm(request.POST)
+        if form.is_valid():
+            save_to_hall = form.save(commit=False)
+            save_to_hall.hall = cinema_hall
+            save_to_hall.save()
+            return redirect('hall_info', hall_id)
+        else:
+            print(form.errors)
+
+    form = FilmSessionForm
+    data = {
+        'form': form,
+    }
+    return render(request, "adminpanel/add_sessionfilm.html", data)

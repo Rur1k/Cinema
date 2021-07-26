@@ -1,5 +1,5 @@
 from django import forms
-from .models import Film, Cinema, Cinema_hall, News, Stock, Page, MainPage
+from .models import Film, Cinema, Cinema_hall, News, Stock, Page, MainPage, FilmSession
 
 
 class FilmForm(forms.ModelForm):
@@ -387,5 +387,31 @@ class MainPageForm(forms.ModelForm):
             }),
             'status_page': forms.Select(attrs={
                 'class': 'form-control',
+            }),
+        }
+
+
+class FilmSessionForm(forms.ModelForm):
+    class Meta:
+        model = FilmSession
+        fields = [
+            'datetime',
+            'film',
+            'price_ticket',
+        ]
+
+        widgets = {
+            'datetime': forms.DateTimeInput(attrs={
+                'class': 'form-control datepicker',
+                'placeholder': 'Дата сеанса',
+                'type': 'datetime-local',
+            }),
+            'film': forms.Select(attrs={
+                'class': 'form-control',
+                'placeholder': 'Фильм'
+            }),
+            'price_ticket': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Цена билета',
             }),
         }
