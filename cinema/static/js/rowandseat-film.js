@@ -1,6 +1,7 @@
 $(document).ready(function() {
         var source = document.querySelector(".js-selected-seat-template").innerHTML;
         var template = Handlebars.compile(source);
+        var currentCost = $('.js-seat-container')[0].dataset.currentCost;
         var selectedSeats = {
             addedSeats: [],
             sum: 0
@@ -29,6 +30,8 @@ $(document).ready(function() {
             else {
                 selectedSeats.addedSeats.push(newSeat);
             }
+
+            selectedSeats.sum = currentCost * selectedSeats.addedSeats.length;
 
             var resultHtml = template(selectedSeats);
             $('.js-seat-result-container').html(resultHtml)

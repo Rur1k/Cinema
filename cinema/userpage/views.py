@@ -1,19 +1,9 @@
 from django.shortcuts import render
-from adminpanel.models import Film
+from adminpanel.models import Film, FilmSession, Cinema_hall
 
 
 def main_page(request):
     return render(request, 'userpage/base_userpage.html')
-
-def hall(request):
-    rows = range(1, 13)
-    columns = range(1, 21)
-    data = {
-        'rows': rows,
-        'columns': columns,
-    }
-
-    return render(request, 'userpage/hall.html', data)
 
 
 def poster(request):
@@ -25,7 +15,32 @@ def poster(request):
 
 
 def film_details(request, film_id):
+    SessionList = FilmSession.objects.filter(film=film_id)
+    FilmInfo = Film.objects.get(id=film_id)
+
     context = {
-        'film': Film.objects.get(id=film_id)
+        'SessionList': SessionList,
+        'film': FilmInfo,
     }
     return render(request, 'userpage/film.html', context)
+
+
+def session_hall_info(request, session_id):
+    SessionInfo = FilmSession.objects.get(id=session_id)
+    HallInfo = SessionInfo.hall
+    FilmInfo = SessionInfo.film
+
+    row = HallInfo.row + 1
+    col = HallInfo.col + 1
+
+    rows = range(1, row)
+    columns = range(1, col)
+
+    data = {
+        'SessionInfo': SessionInfo,
+        'HallInfo': HallInfo,
+        'FilmInfo': FilmInfo,
+        'rows': rows,
+        'columns': columns,
+    }
+    return render(request, 'userpage/hall.html', data)

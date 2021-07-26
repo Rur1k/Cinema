@@ -43,5 +43,27 @@
             <text><b>Описание: </b>{{ film.description_film }}</text><br>
         </div>
     </div>
+    <div class="session film">
+        <table class="table table-bordered text-white">
+                <thead>
+                    <th scope="col">Кинотеатр</th>
+                    <th scope="col">Зал</th>
+                    <th scope="col">Дата и время сеанса</th>
+                    <th scope="col">Цена(грн)</th>
+                    <th scope="col">Купить билет</th>
+                </thead>
+                {% for session in SessionList %}
+                    <tbody>
+                        <td>{{ session.hall.cinema_id.cinema_name }}</td>
+                        <td>{{ session.hall.number_hall }}</td>
+                        <td>{{ session.datetime }}</td>
+                        <td>{{ session.price_ticket }}</td>
+                        <td>
+                            <a href="{% url 'session_hall_info' session.id %}"><i class="nav-icon fas fa-ticket-alt fa-2x"></i></a>
+                        </td>
+                     </tbody>
+                {% endfor %}
+            </table>
+    </div>
   </div>
 {% endblock %}
