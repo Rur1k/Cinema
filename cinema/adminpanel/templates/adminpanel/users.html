@@ -1,0 +1,44 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Пользователи{% endblock %}
+
+{% block name %}Пользователи{% endblock %}
+
+{% block content %}
+<div class="col-md-3 float-right">
+    <button type="button" class="btn-news-stock btn btn-dark float-right" onclick="location.href='{% url 'add_user' %}'">Добавить пользователя</button>
+    <br><br><br>
+</div>
+<div>
+        <table class="table table-bordered">
+            <thead>
+                <th scope="col">ID</th>
+                <th scope="col">Дата регистрации</th>
+                <th scope="col">День рождения</th>
+                <th scope="col">Email</th>
+                <th scope="col">Телефон</th>
+                <th scope="col">ФИО</th>
+                <th scope="col">Псевдоним</th>
+                <th scope="col">Город</th>
+                <th scope="col">Эл. упр</th>
+            </thead>
+            {% for user in users %}
+                <tbody>
+                    <td>{{ user.user.id }}</td>
+                    <td>{{ user.user.date_joined }}</td>
+                    <td>{{ user.birth_date }}</td>
+                    <td>{{ user.user.email }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ user.user.last_name }}</td>
+                    <td>{{ user.pseudonym }}</td>
+                    <td>{{ user.city }}</td>
+                    <td>
+                        <a href=""><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <a href=""><i class="nav-icon fas fa-trash fa-2x"></i></a></td>
+                </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock%}
