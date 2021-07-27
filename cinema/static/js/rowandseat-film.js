@@ -7,6 +7,7 @@ $(document).ready(function() {
             sum: 0
         };
 
+
         $('.js-seat-container').on('click', '.js-seat-selector', function(e) {
             var targetElem = e.currentTarget;
             var dataSet = targetElem.dataset;
@@ -36,5 +37,6 @@ $(document).ready(function() {
             var resultHtml = template(selectedSeats);
             $('.js-seat-result-container').html(resultHtml)
         });
+
     }
 )

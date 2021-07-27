@@ -44,3 +44,8 @@ def session_hall_info(request, session_id):
         'columns': columns,
     }
     return render(request, 'userpage/hall.html', data)
+
+
+def save_reserve(request):
+
+    return render(request, 'userpage/test.html')

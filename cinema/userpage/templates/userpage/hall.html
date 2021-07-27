@@ -14,25 +14,31 @@
 
     <div class="d-flex  flex-row bd-highlight mb-2 justify-content-left text-white">
         <div class="p-2 bd-bd-highlight">
-            <img src="{{ FilmInfo.main_picture.url }}" width="100%">
+            <img src="{{ FilmInfo.main_picture.url }}">
         </div>
         <div class="p-2 bd-bd-highlight">
             <text><b>Цена в грн: </b>{{ SessionInfo.price_ticket }}</text><br>
             <text><b>Время: </b>{{ SessionInfo.datetime }}</text><br><br>
             <text><b>Описание: </b>{{ FilmInfo.description_film }}</text><br>
         </div>
-    </div>
+    </div><br>
 
-<div class="row js-seat-container text-white" data-current-cost="{{ SessionInfo.price_ticket }}">
+
+<div class="row js-seat-container text-white"
+     data-current-cost="{{ SessionInfo.price_ticket }}"
+     data-current-timeslot-id="{{ SessionInfo.id }}">
+
+    {% csrf_token %}
+
 
     <div class="col-md-7">
         <h1 class="text-white text-center">____ЭКРАН____</h1>
         {% for row in rows %}
-        <div class="cinema-row">
+        <div class="cinema-row text-center">
             <div class="cinema-row-label">Ряд {{ row }}</div>
             {% for column in columns %}
                 <div class="cinema-seat">
-                    <input type="checkbox" id="check-{{ row }}-{{ column }}">
+                    <input type="checkbox" class="checkbox" name="SeatList" id="check-{{ row }}-{{ column }}" value="{{row}}-{{column}}">
                     <label for="check-{{ row }}-{{ column }}"
                            class="js-seat-selector"
                            data-seat-row="{{ row }}"
@@ -47,6 +53,7 @@
         <div class="js-seat-result-container">
 
         </div>
+
     </div>
 
     <div class="js-selected-seat-template" hidden="hidden">
@@ -64,18 +71,20 @@
             {{/if}}
         {% endverbatim %}
     </div>
-
 </div><br>
+
 
 <div class="text-center text-white">
     <p><b>Стоимость услуги бронирования - 3 грн. за каждое место</b></p>
     <p>ЗАБРОНИРОВАННЫЕ БИЛЕТЫ НУЖНО ВЫКУПИТЬ В КАССЕ КИНОТЕАТРА НЕ ПОЗДНЕЕ ЧЕМ ЗА ПОЛЧАСА ДО НАЧАЛА СЕАНСА</p>
 </div>
 
-<div class="text-center">
-    <button class="btn btn-info">Забронировать</button>
-    <button class="btn btn-warning">Купить</button>
+<div class="text-center js-seat-container">
+    <button class="btn btn-info js-reserve-seats" onclick="location.href='{% url 'save_reserve' %}'">Забронировать</button>
+    <button class="btn btn-warning js-bue-seats">Купить</button>
 </div>
+
+
 
 
 {% endblock %}
