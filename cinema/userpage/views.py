@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from adminpanel.models import Film, FilmSession, Cinema_hall
+from .models import ReserveAndBuySeats
 
 
 def main_page(request):
@@ -35,7 +36,6 @@ def session_hall_info(request, session_id):
 
     rows = range(1, row)
     columns = range(1, col)
-
     data = {
         'SessionInfo': SessionInfo,
         'HallInfo': HallInfo,
@@ -47,5 +47,10 @@ def session_hall_info(request, session_id):
 
 
 def save_reserve(request):
+
+    JSON = request.POST.get('checkboxes')
+
+    print(JSON)
+
 
     return render(request, 'userpage/test.html')

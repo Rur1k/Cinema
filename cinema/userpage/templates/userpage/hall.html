@@ -23,7 +23,7 @@
         </div>
     </div><br>
 
-
+<form action="" method="POST">
 <div class="row js-seat-container text-white"
      data-current-cost="{{ SessionInfo.price_ticket }}"
      data-current-timeslot-id="{{ SessionInfo.id }}">
@@ -53,7 +53,7 @@
         <div class="js-seat-result-container">
 
         </div>
-
+    <button class="btn btn-info js-reserve-seats" id="submit-button" onclick="location.href='{% url 'save_reserve' %}'">Забронировать</button>
     </div>
 
     <div class="js-selected-seat-template" hidden="hidden">
@@ -72,7 +72,7 @@
         {% endverbatim %}
     </div>
 </div><br>
-
+</form>
 
 <div class="text-center text-white">
     <p><b>Стоимость услуги бронирования - 3 грн. за каждое место</b></p>
@@ -80,9 +80,37 @@
 </div>
 
 <div class="text-center js-seat-container">
-    <button class="btn btn-info js-reserve-seats" onclick="location.href='{% url 'save_reserve' %}'">Забронировать</button>
+    <button class="btn btn-info js-reserve-seats">Забронировать</button>
     <button class="btn btn-warning js-bue-seats">Купить</button>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    var selected_items = [];
+    $(".checkbox").click(function(){
+        var selected_item = $(this).val();
+        var index = selected_items.indexOf(selected_item);
+        if(index == -1)
+        {
+           selected_items.push(selected_item);
+        }
+        else{
+           selected_items.splice(index, 1);
+        }
+    });
+    $("#submit-button").click(function(){
+        $.ajax({
+            url: '{% url 'save_reserve' %}',
+            data: {'checkboxes': selected_items.join(",")},
+            dataType: 'json',
+            type: 'POST',
+            success: function (data) {
+            }
+        });
+    });
+})
+</script>
 
 
 

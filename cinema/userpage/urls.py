@@ -7,5 +7,4 @@ urlpatterns = [
     path('poster/', views.poster, name='poster'),
     path('film/<int:film_id>', views.film_details, name='film_details'),
     path('request/', views.save_reserve, name='save_reserve'),
-
 ]
