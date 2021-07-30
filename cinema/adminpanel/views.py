@@ -284,7 +284,18 @@ def add_film_session(request, hall_id):
 
 def banners_and_sliders(request):
     Sliders = Slider.objects.all()
-    SliderFormSet = formset_factory(SliderForm, extra=3)
+    SliderFormSet = formset_factory(SliderForm, extra=6)
+
+    if request.method == 'POST':
+        FormsetSave = formset_factory(SliderForm)
+        form = FormsetSave(request.POST)
+        if form.is_valid():
+            form.save()
+            print('Данные сохранены')
+        else:
+            print('Хьюстон у нас проблемы!!!')
+            print(form.errors)
+
 
 
     data = {

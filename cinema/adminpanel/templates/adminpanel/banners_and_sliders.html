@@ -7,33 +7,29 @@
 
 {% block content %}
 <div class="row">
+    <form method="POST">
+        {% csrf_token %}
     <div class="top-banners col-md-12">
         <h1 class="text-center">На главной вверх</h1>
         <div class="border border-dark rounded top-banners-border">
-            <div class="row">
+            <div class="row" style="margin-bottom: 1%">
                 <div class="col-md-12">
-                    <h4>Размер: 1000х190</h4>
+                    <div class="row">
+                        <div class="col-md-6"><h4>Размер: 1000х190</h4></div>
+
+                        <div class="form-check form-switch col-md-6 text-right">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchChecked" checked>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="col-md-12 text-center">
                     <div class="row">
                         {% for form in formset %}
-<!--       `                 <div class="col-md-2 row">-->
-<!--                            <div class="col-md-12">-->
-<!--                                <img id="upload-btn" src="{% static 'img/default/default-img.png' %}" width="100%" height="100%"/>-->
-<!--                            </div>-->
-<!--                            <div class="col-md-12">-->
-<!--                                <label class="md-6">URL:</label>-->
-<!--                                <input type="text" class="md-6 form-control" value="{{ slider.url }}">-->
-<!--                            </div>-->
-<!--                            <div class="col-md-12">-->
-<!--                                <label class="md-6">Текст:</label>-->
-<!--                                <input type="text" class="md-6 form-control" value="{{ slider.description }}">-->
-<!--                            </div>-->
-<!--                        </div>-->
-                               `
-                        <div class="col-md-2 row">
+                        <div class="col-md-2" style="margin: 1%">
                             <div class="col-md-12">
-                                {{ form.picture }}
+                                <img hidden="hidden" id="upload-btn" src="{% static 'img/default/default-img.png' %}" width="100%" height="100%"/>
+                                <div>{{ form.picture }}</div>
                             </div>
                             <div class="col-md-12">
                                 <label class="md-6">URL:</label>
@@ -45,23 +41,24 @@
                             </div>
                         </div>
                         {% endfor %}
-
-                        <div class="col-md-2"><button class="btn btn-dark">Добавить фото</button></div>
                     </div>
                 </div>
-                <div class="col-md-12">
+
+
+                <div class="col-md-12" style="margin-top: 2%">
                     <div class="row">
                         <div class="col-md-6">
                             <text class="">Скорость вращения</text>
                         </div>
                         <div class="col-md-6">
-                            <button class="btn btn-dark text-center">Сохранить</button>
+                            <input type="submit" class="btn btn-dark text-center">Сохранить</input>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </form>
 
     <div class="col-md-12 background-banners">
         <h1 class="text-center">Сквозной банер на заднем фоне</h1>

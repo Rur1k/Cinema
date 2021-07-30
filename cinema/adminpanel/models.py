@@ -175,9 +175,9 @@ class Ticket(models.Model):
 
 class Slider(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
-    picture = models.ImageField(upload_to='static/img/sliders', null=True)
-    url = models.URLField('Ссылка с картинки', null=True)
-    description = models.TextField()
+    picture = models.ImageField(upload_to='static/img/sliders', null=True, blank=True)
+    url = models.URLField('Ссылка с картинки', null=True, blank=True)
+    description = models.TextField(blank=True)
 
 
 
