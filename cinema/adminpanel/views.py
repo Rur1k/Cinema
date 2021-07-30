@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Film, Cinema, Cinema_hall, News, Stock, Page, MainPage, ContactPage, FilmSession
-from .forms import FilmForm, CinemaForm, CinemaHallForm, NewsForm, StockForm, PageForm, MainPageForm, FilmSessionForm
+from .models import Film, Cinema, Cinema_hall, News, Stock, Page, MainPage, ContactPage, FilmSession, Slider
+from .forms import FilmForm, CinemaForm, CinemaHallForm, NewsForm, StockForm, PageForm, MainPageForm, FilmSessionForm, SliderForm
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.forms import formset_factory
 
@@ -280,3 +280,15 @@ def add_film_session(request, hall_id):
         'form': form,
     }
     return render(request, "adminpanel/add_sessionfilm.html", data)
+
+
+def banners_and_sliders(request):
+    Sliders = Slider.objects.all()
+    SliderFormSet = formset_factory(SliderForm, extra=3)
+
+
+    data = {
+        'Sliders': Sliders,
+        'formset': SliderFormSet(),
+    }
+    return render(request, 'adminpanel/banners_and_sliders.html', data)

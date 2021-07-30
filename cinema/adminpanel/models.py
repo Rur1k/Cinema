@@ -53,22 +53,22 @@ class Film(models.Model):
     film_name = models.CharField('Название фильма', max_length=64)
     relese_year = models.CharField('Год выхода', max_length=64)
     country = models.CharField('Страна производитель', max_length=64)
-    producer = models.CharField('Продюсер', max_length=255)
-    director = models.CharField('Режисер', max_length=255)
-    screenwriter = models.CharField('Сценарист', max_length=255)
-    composer = models.CharField('Композитор', max_length=255)
-    operator = models.CharField('Оператор', max_length=255)
+    producer = models.CharField('Продюсер', max_length=255, default='-', blank=True)
+    director = models.CharField('Режисер', max_length=255, default='-', blank=True)
+    screenwriter = models.CharField('Сценарист', max_length=255, default='-', blank=True)
+    composer = models.CharField('Композитор', max_length=255, default='-', blank=True)
+    operator = models.CharField('Оператор', max_length=255, default='-', blank=True)
     genre = models.ManyToManyField(Genre_film)
-    budget = models.CharField('Бюджет', max_length=64)
+    budget = models.CharField('Бюджет', max_length=64, default='-', blank=True)
     age = models.CharField('Возраст просмотра', max_length=64)
     time_film = models.CharField('Длительность фильма', max_length=64)
     description_film = models.TextField('Описание фильма')
     main_picture = models.ImageField(upload_to='static/img/film')
-    picture_1 = models.ImageField(upload_to='static/img/film', null=True)
-    picture_2 = models.ImageField(upload_to='static/img/film', null=True)
-    picture_3 = models.ImageField(upload_to='static/img/film', null=True)
-    picture_4 = models.ImageField(upload_to='static/img/film', null=True)
-    picture_5 = models.ImageField(upload_to='static/img/film', null=True)
+    picture_1 = models.ImageField(upload_to='static/img/film', null=True, blank=True)
+    picture_2 = models.ImageField(upload_to='static/img/film', null=True, blank=True)
+    picture_3 = models.ImageField(upload_to='static/img/film', null=True, blank=True)
+    picture_4 = models.ImageField(upload_to='static/img/film', null=True, blank=True)
+    picture_5 = models.ImageField(upload_to='static/img/film', null=True, blank=True)
     status_film = models.ForeignKey(Status_film, on_delete=models.CASCADE)
     date_premiere = models.DateField('Дата примьеры')
     trailer = models.URLField('Трейлер фильма')
@@ -171,6 +171,14 @@ class Ticket(models.Model):
     price = models.IntegerField('Цена билета')
     row = models.IntegerField('Ряд')
     seat = models.IntegerField('Место')
+
+
+class Slider(models.Model):
+    id = models.AutoField(unique=True, primary_key=True)
+    picture = models.ImageField(upload_to='static/img/sliders', null=True)
+    url = models.URLField('Ссылка с картинки', null=True)
+    description = models.TextField()
+
 
 
 

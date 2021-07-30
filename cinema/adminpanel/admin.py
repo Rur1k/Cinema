@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Film, Format_film, Genre_film, Status_film, Cinema, Status_main, Page, MainPage, ContactPage, FilmSession
+from .models import *
 from userpage.models import StatusSeat
 
 admin.site.register(Film)
@@ -12,6 +12,7 @@ admin.site.register(Page)
 admin.site.register(MainPage)
 admin.site.register(ContactPage)
 admin.site.register(FilmSession)
+admin.site.register(Slider)
 
 admin.site.register(StatusSeat)
 

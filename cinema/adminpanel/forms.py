@@ -1,5 +1,5 @@
 from django import forms
-from .models import Film, Cinema, Cinema_hall, News, Stock, Page, MainPage, FilmSession
+from .models import Film, Cinema, Cinema_hall, News, Stock, Page, MainPage, FilmSession, Slider
 
 
 class FilmForm(forms.ModelForm):
@@ -413,5 +413,29 @@ class FilmSessionForm(forms.ModelForm):
             'price_ticket': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Цена билета',
+            }),
+        }
+
+
+class SliderForm(forms.ModelForm):
+    class Meta:
+        model = Slider
+        fields = [
+            'picture',
+            'url',
+            'description',
+        ]
+
+        widgets = {
+            'picture': forms.ClearableFileInput(attrs={
+                'class id': 'main_img',
+            }),
+            'url': forms.URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'URL'
+            }),
+            'description': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'текс',
             }),
         }

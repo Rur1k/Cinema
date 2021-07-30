@@ -78,3 +78,23 @@
 #upload-picture5{
     cursor:pointer;
 }
+
+.top-banners-border{
+    padding: 2%;
+}
+
+.news-stock-banners-border{
+    padding: 2%
+}
+
+.top-banners{
+
+}
+
+.background-banners{
+    margin-top: 2%;
+}
+
+.news-stock-banners{
+    margin-top: 2%;
+}
