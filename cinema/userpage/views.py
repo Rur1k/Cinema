@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from adminpanel.models import Film, FilmSession, Cinema_hall, BackgroundSetting
+from adminpanel.models import Film, FilmSession, Cinema_hall, BackgroundSetting, Slider, NewsAndStocksBanners
 from .models import ReserveAndBuySeats
 
 
@@ -12,10 +12,24 @@ def backSetting():
 
 
 def main_page(request):
+    Sliders = Slider.objects.all()
+    SliderOne = Slider.objects.all()[:1]
+
+    NewsAndStocks = NewsAndStocksBanners.objects.all()
+    NewsAndStocksOne = NewsAndStocksBanners.objects.all()[:1]
+
+
+
     context = {
-        'backgroundSite': backSetting()
+        'backgroundSite': backSetting(),
+        'Sliders': Sliders,
+        'SliderOne': SliderOne,
+        'NewsAndStocks': NewsAndStocks,
+        'NewsAndStocksOne': NewsAndStocksOne,
+        'films_active': Film.objects.filter(status_film=1),
+        'films_pending': Film.objects.filter(status_film=2),
     }
-    return render(request, 'userpage/base_userpage.html', context)
+    return render(request, 'userpage/mainpage.html', context)
 
 
 def poster(request):
