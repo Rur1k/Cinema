@@ -1,5 +1,5 @@
 from django import forms
-from .models import Film, Cinema, Cinema_hall, News, Stock, Page, MainPage, FilmSession, Slider
+from .models import *
 
 
 class FilmForm(forms.ModelForm):
@@ -437,5 +437,51 @@ class SliderForm(forms.ModelForm):
             'description': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'текс',
+            }),
+        }
+
+
+class NewsAndStocksForm(forms.ModelForm):
+    class Meta:
+        model = NewsAndStocksBanners
+        fields = [
+            'picture',
+            'url',
+            'description',
+        ]
+
+        widgets = {
+            'picture': forms.ClearableFileInput(attrs={
+                'class id': 'main_img',
+            }),
+            'url': forms.URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'URL'
+            }),
+            'description': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'текс',
+            }),
+        }
+
+
+class BackgroundSettingForm(forms.ModelForm):
+    class Meta:
+        model = BackgroundSetting
+
+        fields = [
+            'backgroundOn',
+            'backgroundImg',
+        ]
+
+        widgets = {
+            'backgroundOn': forms.RadioSelect(choices=[
+                ('1', 'Фото на фон'),
+                ('0', 'Просто фон')
+            ], attrs={
+
+            }),
+            'backgroundImg': forms.ClearableFileInput(attrs={
+                'class id': 'main_img',
             }),
         }

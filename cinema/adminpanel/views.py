@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Film, Cinema, Cinema_hall, News, Stock, Page, MainPage, ContactPage, FilmSession, Slider
-from .forms import FilmForm, CinemaForm, CinemaHallForm, NewsForm, StockForm, PageForm, MainPageForm, FilmSessionForm, SliderForm
+from .models import *
+from .forms import *
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.forms import formset_factory
 
@@ -284,22 +284,40 @@ def add_film_session(request, hall_id):
 
 def banners_and_sliders(request):
     Sliders = Slider.objects.all()
-    SliderFormSet = formset_factory(SliderForm, extra=6)
+    NewsAndStocks = NewsAndStocksBanners.objects.all()
+    BackSetting = BackgroundSetting.load()
 
-    if request.method == 'POST':
-        FormsetSave = formset_factory(SliderForm)
-        form = FormsetSave(request.POST)
+    if request.method == 'POST' and 'add-slider' in request.POST:
+        form = SliderForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            print('Данные сохранены')
+            print('Данные слайдеров сохранены')
+        else:
+            print('Хьюстон у нас проблемы!!!')
+            print(form.errors)
+    elif request.method == 'POST' and 'add-news-stock' in request.POST:
+        form = NewsAndStocksForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            print('Данные новостей и акций сохранены')
+        else:
+            print('Хьюстон у нас проблемы!!!')
+            print(form.errors)
+    elif request.method == 'POST' and 'update-background' in request.POST:
+        form = BackgroundSettingForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            print('Данные фона сохранены')
         else:
             print('Хьюстон у нас проблемы!!!')
             print(form.errors)
 
-
-
     data = {
         'Sliders': Sliders,
-        'formset': SliderFormSet(),
+        'formSlider': SliderForm(),
+        'NewsAndStocks': NewsAndStocks,
+        'formNewsAndStock': NewsAndStocksForm(),
+        'formBackground': BackgroundSettingForm(),
+
     }
     return render(request, 'adminpanel/banners_and_sliders.html', data)

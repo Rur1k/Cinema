@@ -16,6 +16,7 @@ class Status_film(models.Model):
     def __str__(self):
         return self.name
 
+
 class Status_main(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
     name = models.CharField('Статус глобальный', max_length=64)
@@ -180,13 +181,33 @@ class Slider(models.Model):
     description = models.TextField(blank=True)
 
 
+class NewsAndStocksBanners(models.Model):
+    id = models.AutoField(unique=True, primary_key=True)
+    picture = models.ImageField(upload_to='static/img/sliders', null=True, blank=True)
+    url = models.URLField('Ссылка с картинки', null=True, blank=True)
+    description = models.TextField(blank=True)
 
 
+class SingletonModel(models.Model):
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super(SingletonModel, self).save(*args, **kwargs)
+
+    def delete(self):
+        pass
+
+    @classmethod
+    def load(cls):
+        obj, created = cls.objects.get_or_create(pk=1)
+        return obj
 
 
-
-
-
-
-
-
+class BackgroundSetting(SingletonModel):
+    backgroundOn = models.IntegerField('Флаг включения фона', default=0)
+    backgroundDefault = models.ImageField('Дефолтная картинка', default='static/img/default/background-default.jpeg')
+    backgroundImg = models.ImageField('Загружаемая картинка фона', upload_to='static/img/default', null=True,
+                                      blank=True,
+                                      default='static/img/default/background-default.jpeg')

@@ -1,16 +1,28 @@
 from django.shortcuts import render
-from adminpanel.models import Film, FilmSession, Cinema_hall
+from adminpanel.models import Film, FilmSession, Cinema_hall, BackgroundSetting
 from .models import ReserveAndBuySeats
 
 
+def backSetting():
+    background = BackgroundSetting.objects.get(pk=1)
+    if background.backgroundOn == 1:
+        return background.backgroundImg
+    else:
+        return background.backgroundDefault
+
+
 def main_page(request):
-    return render(request, 'userpage/base_userpage.html')
+    context = {
+        'backgroundSite': backSetting()
+    }
+    return render(request, 'userpage/base_userpage.html', context)
 
 
 def poster(request):
     context = {
         'films_active': Film.objects.filter(status_film=1),
         'films_pending': Film.objects.filter(status_film=2),
+        'backgroundSite': backSetting()
     }
     return render(request, 'userpage/poster.html', context)
 
@@ -22,6 +34,7 @@ def film_details(request, film_id):
     context = {
         'SessionList': SessionList,
         'film': FilmInfo,
+        'backgroundSite': backSetting()
     }
     return render(request, 'userpage/film.html', context)
 
@@ -42,6 +55,7 @@ def session_hall_info(request, session_id):
         'FilmInfo': FilmInfo,
         'rows': rows,
         'columns': columns,
+        'backgroundSite': backSetting()
     }
     return render(request, 'userpage/hall.html', data)
 
