@@ -118,7 +118,8 @@ class FilmForm(forms.ModelForm):
             }),
             'format_film': forms.SelectMultiple(attrs={
                 'id': 'format-select',
-                'multiple': 'multiple'
+                'class': 'form-select',
+                'multiple': 'multiple',
             }),
         }
 

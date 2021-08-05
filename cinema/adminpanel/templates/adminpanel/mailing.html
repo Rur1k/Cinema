@@ -13,14 +13,16 @@
             <div class="col-md-3">
                 <label>Выбрать пользователей кому слать</label>
             </div>
-            <div class="col-md-3">
-                <input type="checkbox"> Все пользователи
+            <div class="col-md-3 form-check">
+                <input class="form-check-input" type="radio" name="RadioSMS" id="SmsCheckAllUser">
+                <label class="form-check-label" for="SmsCheckAllUser">Все пользователи</label>
             </div>
-            <div class="col-md-3">
-                <input type="checkbox"> Выборочно
+             <div class="col-md-3 form-check">
+                <input class="form-check-input" type="radio" name="RadioSMS" id="SmsCheckSelectivelyUser">
+                <label class="form-check-label" for="SmsCheckSelectivelyUser">Выборочно</label>
             </div>
             <div class="col-md-3 text-right">
-                <button>Выбрать пользователей</button>
+                <button class="btn btn-dark">Выбрать пользователей</button>
             </div>
         </div>
         <div class="col-md-12 row">
@@ -39,7 +41,7 @@
             </div>
         </div>
         <div class="col-md-12 text-center">
-            <button>Начать рассылку</button>
+            <button class="btn btn-dark">Начать рассылку</button>
         </div>
     </div>
 
@@ -49,14 +51,16 @@
             <div class="col-md-3">
                 <label>Выбрать email кому слать</label>
             </div>
-            <div class="col-md-3">
-                <input type="checkbox"> Все пользователи на почту
+            <div class="col-md-3 form-check">
+                <input class="form-check-input" type="radio" name="RadioEmail" id="EmailCheckAllUser">
+                <label class="form-check-label" for="EmailCheckAllUser">Все пользователи на почту</label>
             </div>
-            <div class="col-md-3">
-                <input type="checkbox"> Выборочно
+             <div class="col-md-3 form-check">
+                <input class="form-check-input" type="radio" name="RadioEmail" id="EmailCheckSelectivelyUser">
+                <label class="form-check-label" for="EmailCheckSelectivelyUser">Выборочно</label>
             </div>
             <div class="col-md-3 text-right">
-                <button>Выбрать пользователей</button>
+                <button class="btn btn-dark">Выбрать пользователей</button>
             </div>
         </div>
 
@@ -64,7 +68,7 @@
             <div class="col-md-6 row">
                 <div class="col-md-12 row">
                     <div class="col-md-6 text-left">Загрузить HTML-письмо</div>
-                    <div class="col-md-6 text-center"><button>Загрузить</button></div>
+                    <div class="col-md-6 text-center"><button class="btn btn-dark">Загрузить</button></div>
                 </div>
                 <div class="col-md-12">Загружен файл: {}</div>
                 <div class="col-md-12">Шаблон используемый в текущей рассылке: {}</div>
@@ -81,7 +85,7 @@
 
 
         <div class="col-md-12 text-center">
-            <button>Начать рассылку</button>
+            <button class="btn btn-dark">Начать рассылку</button>
         </div>
     </div>
 </div>
