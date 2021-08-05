@@ -98,3 +98,22 @@
 .news-stock-banners{
     margin-top: 2%;
 }
+
+.sms-block{
+        padding: 2%;
+        margin: 1%;
+}
+
+.sms-block div{
+    margin-bottom: 1%;
+}
+
+.email-block{
+        padding: 2%;
+        margin: 1%;
+}
+
+.email-block div{
+    margin-bottom: 1%;
+}
+

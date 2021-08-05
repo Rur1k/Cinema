@@ -117,7 +117,6 @@ class FilmForm(forms.ModelForm):
                 'placeholder': 'Ссылка на трейлер youtube'
             }),
             'format_film': forms.SelectMultiple(attrs={
-                'class': 'form-control',
                 'id': 'format-select',
                 'multiple': 'multiple'
             }),

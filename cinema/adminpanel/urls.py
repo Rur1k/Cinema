@@ -31,4 +31,5 @@ urlpatterns = [
     path('contact/', views.ContactCinema, name='contact'),
     path('hall/<int:hall_id>/addsessionfilm/', views.add_film_session, name='add_filmsession'),
     path('bannersandsliders/', views.banners_and_sliders, name='bannersandsliders'),
+    path('mailing/', views.mailing, name='mailing'),
 ]

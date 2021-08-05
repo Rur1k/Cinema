@@ -321,3 +321,7 @@ def banners_and_sliders(request):
 
     }
     return render(request, 'adminpanel/banners_and_sliders.html', data)
+
+
+def mailing(request):
+    return render(request, 'adminpanel/mailing.html')

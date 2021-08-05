@@ -161,4 +161,6 @@ $('#main_used_picure').change(function () {
             }
         });
 
+$('#genre-select').multiselect();
+$('#format-select').multiselect();
 
