@@ -3,6 +3,11 @@ from .models import *
 from .forms import *
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.forms import formset_factory
+from django.core.mail import send_mail, BadHeaderError
+from cinema.settings import FROM_EMAIL, EMAIL_ADMIN
+from django.http import HttpResponse, HttpResponseRedirect
+from account.models import Profile
+from django.db.models import Q
 
 
 def admin(request):
@@ -325,3 +330,37 @@ def banners_and_sliders(request):
 
 def mailing(request):
     return render(request, 'adminpanel/mailing.html')
+
+
+def contact_view(request):
+    if request.method == 'GET':
+        form = ContactForm()
+    elif request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(f'{subject} от {from_email})', message, FROM_EMAIL, EMAIL_ADMIN, fail_silently=False
+                          )
+            except BadHeaderError:
+                return HttpResponse('Ошибка в теме письма')
+            return redirect('success')
+    else:
+        return HttpResponse('Неверный запрос')
+    return render(request, 'adminpanel/email.html', {'form': form})
+
+
+def success_view(request):
+    return HttpResponse('Приняли! Спасибо за вашу заявку.')
+
+
+def select_user_contact(request):
+    Users = Profile.objects.filter(~Q(phone=None))
+
+    data = {
+        'users': Users
+    }
+
+    return render(request, 'adminpanel/select_user_contact.html', data)

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from adminpanel.models import Film, FilmSession, Cinema_hall, BackgroundSetting, Slider, NewsAndStocksBanners
 from .models import ReserveAndBuySeats
+import json
 
 
 def backSetting():
@@ -75,10 +76,8 @@ def session_hall_info(request, session_id):
 
 
 def save_reserve(request):
+    data = json.loads(request.POST.get('checkboxes'))
 
-    JSON = request.POST.get('checkboxes')
-
-    print(JSON)
-
+    print(data)
 
     return render(request, 'userpage/test.html')

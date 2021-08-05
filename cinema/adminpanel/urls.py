@@ -32,4 +32,7 @@ urlpatterns = [
     path('hall/<int:hall_id>/addsessionfilm/', views.add_film_session, name='add_filmsession'),
     path('bannersandsliders/', views.banners_and_sliders, name='bannersandsliders'),
     path('mailing/', views.mailing, name='mailing'),
+    path('email/', views.contact_view, name='email'),
+    path('success/', views.success_view, name='success'),
+    path('select_user_contact/', views.select_user_contact, name='select_user_contact'),
 ]

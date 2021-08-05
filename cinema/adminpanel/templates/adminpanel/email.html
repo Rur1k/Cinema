@@ -1,0 +1,18 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Рассылка{% endblock %}
+
+{% block name %}Поле отправки email{% endblock %}
+
+{% block content %}
+
+<div class="email">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+</div>
+
+{% endblock %}
