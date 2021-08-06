@@ -38,7 +38,11 @@
             <div class="cinema-row-label">Ряд {{ row }}</div>
             {% for column in columns %}
                 <div class="cinema-seat">
-                    <input type="checkbox" class="checkbox" name="SeatList" id="check-{{ row }}-{{ column }}" value="{{row}}-{{column}}">
+                    {% with seatrow=row|slugify|add:"-"  seatcolumn=column|slugify%}
+                    <input type="checkbox" class="checkbox" name="SeatList" id="check-{{ row }}-{{ column }}"
+                           value="{{row}}-{{column}}"
+                           {% if seatrow|add:seatcolumn in BusySeats %} disabled checked {% endif %}>
+                    {% endwith %}
                     <label for="check-{{ row }}-{{ column }}"
                            class="js-seat-selector"
                            data-seat-row="{{ row }}"
@@ -83,36 +87,6 @@
     <button class="btn btn-info js-reserve-seats">Забронировать</button>
     <button class="btn btn-warning js-bue-seats">Купить</button>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-    var selected_items = [];
-    $(".checkbox").click(function(){
-        var selected_item = $(this).val();
-        var index = selected_items.indexOf(selected_item);
-        if(index == -1)
-        {
-           selected_items.push(selected_item);
-        }
-        else{
-           selected_items.splice(index, 1);
-        }
-    });
-    $("#submit-button").click(function(){
-        $.ajax({
-            url: '{% url 'save_reserve' SessionInfo.id%}',
-            data: JSON.stringify{'checkboxes': selected_items.join(",")},
-            dataType: 'json',
-            type: 'POST',
-            success: function (data) {
-            }
-        });
-    });
-})
-</script>
-
-
 
 
 {% endblock %}

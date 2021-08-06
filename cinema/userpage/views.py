@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from adminpanel.models import Film, FilmSession, Cinema_hall, BackgroundSetting, Slider, NewsAndStocksBanners
 from .models import SeatsReserveAndBuy, StatusSeat
-import json
 
 
 def backSetting():
@@ -59,12 +58,18 @@ def session_hall_info(request, session_id):
     FilmInfo = SessionInfo.film
     BusySeats = SeatsReserveAndBuy.objects.filter(session=session_id)
 
+    BusySeatsList = []
+
+    for seat in BusySeats:
+        BusySeatsList.append(seat.seat)
+
     row = HallInfo.row + 1
     col = HallInfo.col + 1
 
     rows = range(1, row)
     columns = range(1, col)
     data = {
+        'BusySeats': BusySeatsList,
         'sessionId': SessionID,
         'SessionInfo': SessionInfo,
         'HallInfo': HallInfo,

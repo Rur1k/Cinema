@@ -31,8 +31,15 @@
     padding: 5px;
 }
 
+
 .cinema-seat input[type=checkbox]:checked + label {
     color: darkorange;
     border: 1px solid orange;
     background-color: white;
+}
+
+.cinema-seat input[type=checkbox]:disabled:checked + label {
+    color: green;
+    border: 1px solid orange;
+    background-color: grey;
 }
