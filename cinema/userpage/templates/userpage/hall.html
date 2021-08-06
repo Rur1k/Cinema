@@ -23,7 +23,7 @@
         </div>
     </div><br>
 
-<form>
+<form action="{% url 'save_reserve' SessionInfo.id %}" method="POST">
 <div class="row js-seat-container text-white"
      data-current-cost="{{ SessionInfo.price_ticket }}"
      data-current-timeslot-id="{{ SessionInfo.id }}">
@@ -53,7 +53,7 @@
         <div class="js-seat-result-container">
 
         </div>
-    <button id="submit-button" class="btn btn-info js-reserve-seats" onclick="location.href='{% url 'save_reserve' %}'">Забронировать</button>
+    <button id="submit-button" class="btn btn-info js-reserve-seats">Забронировать</button>
     </div>
 
     <div class="js-selected-seat-template" hidden="hidden">
@@ -101,7 +101,7 @@ $(document).ready(function(){
     });
     $("#submit-button").click(function(){
         $.ajax({
-            url: '{% url 'save_reserve' %}',
+            url: '{% url 'save_reserve' SessionInfo.id%}',
             data: JSON.stringify{'checkboxes': selected_items.join(",")},
             dataType: 'json',
             type: 'POST',

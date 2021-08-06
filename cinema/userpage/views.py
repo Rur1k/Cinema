@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from adminpanel.models import Film, FilmSession, Cinema_hall, BackgroundSetting, Slider, NewsAndStocksBanners
-from .models import ReserveAndBuySeats
+from .models import SeatsReserveAndBuy, StatusSeat
 import json
 
 
@@ -18,8 +18,6 @@ def main_page(request):
 
     NewsAndStocks = NewsAndStocksBanners.objects.all()
     NewsAndStocksOne = NewsAndStocksBanners.objects.all()[:1]
-
-
 
     context = {
         'backgroundSite': backSetting(),
@@ -56,8 +54,10 @@ def film_details(request, film_id):
 
 def session_hall_info(request, session_id):
     SessionInfo = FilmSession.objects.get(id=session_id)
+    SessionID = FilmSession.objects.filter(id=session_id)
     HallInfo = SessionInfo.hall
     FilmInfo = SessionInfo.film
+    BusySeats = SeatsReserveAndBuy.objects.filter(session=session_id)
 
     row = HallInfo.row + 1
     col = HallInfo.col + 1
@@ -65,6 +65,7 @@ def session_hall_info(request, session_id):
     rows = range(1, row)
     columns = range(1, col)
     data = {
+        'sessionId': SessionID,
         'SessionInfo': SessionInfo,
         'HallInfo': HallInfo,
         'FilmInfo': FilmInfo,
@@ -75,9 +76,31 @@ def session_hall_info(request, session_id):
     return render(request, 'userpage/hall.html', data)
 
 
-def save_reserve(request):
-    data = json.loads(request.POST.get('checkboxes'))
+def save_reserve(request, session_id):
+    Seats = SeatsReserveAndBuy.objects.filter(session=session_id)
+    session = FilmSession.objects.get(id=session_id)
+    status = StatusSeat.objects.get(id=1)
+    SeatList = []
 
-    print(data)
+    print('Зашли в представление')
+
+    if request.method == 'POST':
+        print('прошли проверу на пост запрос')
+        CheckSeat = request.POST.getlist('SeatList')
+        print(CheckSeat)
+
+        for seat in Seats:
+            SeatList.append(seat.seat)
+
+        for seat in CheckSeat:
+            if seat in SeatList:
+                print('Уже забронировано/куплено')
+            else:
+                print('Места нет, можно бронировать')
+                saveSeat = SeatsReserveAndBuy.objects.create(session=session, seat=seat, status_seat=status)
+                saveSeat.save()
+
+    else:
+        print('НЕ прошли проверку пост')
 
     return render(request, 'userpage/test.html')

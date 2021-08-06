@@ -10,10 +10,11 @@ class StatusSeat(models.Model):
         return self.name
 
 
-class ReserveAndBuySeats(models.Model):
+class SeatsReserveAndBuy(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
     session = models.ForeignKey(FilmSession, on_delete=models.CASCADE)
-    reserve_seats = models.JSONField('Зарезервированые места', null=True)
-    buy_seats = models.JSONField('Купленные места', null=True)
+    seat = models.CharField('Место', max_length=16)
+    status_seat = models.ForeignKey(StatusSeat, on_delete=models.CASCADE)
+
 
 
