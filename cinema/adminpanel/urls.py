@@ -28,7 +28,7 @@ urlpatterns = [
     path('addpage/', views.add_page, name='add_page'),
     path('editpage/<int:pk>', views.UpdatePageView.as_view(), name='edit_page'),
     path('editmainpage/<int:pk>', views.UpdateMainPageView.as_view(), name='edit_mainpage'),
-    path('contact/', views.ContactCinema, name='contact'),
+    path('contact/', views.ContactCinemaList, name='contact'),
     path('hall/<int:hall_id>/addsessionfilm/', views.add_film_session, name='add_filmsession'),
     path('bannersandsliders/', views.banners_and_sliders, name='bannersandsliders'),
     path('mailing/', views.mailing, name='mailing'),
@@ -38,4 +38,8 @@ urlpatterns = [
     path('delete_slider/<int:pk>', views.SliderDeleteView.as_view(), name='delete_slider'),
     path('delete_background/<int:pk>', views.BackgroundDeleteView.as_view(), name='delete_background'),
     path('delete_newsslider/<int:pk>', views.NewsSliderDeleteView.as_view(), name='delete_newsslider'),
+    path('addcontactcinema/', views.add_contact_cinema, name='add_contact_cinema'),
+    path('editcontactcinema/<int:pk>', views.UpdateContactCinemaView.as_view(), name='edit_contact_cinema'),
+    path('deletecontactcinema/<int:pk>', views.ContactCinemaDeleteView.as_view(), name='delete_contact_cinema'),
+    path('deletepage/<int:pk>', views.PageDeleteView.as_view(), name='delete_page'),
 ]

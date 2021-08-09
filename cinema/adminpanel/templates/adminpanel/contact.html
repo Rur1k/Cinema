@@ -7,17 +7,32 @@
 
 {% block content %}
 <div class="col-md-3 float-right">
-    <button type="button" class="btn-news-stock btn btn-dark float-right" onclick="location.href=''">Добавить контакты</button>
+    <button type="button" class="btn-news-stock btn btn-dark float-right" onclick="location.href='{% url 'add_contact_cinema' %}'">Добавить контакты</button>
     <br><br><br>
 </div>
 <div>
 
         <table class="table table-bordered">
             <thead>
+                <th scope="col">Лого</th>
                 <th scope="col">Название</th>
                 <th scope="col">Адресс</th>
+                <th scope="col">Координаты</th>
                 <th scope="col">Эл. упр</th>
             </thead>
+            {% for contact in contact_cinema %}
+                <tbody>
+                    <td class="text-center"><img src="{{ contact.logo.url }}" width="100px" height="100px"/></td>
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.address }}</td>
+                    <td>{{ contact.coordinates }}</td>
+
+                    <td class="text-center">
+                        <a href="{% url 'edit_contact_cinema' contact.id %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <a href="{% url 'delete_contact_cinema' contact.id %}"><i class="nav-icon fas fa-trash fa-2x"></i></a>
+                    </td>
+                </tbody>
+            {% endfor %}
         </table>
 </div>
 

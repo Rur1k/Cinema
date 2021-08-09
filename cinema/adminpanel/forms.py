@@ -491,3 +491,33 @@ class ContactForm(forms.Form):
     from_email = forms.EmailField(label='Email', required=True)
     subject = forms.CharField(label='Тема', required=True)
     message = forms.CharField(label='Сообщение', widget=forms.Textarea, required=True)
+
+
+class ContactCinemaForm(forms.ModelForm):
+    class Meta:
+        model = ContactCinema
+
+        fields = [
+            'name',
+            'address',
+            'coordinates',
+            'logo',
+        ]
+
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Название кинотеатра',
+            }),
+            'address': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Адресс',
+            }),
+            'coordinates': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Координаты',
+            }),
+            'logo': forms.ClearableFileInput(attrs={
+                'class id': 'main_img',
+            }),
+        }

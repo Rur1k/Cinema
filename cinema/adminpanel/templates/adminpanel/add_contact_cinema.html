@@ -1,0 +1,49 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Добавление/Редактирование{% endblock %}
+
+{% block name %}Добавление/Редактирование контактов кинотеатра{% endblock %}
+
+{% block content %}
+<div class="add-news">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label text-right">Название кинотеатра: </label>
+           <div class="col-sm-10">
+               {{ form.name }}
+           </div>
+      </div><br>
+
+      <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label text-right">Адресс: </label>
+          <div class="col-sm-10">
+               {{ form.address }}
+          </div>
+      </div><br>
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label text-right">Координаты для карты: </label>
+           <div class="col-sm-10">
+                {{ form.coordinates }}
+           </div>
+      </div><br>
+
+      <div class="mb-2 row">
+           <label class="col-sm-2 col-form-label text-right">Лого: </label>
+           <div class="col-sm-10">
+               <img id="upload-btn" src="{% static 'img/default/default-img.png' %}" width="150" height="150"/>
+               <div id="main-used-picture" hidden="hidden">
+                   {{ form.logo }}
+               </div>
+           </div>
+       </div> <br>
+      <div class="mb-3 row">
+          <input type="submit" class="button-add-mass btn btn-dark col-md-4" value="Добавить/Сохранить"><br>
+      </div>
+  </form>
+</div>
+{% endblock %}

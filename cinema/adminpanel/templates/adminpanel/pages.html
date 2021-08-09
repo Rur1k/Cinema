@@ -46,7 +46,7 @@
                     <td>
                         {% if page.status_delete == 1 %}
                             <a href="{% url 'edit_page' page.id %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                            <a href=""><i class="nav-icon fas fa-trash fa-2x"></i></a>
+                            <a href="{% url 'delete_page' page.id %}"><i class="nav-icon fas fa-trash fa-2x"></i></a>
                         {% else %}
                             <a href="{% url 'edit_page' page.id %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         {% endif %}

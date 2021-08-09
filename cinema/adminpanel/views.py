@@ -264,8 +264,11 @@ class UpdateMainPageView(UpdateView):
     form_class = MainPageForm
 
 
-def ContactCinema(request):
-    return render(request, 'adminpanel/contact.html')
+def ContactCinemaList(request):
+    data = {
+        'contact_cinema': ContactCinema.objects.all()
+    }
+    return render(request, 'adminpanel/contact.html', data)
 
 
 def add_film_session(request, hall_id):
@@ -384,5 +387,41 @@ class NewsSliderDeleteView(DeleteView):
     model = NewsAndStocksBanners
     success_url = '../../admin/deletedone/'
     template_name = 'adminpanel/delete_newsslider.html'
+
+
+def add_contact_cinema(request):
+    if request.method == 'POST':
+        form = ContactCinemaForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('contact')
+        else:
+            print(form.errors)
+
+    form = ContactCinemaForm()
+    data = {
+        'form': form,
+    }
+    return render(request, "adminpanel/add_contact_cinema.html", data)
+
+
+class UpdateContactCinemaView(UpdateView):
+    model = ContactCinema
+    success_url = '../../admin/contact'
+    template_name = 'adminpanel/add_contact_cinema.html'
+    form_class = ContactCinemaForm
+
+
+class ContactCinemaDeleteView(DeleteView):
+    model = ContactCinema
+    success_url = '../../admin/deletedone/'
+    template_name = 'adminpanel/delete_contact_cinema.html'
+
+
+class PageDeleteView(DeleteView):
+    model = Page
+    success_url = '../../admin/deletedone/'
+    template_name = 'adminpanel/delete_page.html'
+
 
 
