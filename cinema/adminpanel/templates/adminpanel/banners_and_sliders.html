@@ -18,9 +18,9 @@
                     <div class="row">
                         <div class="col-md-6"><h4>Размер: 1000х190</h4></div>
 
-                        <div class="form-check form-switch col-md-6 text-right">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchChecked" checked>
-                        </div>
+<!--                        <div class="form-check form-switch col-md-6 text-right">-->
+<!--                            <input class="form-check-input" type="checkbox" id="flexSwitchChecked" checked>-->
+<!--                        </div>-->
                     </div>
                 </div>
 
@@ -28,6 +28,7 @@
                     <div class="row">
                         {% for slider in Sliders %}
                         <div class="col-md-2" style="margin: 1%">
+                            <div class="col-md-12"><label>Слайд</label></div>
                             <div class="col-md-12">
                                 <img src="{{ slider.picture.url }}" width="100%" height="100%"/>
                             </div>
@@ -39,14 +40,16 @@
                                 <label class="md-6">Текст:</label>
                                 <input class="form-control" type="text" value="{{ slider.description }}">
                             </div>
-                            <div class="col-md-12"><a>Удалить</a></div>
+                            <div class="col-md-12"><a href="{% url 'delete_slider' slider.id %}">Удалить</a></div>
                         </div>
                         {% endfor %}
                         <div class="col-md-2" style="margin: 1%">
                             <div class="col-md-12"><label>Добавить фото</label></div>
                             <div class="col-md-12">
-                                <img hidden="hidden" id="upload-btn" src="{% static 'img/default/default-img.png' %}" width="100%" height="100%"/>
-                                <div>{{ formSlider.picture }}</div>
+                                <img id="upload-btn" src="{% static 'img/default/default-img.png' %}" width="100%" height="100%"/>
+                                <div hidden="hidden">
+                                    {{ formSlider.picture }}
+                                </div>
                             </div>
                             <div class="col-md-12">
                                 <label class="md-6">URL:</label>
@@ -63,10 +66,7 @@
 
                 <div class="col-md-12" style="margin-top: 2%">
                     <div class="row">
-                        <div class="col-md-6">
-                            <text class="">Скорость вращения</text>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12 text-center">
                             <input type="submit" class="btn btn-dark text-center" name="add-slider" value="Сохранить"/>
                         </div>
                     </div>
@@ -90,9 +90,18 @@
                         <div class="col-md-4">
                             {{ formBackground.backgroundOn }}
                         </div>
-                        <div class="col-md-4">{{ formBackground.backgroundImg }}</div>
+                        {% if Background.backgroundImg != 'static/img/default/background-default.jpeg' %}
+                        <div class="col-md-4">
+                            <img src="{{ Background.backgroundImg.url }}" width="175px" height="125px"/>
+                        </div>
+                        {% else %}
+                        <div class="col-md-4">
+                            <img id="upload-picture2"  src="{% static 'img/default/default-img.png' %}" width="175px" height="125px"/>
+                        </div>
+                        <div hidden="hidden" class="col-md-4">{{ formBackground.backgroundImg }}</div>
+                        {% endif %}
                         <div class="col-md-2"><input type="submit" class="btn btn-dark" name="update-background" value="Сохранить"/></div>
-                        <div class="col-md-2"><button class="btn btn-dark">Удалить</button></div>
+                        <div class="col-md-2"><a class="btn btn-dark" href="{% url 'delete_background' Background.id %}">Удалить</a></div>
                     </div>
                 </div>
             </div>
@@ -120,6 +129,7 @@
                     <div class="row">
                         {% for newsstock in NewsAndStocks %}
                         <div class="col-md-2" style="margin: 1%">
+                            <div class="col-md-12"><label>Слайд</label></div>
                             <div class="col-md-12">
                                 <img src="{{ newsstock.picture.url }}" width="100%" height="100%"/>
                             </div>
@@ -131,14 +141,16 @@
                                 <label class="md-6">Текст:</label>
                                 <input class="form-control" type="text" value="{{ newsstock.description }}">
                             </div>
-                            <div class="col-md-12"><a>Удалить</a></div>
+                            <div class="col-md-12"><a href="{% url 'delete_newsslider' newsstock.id %}">Удалить</a></div>
                         </div>
                         {% endfor %}
                         <div class="col-md-2" style="margin: 1%">
                             <div class="col-md-12"><label>Добавить фото</label></div>
                             <div class="col-md-12">
-                                <img hidden="hidden" id="" src="{% static 'img/default/default-img.png' %}" width="100%" height="100%"/>
-                                <div>{{ formNewsAndStock.picture }}</div>
+                                <img id="upload-picture1" src="{% static 'img/default/default-img.png' %}" width="100%" height="100%"/>
+                                <div id="main-used-picture" hidden="hidden">
+                                   {{ formNewsAndStock.picture }}
+                                </div>
                             </div>
                             <div class="col-md-12">
                                 <label class="md-6">URL:</label>
@@ -155,10 +167,7 @@
 
                 <div class="col-md-12" style="margin-top: 2%">
                     <div class="row">
-                        <div class="col-md-6">
-                            <text class="">Скорость вращения</text>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12 text-center">
                             <input type="submit" class="btn btn-dark text-center" name="add-news-stock" value="Сохранить"/>
                         </div>
                     </div>

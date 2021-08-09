@@ -34,8 +34,8 @@
                     <td>{{ user.pseudonym }}</td>
                     <td>{{ user.city }}</td>
                     <td>
-                        <a href=""><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        <a href=""><i class="nav-icon fas fa-trash fa-2x"></i></a></td>
+                        <a href="{% url 'edit_user' user.user.id %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <a href="{% url 'delete_user' user.user.id %}"><i class="nav-icon fas fa-trash fa-2x"></i></a></td>
                 </tbody>
             {% endfor %}
         </table>

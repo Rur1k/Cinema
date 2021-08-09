@@ -1,0 +1,23 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Удаление пользователя{% endblock %}
+
+{% block name %}Удаление пользователя{% endblock %}
+
+{% block content %}
+<div>
+  {% if request.user.is_authenticated %}
+  <h1>Удаление пользователя: {{ user.username }}</h1><br>
+
+  <p>Вы уверены что хотите удалить пользователя?</p>
+
+  <form method="POST">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-dark" value="Удалить">
+  </form>
+  {% else %}
+  <p>Для удаления фильма надо <a href="{% url 'login' %}">авторизоватся.</a></p>
+  {% endif %}
+</div>
+{% endblock %}

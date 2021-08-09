@@ -1,0 +1,23 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Удаление фона{% endblock %}
+
+{% block name %}Удаление фона{% endblock %}
+
+{% block content %}
+<div>
+  {% if request.user.is_authenticated %}
+  <h1>Удаление фона:</h1><br>
+  <img src="{{ Background.backgroundImg.url }}" width="175px" height="125px"><br>
+  <p>Вы уверены что хотите удалить фон?</p>
+
+  <form method="POST">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-dark" value="Удалить">
+  </form>
+  {% else %}
+  <p>Для удаления фильма надо <a href="{% url 'login' %}">авторизоватся.</a></p>
+  {% endif %}
+</div>
+{% endblock %}

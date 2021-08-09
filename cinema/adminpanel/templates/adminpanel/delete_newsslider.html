@@ -1,0 +1,23 @@
+{% extends 'adminpanel/base.html' %}
+{% load static %}
+
+{% block title %}Удаление слайда {% endblock %}
+
+{% block name %}Удаление слайда{% endblock %}
+
+{% block content %}
+<div>
+  {% if request.user.is_authenticated %}
+  <h1>Удаление слайда:</h1><br>
+  <img src="{{ NewsAndStocksBanners.picture.url }}" width="175px" height="125px"><br>
+  <p>Вы уверены что хотите удалить слайд?</p>
+
+  <form method="POST">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-dark" value="Удалить">
+  </form>
+  {% else %}
+  <p>Для удаления фильма надо <a href="{% url 'login' %}">авторизоватся.</a></p>
+  {% endif %}
+</div>
+{% endblock %}

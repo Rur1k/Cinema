@@ -35,4 +35,7 @@ urlpatterns = [
     path('email/', views.contact_view, name='email'),
     path('success/', views.success_view, name='success'),
     path('select_user_contact/', views.select_user_contact, name='select_user_contact'),
+    path('delete_slider/<int:pk>', views.SliderDeleteView.as_view(), name='delete_slider'),
+    path('delete_background/<int:pk>', views.BackgroundDeleteView.as_view(), name='delete_background'),
+    path('delete_newsslider/<int:pk>', views.NewsSliderDeleteView.as_view(), name='delete_newsslider'),
 ]

@@ -291,6 +291,7 @@ def banners_and_sliders(request):
     Sliders = Slider.objects.all()
     NewsAndStocks = NewsAndStocksBanners.objects.all()
     BackSetting = BackgroundSetting.load()
+    Background = BackgroundSetting.objects.get(id=1)
 
     if request.method == 'POST' and 'add-slider' in request.POST:
         form = SliderForm(request.POST, request.FILES)
@@ -318,6 +319,7 @@ def banners_and_sliders(request):
             print(form.errors)
 
     data = {
+        'Background': Background,
         'Sliders': Sliders,
         'formSlider': SliderForm(),
         'NewsAndStocks': NewsAndStocks,
@@ -364,3 +366,23 @@ def select_user_contact(request):
     }
 
     return render(request, 'adminpanel/select_user_contact.html', data)
+
+
+class SliderDeleteView(DeleteView):
+    model = Slider
+    success_url = '../../admin/deletedone/'
+    template_name = 'adminpanel/delete_slider.html'
+
+
+class BackgroundDeleteView(DeleteView):
+    model = BackgroundSetting
+    success_url = '../../admin/deletedone/'
+    template_name = 'adminpanel/delete_background.html'
+
+
+class NewsSliderDeleteView(DeleteView):
+    model = NewsAndStocksBanners
+    success_url = '../../admin/deletedone/'
+    template_name = 'adminpanel/delete_newsslider.html'
+
+

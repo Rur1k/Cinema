@@ -452,7 +452,7 @@ class NewsAndStocksForm(forms.ModelForm):
 
         widgets = {
             'picture': forms.ClearableFileInput(attrs={
-                'class id': 'main_img',
+                'class id': 'picture_1',
             }),
             'url': forms.URLInput(attrs={
                 'class': 'form-control',
@@ -482,7 +482,7 @@ class BackgroundSettingForm(forms.ModelForm):
 
             }),
             'backgroundImg': forms.ClearableFileInput(attrs={
-                'class id': 'main_img',
+                'class id': 'picture_2',
             }),
         }
 

@@ -9,7 +9,7 @@
 
 <div class="row">
     {% for cinema in cinemas %}
-    <div class="p-2 bd-bd-highlight">
+    <div class="col-md-3 text-center">
         <a href="{% url 'cinema_info' cinema.id %}">
             <img src="{{ cinema.logo.url }}" width="200" height="200"><br>
             <label class="label-cinema">{{ cinema.cinema_name }}</label>
