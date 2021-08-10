@@ -23,7 +23,7 @@
                     <td>{{ mainpage.name_page }}</td>
                     <td>{{ mainpage.create_date }}</td>
                     <td>{{ mainpage.status_page }}</td>
-                    <td>
+                    <td class="text-center">
                         <a href="{% url 'edit_mainpage' mainpage.id%}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                     </td>
             </tbody>
@@ -33,7 +33,7 @@
                     <td>{{ contact.name_page }}</td>
                     <td>{{ contact.create_date }}</td>
                     <td>{{ contact.status_page }}</td>
-                    <td>
+                    <td class="text-center">
                         <a href="{% url 'contact' %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                     </td>
             </tbody>
@@ -43,7 +43,7 @@
                     <td>{{ page.name_page }}</td>
                     <td>{{ page.create_date }}</td>
                     <td>{{ page.status_page }}</td>
-                    <td>
+                    <td class="text-center">
                         {% if page.status_delete == 1 %}
                             <a href="{% url 'edit_page' page.id %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                             <a href="{% url 'delete_page' page.id %}"><i class="nav-icon fas fa-trash fa-2x"></i></a>

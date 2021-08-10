@@ -16,11 +16,11 @@
         <img src="{{ cinema.top_banner.url }}" width="100%" height="200"><br>
     </div>
     <br>
-    <div class="d-flex  flex-row bd-highlight mb-2 justify-content-left">
-        <div class="p-2 bd-bd-highlight">
-            <img src="{{ cinema.logo.url }}">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{ cinema.logo.url }}" width="100%" height="100%">
         </div>
-        <div class="p-2 bd-bd-highlight">
+        <div class="col-md-9">
             <text><b>Название кинотеатра: </b>{{ cinema.cinema_name }}</text><br>
             <text><b>Описание: </b>{{ cinema.description_cinema }}</text><br>
             <text><b>Условия:: </b>{{ cinema.conditions }}</text><br>
@@ -42,7 +42,7 @@
                 <tbody>
                     <td>{{ hall.number_hall }}</td>
                     <td>{{ hall.create_date }}</td>
-                    <td>
+                    <td class="text-center">
                         <a href="{% url 'hall_info' hall.id%}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         <a href="{% url 'delete_hall' hall.id %}"><i class="nav-icon fas fa-trash fa-2x"></i></a>
                     </td>

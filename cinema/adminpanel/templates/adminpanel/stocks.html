@@ -23,7 +23,7 @@
                     <td>{{ stock.name_stock }}</td>
                     <td>{{ stock.create_date }}</td>
                     <td>{{ stock.status_stock }}</td>
-                    <td>
+                    <td class="text-center">
                         <a href="{% url 'edit_stock' stock.id %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         <a href="{% url 'delete_stock' stock.id %}"><i class="nav-icon fas fa-trash fa-2x"></i></a></td>
                 </tbody>

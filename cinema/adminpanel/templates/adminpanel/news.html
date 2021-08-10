@@ -24,7 +24,7 @@
                     <td>{{ news.name_news }}</td>
                     <td>{{ news.create_date }}</td>
                     <td>{{ news.status_news }}</td>
-                    <td>
+                    <td class="text-center">
                         <a href="{% url 'edit_news' news.id %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         <a href="{% url 'delete_news' news.id %}"><i class="nav-icon fas fa-trash fa-2x"></i></a>
                     </td>

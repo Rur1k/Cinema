@@ -8,12 +8,12 @@
 {% block content %}
 <div>
   {% if request.user.is_authenticated %}
-  <h1>Удаление с траницы: "{{ page.name_page }}"</h1>
+  <h1>Удаление с cтраницы: "{{ page.name_page }}"</h1>
   <p>Вы уверены что хотите удалить страницу?</p>
 
   <form method="POST">
     {% csrf_token %}
-    <input type="submit" class="btn btn-dark" value="Удалить акцию">
+    <input type="submit" class="btn btn-dark" value="Удалить страницу">
   </form>
   {% else %}
   <p>Для удаления акции надо <a href="{% url 'login' %}">авторизоватся.</a></p>

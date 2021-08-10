@@ -33,7 +33,7 @@
                     <td>{{ user.user.last_name }}</td>
                     <td>{{ user.pseudonym }}</td>
                     <td>{{ user.city }}</td>
-                    <td>
+                    <td class="text-center">
                         <a href="{% url 'edit_user' user.user.id %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         <a href="{% url 'delete_user' user.user.id %}"><i class="nav-icon fas fa-trash fa-2x"></i></a></td>
                 </tbody>
