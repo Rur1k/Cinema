@@ -92,31 +92,32 @@
      </nav>
  </header>
 
-    <div class="container-main">
+    <div class="container-main" style="min-height: 500px">
         {% block content %}
         {% endblock %}
     </div>
 
     <div class="container-bottom border-bottom row">
         <div class="col row">
-            <div class="col-md-12"><h5>Мобильное приложение</h5></div>
-            <div class="col-md-6">Google play</div>
-            <div class="col-md-6">App Store</div>
+            <div class="col-md-12"><h5>Мобильные приложения</h5></div>
+            <div class="col-md-6"><img src="{% static 'img/default/google-play.png' %}" width="100%" height="90%"></div>
+            <div class="col-md-6"><img src="{% static 'img/default/app-store.png' %}" width="100%" height="90%"></div>
             <div class="col-md-12">Разработка сайтов: AVADA-MEDIA</div>
         </div>
         <div class="col row text-center">
             <div class="col-md-12"><h5>Афиша</h5></div>
-            <div class="col-md-12">Расписание</div>
-            <div class="col-md-12">Скоро в прокате</div>
-            <div class="col-md-12">Кинотеатры</div>
-            <div class="col-md-12">Акции</div>
+            <div class="col-md-12"><a  class="link-dark" href="{% url 'timetable' %}">Расписание</a></div>
+            <div class="col-md-12"><a href="{% url 'soon'%}">Скоро в прокате</a></div>
+            <div class="col-md-12"><a href="{% url 'our_cinemas' %}">Кинотеатры</a></div>
+            <div class="col-md-12"><a href="{% url 'our_stocks' %}">Акции</a></div>
         </div>
         <div class="col row text-center">
             <div class="col-md-12"><h5>О кинотеатре</h5></div>
-            <div class="col-md-12">Новости</div>
-            <div class="col-md-12">Реклама</div>
-            <div class="col-md-12">Кафе-Бар</div>
-            <div class="col-md-12">Контакты</div>
+            <div class="col-md-12"><a href="{% url 'our_news' %}">Новости</a></div>
+            {% for page in pages %}
+            <div class="col-md-12"><a href="{% url 'our_page' page.id %}">{{ page.name_page }}</a></div>
+            {% endfor %}
+            <div class="col-md-12"><a href="{% url 'our_contacts' %}">Контакты</a></div>
         </div>
         <div class="md-3">
             <a href="#" class="fab fa-facebook fa-2x"></a>

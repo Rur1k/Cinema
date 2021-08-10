@@ -3,9 +3,20 @@
 {% block title %}Новости{% endblock %}
 
 {% block content %}
-<div class="row">
+<div class="row text-white">
     <div class="col-md-12 text-center"><h2 class="text-white">Новости</h2></div>
-
+    <div class="col-md-12 row">
+        {% for news in news_list %}
+        <div class="col">
+            <a href="{% url 'news_info_userpage' news.id %}">
+                <div class="row text-center">
+                    <div class="col-md-12"><img src="{{ news.main_picture.url }}" width="200px" height="200px"></div>
+                    <div class="col-md-12"><b>{{ news.name_news }}</b></div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
 
 </div>
 {% endblock %}

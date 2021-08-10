@@ -18,7 +18,7 @@
                     <tbody>
                         <td scope="col" class="text-center">{{ session.datetime }}</td>
                         <td scope="col"><a href="{% url 'film_details' session.film.id %}">{{ session.film.film_name }}</a></td>
-                        <td scope="col">{{ session.hall.cinema_id.cinema_name }}</td>
+                        <td scope="col"><a href="{% url 'cinema_userpage' session.hall.cinema_id.id %}">{{ session.hall.cinema_id.cinema_name }}</td>
                         <td scope="col" class="text-center">{{ session.hall.number_hall }}</td>
                         <td scope="col" class="text-center">{{ session.price_ticket }}</td>
                         <td class="text-center">

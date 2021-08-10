@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from adminpanel.models import Film, FilmSession, Cinema_hall, BackgroundSetting, Slider, NewsAndStocksBanners, MainPage, Cinema
-from adminpanel.models import Page
+from adminpanel.models import Page, Stock, News
 from .models import SeatsReserveAndBuy, StatusSeat
 import datetime
 
@@ -157,11 +157,13 @@ def cinemas(request):
 
 
 def stocks(request):
+    Stock_list = Stock.objects.filter(status_stock=1)
 
     data = {
         'pages': Page.objects.filter(status_page=1),
         'MainInfo': MainPage.objects.get(id=1),
         'backgroundSite': backSetting(),
+        'stocks': Stock_list,
     }
     return render(request, 'userpage/stocks.html', data)
 
@@ -177,11 +179,13 @@ def contacts(request):
 
 
 def news(request):
+    news_list = News.objects.filter(status_news=1)
 
     data = {
         'pages': Page.objects.filter(status_page=1),
         'MainInfo': MainPage.objects.get(id=1),
         'backgroundSite': backSetting(),
+        'news_list': news_list,
     }
     return render(request, 'userpage/news.html', data)
 
@@ -196,4 +200,71 @@ def our_page(request, page_id):
         'page': PageInfo,
     }
     return render(request, 'userpage/page.html', data)
+
+
+def cinema_info(request, cinema_id):
+    CinemaInfo = Cinema.objects.get(id=cinema_id)
+    HallInfo = Cinema_hall.objects.filter(cinema_id=cinema_id)
+    FilmSessionList = []
+
+    for session in HallInfo:
+        FilmSessionList.extend(FilmSession.objects.filter(hall=session.id))
+
+    data = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'backgroundSite': backSetting(),
+        'cinema': CinemaInfo,
+        'halls': HallInfo,
+        'session_list': FilmSessionList,
+    }
+
+    return render(request, 'userpage/cinema.html', data)
+
+
+def hall_info(request, hall_id):
+    hall_info_all = Cinema_hall.objects.get(id=hall_id)
+    session = FilmSession.objects.filter(hall=hall_id)
+
+    row = hall_info_all.row + 1
+    col = hall_info_all.col + 1
+
+    rows = range(1, row)
+    columns = range(1, col)
+
+    data = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'backgroundSite': backSetting(),
+        'session': session,
+        'hall': hall_info_all,
+        'rows': rows,
+        'columns': columns,
+    }
+
+    return render(request, 'userpage/hall_info.html', data)
+
+
+def stock_info(request, stock_id):
+    stock_info = Stock.objects.get(id=stock_id)
+
+    data = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'backgroundSite': backSetting(),
+        'stock': stock_info,
+    }
+    return render(request, 'userpage/stock_info.html', data)
+
+
+def news_info(request, news_id):
+    news_info = News.objects.get(id=news_id)
+
+    data = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'backgroundSite': backSetting(),
+        'news': news_info,
+    }
+    return render(request, 'userpage/news_info.html', data)
 

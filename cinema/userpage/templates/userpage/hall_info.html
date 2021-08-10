@@ -1,0 +1,65 @@
+{% extends 'userpage/base_userpage.html' %}
+{% load static %}
+{% block title %}Кинотеатры{% endblock %}
+
+{% block content %}
+<div class="row text-white">
+    <div class="hall-info">
+      <div class="top-banner col-md-12">
+            <img src="{{ hall.top_banner.url }}" width="100%" height="200"><br>
+      </div>
+      <div class="hall-info-main col-md-12">
+          <text><b>Номер зала: </b>{{ hall.number_hall }}</text><br>
+          <text><b>Описание: </b>{{ hall.description_hall }}</text><br>
+      </div>
+    </div>
+
+    <div class="col-md-12 text-center">
+        <h1 class="">Схема зала</h1>
+    </div>
+
+    <div class="col-md-12 row js-seat-container text-center">
+        <div class="col-md-12">
+            {% for row in rows %}
+            <div class="cinema-row">
+                <div class="cinema-row-label">Ряд {{ row }}</div>
+                {% for column in columns %}
+                    <div class="cinema-seat">
+                        <input type="checkbox" id="check-{{ row }}-{{ column }}">
+                        <label for="check-{{ row }}-{{ column }}"
+                               class="js-seat-selector"
+                               data-seat-row="{{ row }}"
+                               data-seat-col="{{ column }}">{{ column }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="col-md-12 film-session text-center text-white">
+         <h1>Сеансы в зале</h1>
+
+            <table class="table table-bordered text-white">
+                <thead>
+                    <th scope="col">Фильм</th>
+                    <th scope="col">Дата и время сеанса</th>
+                    <th scope="col">Цена в грн</th>
+                    <th scope="col">Бронирование</th>
+                </thead>
+                {% for film_session in session %}
+                    <tbody>
+                        <td><a href="{% url 'film_details' film_session.film.id %}">{{ film_session.film.film_name }}</a></td>
+                        <td>{{ film_session.datetime }}</td>
+                        <td>{{ film_session.price_ticket }}</td>
+                        <td class="text-center">
+                            <a href="{% url 'session_hall_info' film_session.id %}"><i class="nav-icon fas fa-ticket-alt fa-2x"></i></a>
+                        </td>
+                     </tbody>
+                {% endfor %}
+            </table>
+    </div>
+
+</div>
+{% endblock %}
