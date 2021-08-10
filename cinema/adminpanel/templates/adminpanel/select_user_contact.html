@@ -7,6 +7,8 @@
 
 {% block content %}
 <div class="row">
+    <form method="POST" action="{% url 'save_phones' %}">
+        {% csrf_token %}
     <div class="col-md-12">
             <table class="table table-bordered">
                 <thead>
@@ -19,11 +21,10 @@
                     <th scope="col">ФИО</th>
                     <th scope="col">Псевдоним</th>
                     <th scope="col">Город</th>
-                    <th scope="col">Эл. упр</th>
                 </thead>
                 {% for user in users %}
                     <tbody>
-                        <td class="text-center"><input type="checkbox" class="form-check-input"></td>
+                        <td class="text-center"><input type="checkbox" name="phone-list" class="form-check-input" value="{{ user.phone }}"></td>
                         <td>{{ user.user.id }}</td>
                         <td>{{ user.user.date_joined }}</td>
                         <td>{{ user.birth_date }}</td>
@@ -32,16 +33,14 @@
                         <td>{{ user.user.last_name }}</td>
                         <td>{{ user.pseudonym }}</td>
                         <td>{{ user.city }}</td>
-                        <td>
-                            <a href=""><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                            <a href=""><i class="nav-icon fas fa-trash fa-2x"></i></a></td>
                     </tbody>
                 {% endfor %}
             </table>
     </div>
 
     <div class="col-md-12 text-center">
-        <button type="button" class="btn-news-stock btn btn-dark" onclick="location.href=''">Сохранить пользователе для отправки</button>
+        <input type="submit" class="btn-news-stock btn btn-dark" value="Сохранить пользователе для отправки"></input>
     </div>
+    </form>
 </div>
 {% endblock%}

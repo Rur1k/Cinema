@@ -42,4 +42,6 @@ urlpatterns = [
     path('editcontactcinema/<int:pk>', views.UpdateContactCinemaView.as_view(), name='edit_contact_cinema'),
     path('deletecontactcinema/<int:pk>', views.ContactCinemaDeleteView.as_view(), name='delete_contact_cinema'),
     path('deletepage/<int:pk>', views.PageDeleteView.as_view(), name='delete_page'),
+    path('save_phone_sms/', views.save_phone_sms, name='save_phones'),
+
 ]

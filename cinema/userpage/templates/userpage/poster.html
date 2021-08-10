@@ -7,11 +7,11 @@
 
 <div class="row">
     {% for film in films_active %}
-    <div class="p-2 bd-bd-highlight">
+    <div class="col text-center">
         <a href="{% url 'film_details' film.id %}">
           <img src="{{ film.main_picture.url }}" width="200" height="295"><br>
           <text class="text-blue"><b>{{ film.film_name }}</b></text><br>
-          <button type="button" class="btn btn-warning" onclick="location.href='#'">Купить</button>
+          <button type="button" class="btn btn-warning" onclick="location.href='{% url 'film_details' film.id %}'"><b>Купить</b></button>
         </a>
     </div>
     {% endfor %}
@@ -19,11 +19,10 @@
 
 <h2 class="text-white">Скоро:</h2>
     {% for film in films_pending %}
-    <div class="p-2 bd-bd-highlight">
+    <div class="col text-center">
         <a href="{% url 'film_details' film.id %}">
           <img src="{{ film.main_picture.url }}" width="200" height="295"><br>
             <text><b>{{ film.film_name }}</b></text><br>
-            <button type="button" class="btn btn-warning" onclick="location.href='#'">Купить</button>
         </a>
     </div>
     {% endfor %}

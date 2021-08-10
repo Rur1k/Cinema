@@ -1,0 +1,17 @@
+{% extends 'userpage/base_userpage.html' %}
+{% load static %}
+{% block title %}Кинотеатры{% endblock %}
+
+{% block content %}
+<div class="row text-white">
+    <div class="col-md-12 text-center"><h2 class="text-white">Наши кинотеатры</h2></div>
+    {% for cinema in cinemas %}
+    <div class="col text-center">
+        <a href="">
+            <img src="{{ cinema.logo.url }}" width="200" height="200"><br>
+            <label class="label-cinema">{{ cinema.cinema_name }}</label>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

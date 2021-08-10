@@ -424,4 +424,19 @@ class PageDeleteView(DeleteView):
     template_name = 'adminpanel/delete_page.html'
 
 
+def save_phone_sms(request):
+    print('Зашли в представление')
+    if request.method == 'POST':
+        print('ПРошли проверу на пост')
+        phone_list = request.POST.getlist('phone-list')
+        print(phone_list)
+
+
+
+    return redirect('mailing')
+
+
+
+
+
 

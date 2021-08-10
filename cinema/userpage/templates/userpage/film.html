@@ -13,7 +13,7 @@
     <br>
     <div class="d-flex  flex-row bd-highlight mb-2 justify-content-left">
         <div class="p-2 bd-bd-highlight">
-            <img src="{{ film.main_picture.url }}">
+            <img src="{{ film.main_picture.url }}" width="200" height="295">
         </div>
         <div class="p-2 bd-bd-highlight">
             <text><b>Название фильма: </b>{{ film.film_name }}</text><br>
@@ -57,8 +57,8 @@
                         <td>{{ session.hall.cinema_id.cinema_name }}</td>
                         <td>{{ session.hall.number_hall }}</td>
                         <td>{{ session.datetime }}</td>
-                        <td>{{ session.price_ticket }}</td>
-                        <td>
+                        <td class="text-center">{{ session.price_ticket }}</td>
+                        <td class="text-center">
                             <a href="{% url 'session_hall_info' session.id %}"><i class="nav-icon fas fa-ticket-alt fa-2x"></i></a>
                         </td>
                      </tbody>

@@ -44,8 +44,8 @@
                             <a href="#" class="fab fa-reddit fa-2x"></a>
              </div>
              <div class="p-2 bd-bd-highlight">
-                    <text class="text-white">(048)777-77-77</text><br>
-                    <text class="text-white">(097)777-77-77</text>
+                 <text class="text-white"><b>{{ MainInfo.phone_one }}</b></text><br>
+                 <text class="text-white"><b>{{ MainInfo.phone_two }}</b></text>
              </div>
          </div>
 
@@ -55,10 +55,10 @@
          <div class="p-2 bd-bd-highlight">
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="{% url 'poster' %}" class="btn btn-dark px-2 link-secondary">Афиша</a></li>
-            <li><a href="#" class="btn btn-dark px-2 link-dark">Расписание</a></li>
-            <li><a href="#" class="btn btn-dark px-2 link-dark">Скоро</a></li>
-            <li><a href="#" class="btn btn-dark px-2 link-dark">Кинотеатры</a></li>
-            <li><a href="#" class="btn btn-dark px-2 link-dark">Акции</a></li>
+            <li><a href="{% url 'timetable' %}" class="btn btn-dark px-2 link-dark">Расписание</a></li>
+            <li><a href="{% url 'soon' %}" class="btn btn-dark px-2 link-dark">Скоро</a></li>
+            <li><a href="{% url 'our_cinemas' %}" class="btn btn-dark px-2 link-dark">Кинотеатры</a></li>
+            <li><a href="{% url 'our_stocks' %}" class="btn btn-dark px-2 link-dark">Акции</a></li>
             <li>
               <div class="dropdown">
                 <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -66,7 +66,13 @@
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li class="dropdown-item"><a href="#">Action</a></li>
+
+                      <li class="dropdown-item"><a href="{% url 'our_news' %}">Новости</a></li>
+                      {% for page in pages %}
+                      <li class="dropdown-item"><a href="{% url 'our_page' page.id %}">{{ page.name_page }}</a></li>
+                      {% endfor %}
+
+                      <li class="dropdown-item"><a href="{% url 'our_contacts' %}">Контакты</a></li>
                   </ul>
                 </div>
             </li>
@@ -91,8 +97,31 @@
         {% endblock %}
     </div>
 
-    <div class="container-bottom d-flex  align-items-center  justify-content-md-between py-2 mb-6 border-bottom">
-     Нижняя панель
+    <div class="container-bottom border-bottom row">
+        <div class="col row">
+            <div class="col-md-12"><h5>Мобильное приложение</h5></div>
+            <div class="col-md-6">Google play</div>
+            <div class="col-md-6">App Store</div>
+            <div class="col-md-12">Разработка сайтов: AVADA-MEDIA</div>
+        </div>
+        <div class="col row text-center">
+            <div class="col-md-12"><h5>Афиша</h5></div>
+            <div class="col-md-12">Расписание</div>
+            <div class="col-md-12">Скоро в прокате</div>
+            <div class="col-md-12">Кинотеатры</div>
+            <div class="col-md-12">Акции</div>
+        </div>
+        <div class="col row text-center">
+            <div class="col-md-12"><h5>О кинотеатре</h5></div>
+            <div class="col-md-12">Новости</div>
+            <div class="col-md-12">Реклама</div>
+            <div class="col-md-12">Кафе-Бар</div>
+            <div class="col-md-12">Контакты</div>
+        </div>
+        <div class="md-3">
+            <a href="#" class="fab fa-facebook fa-2x"></a>
+            <a href="#" class="fab fa-twitter fa-2x"></a>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>

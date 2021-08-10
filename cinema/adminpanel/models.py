@@ -219,3 +219,14 @@ class BackgroundSetting(SingletonModel):
     backgroundImg = models.ImageField('Загружаемая картинка фона', upload_to='static/img/default', null=True,
                                       blank=True,
                                       default='static/img/default/background-default.jpeg')
+
+
+class AutoSMS(models.Model):
+    id = models.AutoField(unique=True, primary_key=True)
+    id_group = models.IntegerField('Ид группы рассылки')
+    phone = models.CharField("Номер отправки смс", max_length=10)
+    sms = models.CharField('Текст смс-рассылки', max_length=255, blank=True, null=True)
+    datetime = models.DateTimeField(auto_now_add=True)
+
+
+

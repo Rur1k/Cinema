@@ -1,0 +1,17 @@
+{% extends 'userpage/base_userpage.html' %}
+{% load static %}
+{% block title %}Скоро{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 text-center"><h2 class="text-white">Смотрите скоро</h2></div>
+    {% for film in films_pending %}
+    <div class="col text-center">
+        <a href="{% url 'film_details' film.id %}">
+          <img src="{{ film.main_picture.url }}" width="200" height="295"><br>
+            <text><b>{{ film.film_name }}</b></text><br>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

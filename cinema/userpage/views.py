@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from adminpanel.models import Film, FilmSession, Cinema_hall, BackgroundSetting, Slider, NewsAndStocksBanners
+from adminpanel.models import Film, FilmSession, Cinema_hall, BackgroundSetting, Slider, NewsAndStocksBanners, MainPage, Cinema
+from adminpanel.models import Page
 from .models import SeatsReserveAndBuy, StatusSeat
+import datetime
 
 
 def backSetting():
@@ -14,11 +16,15 @@ def backSetting():
 def main_page(request):
     Sliders = Slider.objects.all()
     SliderOne = Slider.objects.all()[:1]
+    now = datetime.datetime.now()
 
     NewsAndStocks = NewsAndStocksBanners.objects.all()
     NewsAndStocksOne = NewsAndStocksBanners.objects.all()[:1]
 
     context = {
+        'pages': Page.objects.filter(status_page=1),
+        'date': now.strftime("%d.%m"),
+        'MainInfo': MainPage.objects.get(id=1),
         'backgroundSite': backSetting(),
         'Sliders': Sliders,
         'SliderOne': SliderOne,
@@ -32,6 +38,8 @@ def main_page(request):
 
 def poster(request):
     context = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
         'films_active': Film.objects.filter(status_film=1),
         'films_pending': Film.objects.filter(status_film=2),
         'backgroundSite': backSetting()
@@ -44,6 +52,8 @@ def film_details(request, film_id):
     FilmInfo = Film.objects.get(id=film_id)
 
     context = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
         'SessionList': SessionList,
         'film': FilmInfo,
         'backgroundSite': backSetting()
@@ -69,6 +79,8 @@ def session_hall_info(request, session_id):
     rows = range(1, row)
     columns = range(1, col)
     data = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
         'BusySeats': BusySeatsList,
         'sessionId': SessionID,
         'SessionInfo': SessionInfo,
@@ -109,3 +121,79 @@ def save_reserve(request, session_id):
         print('НЕ прошли проверку пост')
 
     return render(request, 'userpage/test.html')
+
+
+def timetable(request):
+    Session = FilmSession.objects.all()
+
+    data = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'backgroundSite': backSetting(),
+        'session_list': Session,
+    }
+
+    return render(request, 'userpage/timetable.html', data)
+
+
+def soon(request):
+    context = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'films_pending': Film.objects.filter(status_film=2),
+        'backgroundSite': backSetting()
+    }
+    return render(request, 'userpage/soon.html', context)
+
+
+def cinemas(request):
+    context = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'backgroundSite': backSetting(),
+        'cinemas': Cinema.objects.all(),
+    }
+    return render(request, 'userpage/cinemas.html', context)
+
+
+def stocks(request):
+
+    data = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'backgroundSite': backSetting(),
+    }
+    return render(request, 'userpage/stocks.html', data)
+
+
+def contacts(request):
+
+    data = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'backgroundSite': backSetting(),
+    }
+    return render(request, 'userpage/contact.html', data)
+
+
+def news(request):
+
+    data = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'backgroundSite': backSetting(),
+    }
+    return render(request, 'userpage/news.html', data)
+
+
+def our_page(request, page_id):
+    PageInfo = Page.objects.get(id=page_id)
+
+    data = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'backgroundSite': backSetting(),
+        'page': PageInfo,
+    }
+    return render(request, 'userpage/page.html', data)
+
