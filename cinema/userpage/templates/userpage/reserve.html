@@ -1,0 +1,27 @@
+{% extends 'userpage/base_userpage.html' %}
+{% load static %}
+{% block title %}Бронирование билета{% endblock %}
+
+{% block content %}
+    <div class="col-md-12 row text-white text-center">
+        <div class="col-md-12 text-center"><h1>Бронь №{{ random }}</h1> </div>
+        <div class="col-md-12 row">
+            {% for ticket in tickets %}
+            <div class="col-md-6 border rounded" style="margin:1%; padding:1%">
+                <ul class="col-md-12 text-left">
+                    <ol class="text-center"><b>Билет №</b>{{ ticket.id }}</ol>
+                    <ol><b>Кинотеатр: </b> {{ ticket.film_session.hall.cinema_id.cinema_name }}</ol>
+                    <ol><b>Зал: </b> {{ ticket.film_session.hall.number_hall }}</ol>
+                    <ol><b>Фильм:</b> {{ ticket.film_session.film.film_name }}</ol>
+                    <ol><b>Сеанс:</b> {{ ticket.film_session.datetime }}</ol>
+                    <ol><b>Ряд:</b> {{ ticket.row }}</ol>
+                    <ol><b>Место:</b> {{ ticket.seat }}</ol>
+                    <ol><b>Цена:</b> {{ ticket.film_session.price_ticket }} грн</ol>
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+        
+
+    </div>
+{% endblock %}

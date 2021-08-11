@@ -18,4 +18,5 @@ urlpatterns = [
     path('cinema/hall/<int:hall_id>', views.hall_info, name='hall_info_userpage'),
     path('stock/<int:stock_id>', views.stock_info, name='stock_info_userpage'),
     path('news_info/<int:news_id>', views.news_info, name='news_info_userpage'),
+    path('user_account/<int:user_id>', views.user_account, name='user_account'),
 ]

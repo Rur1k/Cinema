@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from adminpanel.models import Film, FilmSession, Cinema_hall, BackgroundSetting, Slider, NewsAndStocksBanners, MainPage, Cinema
-from adminpanel.models import Page, Stock, News
+from adminpanel.models import Page, Stock, News, ContactCinema, Ticket
+from account.models import Profile, User
 from .models import SeatsReserveAndBuy, StatusSeat
 import datetime
+import random
 
 
 def backSetting():
@@ -97,7 +99,9 @@ def save_reserve(request, session_id):
     Seats = SeatsReserveAndBuy.objects.filter(session=session_id)
     session = FilmSession.objects.get(id=session_id)
     status = StatusSeat.objects.get(id=1)
+    randon_number = random.randint(1, 999999999999999)
     SeatList = []
+    TicketList = []
 
     print('Зашли в представление')
 
@@ -117,10 +121,26 @@ def save_reserve(request, session_id):
                 saveSeat = SeatsReserveAndBuy.objects.create(session=session, seat=seat, status_seat=status)
                 saveSeat.save()
 
+                rowAndSet = seat.split('-')
+                row = rowAndSet[0]
+                seat = rowAndSet[1]
+                saveTicket = Ticket.objects.create(film_session=session, row=row, seat=seat, status=1)
+                TicketList.append(saveTicket)
+                saveTicket.save()
+                print(TicketList)
+
     else:
         print('НЕ прошли проверку пост')
 
-    return render(request, 'userpage/test.html')
+    data = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'backgroundSite': backSetting(),
+        'tickets': TicketList,
+        'random': randon_number,
+    }
+
+    return render(request, 'userpage/reserve.html', data)
 
 
 def timetable(request):
@@ -169,11 +189,13 @@ def stocks(request):
 
 
 def contacts(request):
+    contacts_list = ContactCinema.objects.all()
 
     data = {
         'pages': Page.objects.filter(status_page=1),
         'MainInfo': MainPage.objects.get(id=1),
         'backgroundSite': backSetting(),
+        'contacts': contacts_list,
     }
     return render(request, 'userpage/contact.html', data)
 
@@ -267,4 +289,17 @@ def news_info(request, news_id):
         'news': news_info,
     }
     return render(request, 'userpage/news_info.html', data)
+
+
+def user_account(request, user_id):
+    ProfileInfo = Profile.objects.get(user=user_id)
+
+    data = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'backgroundSite': backSetting(),
+
+        'profile': ProfileInfo
+    }
+    return render(request, 'userpage/user_account.html', data)
 

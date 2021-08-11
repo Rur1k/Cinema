@@ -5,6 +5,16 @@ from .forms import LoginForm, UserRegistrationForm, UserForm, ProfileForm
 from .models import Profile, User
 
 
+def add_user_in_profile():
+    users = User.objects.all()
+
+    for user in users:
+        if Profile.objects.filter(user=user.pk):
+            print("Пользователь есть")
+        else:
+            Profile.objects.create(user=user)
+
+
 def login_user(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -41,7 +51,8 @@ def register(request):
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
-            return render(request, 'account/register_done.html', {'new_user': new_user})
+            add_user_in_profile()
+            return redirect('mainpage')
     else:
         user_form = UserRegistrationForm()
     return render(request, 'account/register.html', {'user_form': user_form})
@@ -56,6 +67,7 @@ def add_new_user(request):
             save_user_profile = profile_form.save(commit=False)
             save_user_profile.user = user_form.save(commit=False)
             save_user_profile.save()
+            add_user_in_profile()
             return redirect('users')
         else:
             print(user_form.errors)
@@ -72,8 +84,11 @@ def add_new_user(request):
 
 
 def users(request):
+
+    ProfileUser = Profile.objects.all()
+
     data = {
-        'users': Profile.objects.all()
+        'users': ProfileUser
     }
     return render(request, 'adminpanel/users.html', data)
 

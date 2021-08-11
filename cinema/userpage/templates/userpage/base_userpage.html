@@ -81,7 +81,7 @@
 
           <div class="p-2 bd-bd-highlight">
               {% if request.user.is_authenticated %}
-              <div class="btn text-white">В логине</div>
+              <button type="button" class="btn btn-dark" onclick="location.href='{% url 'user_account' request.user.pk %}'">Кабинет</button>
               <button type="button" class="btn btn-dark" onclick="location.href='{% url 'logout' %}'">Выход</button>
               {% else %}
                 <button type="button" class="btn btn-dark" onclick="location.href='{% url 'login' %}'">Вход</button>

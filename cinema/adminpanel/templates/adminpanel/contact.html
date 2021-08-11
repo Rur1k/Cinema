@@ -17,7 +17,6 @@
                 <th scope="col">Лого</th>
                 <th scope="col">Название</th>
                 <th scope="col">Адресс</th>
-                <th scope="col">Координаты</th>
                 <th scope="col">Эл. упр</th>
             </thead>
             {% for contact in contact_cinema %}
@@ -25,7 +24,6 @@
                     <td class="text-center"><img src="{{ contact.logo.url }}" width="100px" height="100px"/></td>
                     <td>{{ contact.name }}</td>
                     <td>{{ contact.address }}</td>
-                    <td>{{ contact.coordinates }}</td>
 
                     <td class="text-center">
                         <a href="{% url 'edit_contact_cinema' contact.id %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>

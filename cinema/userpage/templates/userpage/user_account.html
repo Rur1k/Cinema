@@ -1,0 +1,32 @@
+{% extends 'userpage/base_userpage.html' %}
+{% load static %}
+{% block title %}Кабинет{% endblock %}
+
+{% block content %}
+<div class="row text-white">
+    <div class="col-md-12 text-center"><h2 class="text-white">Страница клиента, {{ profile.user.username }}</h2></div>
+    <div class="col-md-12 row">
+        <div class="col-md-8">
+            <ul>
+                <ol><b>ФИО:</b> {{ profile.user.first_name }} {{ profile.user.last_name }}</ol>
+                <ol><b>Псевдоним:</b> {{ profile.pseudonym }}</ol>
+                <ol><b>e-mail:</b> {{ profile.user.email }}</ol>
+                <ol><b>Адресс:</b> {{ profile.address }}</ol>
+                <ol><b>Номер карты:</b> {{ profile.number_card }}</ol>
+                <ol><b>Пол:</b> {{ profile.male }}</ol>
+                <ol><b>Язык:</b> {{ profile.language }}</ol>
+                <ol><b>Телефон:</b> {{ profile.phone }}</ol>
+                <ol><b>Дата рождения:</b> {{ profile.birth_date }}</ol>
+                <ol><b>Город:</b> {{ profile.city }}</ol>
+            </ul>
+        </div>
+        <div class="col-md-4 text-right">
+            <button type="button" class="btn btn-dark" onclick="location.href=''">Редактировать</button>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <h2>Мои билеты:</h2>
+    </div>
+
+</div>
+{% endblock %}

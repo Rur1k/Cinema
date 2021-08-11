@@ -23,7 +23,7 @@
         </div>
     </div><br>
 
-<form action="{% url 'save_reserve' SessionInfo.id %}" method="POST">
+<form id="save-reserve" action="{% url 'save_reserve' SessionInfo.id %}" method="POST">
 <div class="row js-seat-container text-white"
      data-current-cost="{{ SessionInfo.price_ticket }}"
      data-current-timeslot-id="{{ SessionInfo.id }}">
@@ -57,7 +57,6 @@
         <div class="js-seat-result-container">
 
         </div>
-    <button id="submit-button" class="btn btn-info js-reserve-seats">Забронировать</button>
     </div>
 
     <div class="js-selected-seat-template" hidden="hidden">
@@ -84,7 +83,7 @@
 </div>
 
 <div class="text-center js-seat-container">
-    <button class="btn btn-info js-reserve-seats">Забронировать</button>
+    <button form="save-reserve" type="submit" class="btn btn-info js-reserve-seats" onclick="location.href='{% url 'save_reserve' SessionInfo.id %}'">Забронировать</button>
     <button class="btn btn-warning js-bue-seats">Купить</button>
 </div>
 

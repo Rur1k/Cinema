@@ -160,7 +160,7 @@ class ContactCinema(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
     name = models.CharField('Название кинотеатра', max_length=32)
     address = models.CharField('Адресс', max_length=128)
-    coordinates = models.CharField('Координаты', max_length=64)
+    coordinates = models.TextField('Координаты')
     logo = models.ImageField(upload_to='static/img/contactcinema', null=True, blank=True)
 
 
@@ -175,11 +175,10 @@ class FilmSession(models.Model):
 class Ticket(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
     film_session = models.ForeignKey(FilmSession, on_delete=models.CASCADE)
-    film = models.CharField('Название фильма', max_length=32)
-    datetime = models.CharField('Дата и время сеанса', max_length=32)
-    price = models.IntegerField('Цена билета')
-    row = models.IntegerField('Ряд')
-    seat = models.IntegerField('Место')
+    row = models.CharField('Ряд', max_length=32)
+    seat = models.CharField('Место', max_length=32)
+    user_id = models.CharField('Польователь', max_length=32, default=1)
+    status = models.CharField('Статус', max_length=32, default=0)
 
 
 class Slider(models.Model):

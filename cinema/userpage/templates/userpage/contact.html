@@ -3,9 +3,53 @@
 {% block title %}Контакты{% endblock %}
 
 {% block content %}
-<div class="row">
+<div class="col-md-12 row text-white">
     <div class="col-md-12 text-center"><h2 class="text-white">Контакты</h2></div>
 
-
+<!--    Отображение модели-->
+    {% for contact in contacts %}
+    <div class="col-md-12 row border rounded" style="margin:1%; padding:1%">
+        <div class="col-md-6 row">
+            <div class="col-md-12 row">
+                <div class="col-md-12"><b>{{ contact.name }}</b></div>
+                <div class="col-md-12">
+                    <img src="{{ contact.logo.url }}" width="100%" height="100%" style="max-height:500px; max-width:500px" >
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 row">
+            <div class="col-md-12">
+                {{ contact.address }}
+            </div>
+            <div id="map" class="col-md-12">
+                <iframe
+                        src="{{ contact.coordinates }}"
+                        style="border:0;"
+                        width="100%"
+                        height="100%"
+                        allowfullscreen=""
+                        loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
+
+<!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0Qe7SIpG0pDLFkjAyxqp3Z8Ws_vZD1eI&callback=initMap"></script>-->
+<!--<script>-->
+<!--    function initMap() {-->
+<!--        var coordinates = {lat: 46.4695125, lng: 30.7268761},-->
+
+<!--            map = new google.maps.Map(document.getElementById('map'), {-->
+<!--                center: coordinates,-->
+<!--                zoom: 15,-->
+<!--            });-->
+
+<!--            marker = new google.maps.Marker({-->
+<!--                position: coordinates,-->
+<!--                map: map,-->
+<!--            });-->
+<!--    }-->
+<!--</script>-->
+
 {% endblock %}
