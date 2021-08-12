@@ -14,6 +14,7 @@ admin.site.register(ContactPage)
 admin.site.register(FilmSession)
 admin.site.register(Slider)
 admin.site.register(BackgroundSetting)
+admin.site.register(AutoSMS)
 
 admin.site.register(StatusSeat)
 admin.site.register(SeatsReserveAndBuy)

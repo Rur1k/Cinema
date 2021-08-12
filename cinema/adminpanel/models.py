@@ -170,6 +170,7 @@ class FilmSession(models.Model):
     film = models.ForeignKey(Film, on_delete=models.CASCADE)
     datetime = models.DateTimeField()
     price_ticket = models.IntegerField('Цена билета')
+    status = models.ForeignKey(Status_main, default=1, null=True, on_delete=models.CASCADE)
 
 
 class Ticket(models.Model):
@@ -222,7 +223,7 @@ class BackgroundSetting(SingletonModel):
 
 class AutoSMS(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
-    id_group = models.IntegerField('Ид группы рассылки')
+    id_group = models.IntegerField('Ид группы рассылки', default=1, null=False)
     phone = models.CharField("Номер отправки смс", max_length=10)
     sms = models.CharField('Текст смс-рассылки', max_length=255, blank=True, null=True)
     datetime = models.DateTimeField(auto_now_add=True)

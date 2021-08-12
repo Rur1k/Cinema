@@ -6,12 +6,65 @@ from django.forms import formset_factory
 from django.core.mail import send_mail, BadHeaderError
 from cinema.settings import FROM_EMAIL, EMAIL_ADMIN
 from django.http import HttpResponse, HttpResponseRedirect
-from account.models import Profile
+from account.models import Profile, User
 from django.db.models import Q
+import datetime
+
+now = datetime.datetime.now()
 
 
 def admin(request):
-    return render(request, 'adminpanel/statistics.html')
+    # Пользователей зарегестрировано
+    users = User.objects.count()
+    # Выборка всех билетов
+    tickets = Ticket.objects.all()
+    # Общее количество сеансов
+    sessions = FilmSession.objects.count()
+    # Активные сеансы
+    activ_session = FilmSession.objects.all().extra(where=["datetime>='"+str(now)+"'"]).count()
+    activ_session_list = FilmSession.objects.all().extra(where=["datetime>='"+str(now)+"'"])
+
+    # Просчет мест в сеансах, занятых, сводобных и тд
+    allSeat = 0
+    buySeat = 0
+    activeProfit = 0
+
+    for data in activ_session_list:
+        allSeat = allSeat + (data.hall.row * data.hall.col)
+        buySeat = buySeat + Ticket.objects.filter(film_session=data).count()
+        activeProfit = activeProfit + (buySeat*data.price_ticket)
+
+    percentBuySeat = ((buySeat*100)/allSeat)
+
+    # Прибыль с билетов
+    sumBuyTickets = 0
+    for ticket in tickets:
+        sumBuyTickets = sumBuyTickets+ticket.film_session.price_ticket
+
+    # Статистика по фильмам
+    films = Film.objects.count()
+    activeFilms = Film.objects.filter(status_film=1).count()
+    soonFilms = Film.objects.filter(status_film=2).count()
+    archiveFilms = Film.objects.filter(status_film=3).count()
+
+    data = {
+        'count_users': users,
+        'sumBuyTicket': sumBuyTickets,
+        'sessions': sessions,
+        'activ_session': activ_session,
+        'allSeat': allSeat,
+        'buySeat': buySeat,
+        'freeSeat': allSeat-buySeat,
+        'percentBuySeat': percentBuySeat,
+        'activeProfit': activeProfit,
+        'films': films,
+        'activeFilms': activeFilms,
+        'soonFilms': soonFilms,
+        'archiveFilms': archiveFilms,
+    }
+
+
+    return render(request, 'adminpanel/statistics.html', data)
 
 
 def films(request):
@@ -118,7 +171,7 @@ def add_cinema_hall(request, cinema_id):
 
 def hall_info(request, hall_id):
     hall_info_all = Cinema_hall.objects.get(id=hall_id)
-    session = FilmSession.objects.filter(hall=hall_id)
+    session = FilmSession.objects.filter(hall=hall_id).extra(where=["datetime>='"+str(now)+"'"])
 
     row = hall_info_all.row + 1
     col = hall_info_all.col + 1
@@ -431,9 +484,23 @@ def save_phone_sms(request):
         phone_list = request.POST.getlist('phone-list')
         print(phone_list)
 
+        last = []
 
+        for id in AutoSMS.objects.all():
+            last.append(id.id_group)
+
+        new_id = int(max(last))+1
+
+        for phone in phone_list:
+            AutoSMS.objects.create(id_group=new_id, phone=phone)
 
     return redirect('mailing')
+
+def start_sms(request):
+    pass
+
+
+
 
 
 

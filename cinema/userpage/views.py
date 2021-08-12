@@ -7,6 +7,8 @@ from account.forms import UserForm, ProfileForm
 import datetime
 import random
 
+now = datetime.datetime.now()
+
 
 def backSetting():
     background = BackgroundSetting.objects.get(pk=1)
@@ -51,7 +53,7 @@ def poster(request):
 
 
 def film_details(request, film_id):
-    SessionList = FilmSession.objects.filter(film=film_id)
+    SessionList = FilmSession.objects.filter(film=film_id).extra(where=["datetime>='"+str(now)+"'"])
     FilmInfo = Film.objects.get(id=film_id)
 
     context = {
@@ -162,7 +164,8 @@ def save_reserve(request, session_id):
 
 
 def timetable(request):
-    Session = FilmSession.objects.all()
+    now = datetime.datetime.now()
+    Session = FilmSession.objects.extra(where=["datetime>='"+str(now)+"'"])
 
     data = {
         'pages': Page.objects.filter(status_page=1),
@@ -248,7 +251,7 @@ def cinema_info(request, cinema_id):
     FilmSessionList = []
 
     for session in HallInfo:
-        FilmSessionList.extend(FilmSession.objects.filter(hall=session.id))
+        FilmSessionList.extend(FilmSession.objects.filter(hall=session.id).extra(where=["datetime>='"+str(now)+"'"]))
 
     data = {
         'pages': Page.objects.filter(status_page=1),
@@ -264,7 +267,7 @@ def cinema_info(request, cinema_id):
 
 def hall_info(request, hall_id):
     hall_info_all = Cinema_hall.objects.get(id=hall_id)
-    session = FilmSession.objects.filter(hall=hall_id)
+    session = FilmSession.objects.filter(hall=hall_id).extra(where=["datetime>='"+str(now)+"'"])
 
     row = hall_info_all.row + 1
     col = hall_info_all.col + 1
