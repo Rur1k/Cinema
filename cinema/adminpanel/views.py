@@ -34,7 +34,8 @@ def admin(request):
         buySeat = buySeat + Ticket.objects.filter(film_session=data).count()
         activeProfit = activeProfit + (buySeat*data.price_ticket)
 
-    percentBuySeat = ((buySeat*100)/allSeat)
+    if (allSeat | buySeat) != 0:
+        percentBuySeat = ((buySeat*100)/allSeat)
 
     # Прибыль с билетов
     sumBuyTickets = 0
