@@ -1,13 +1,13 @@
 {% extends 'userpage/base_userpage.html' %}
 {% load static %}
-{% block title %}Бронирование билета{% endblock %}
+{% block title %}Заказ билетов{% endblock %}
 
 {% block content %}
     <div class="col-md-12 row text-white text-center">
-        <div class="col-md-12 text-center"><h1>Бронь №{{ random }}</h1> </div>
+        <div class="col-md-12 text-center"><h1>Заказ № {{ random }}</h1> </div>
         <div class="col-md-12 row">
             {% for ticket in tickets %}
-            <div class="col-md-6 border rounded" style="padding:1%">
+            <div class="col-md-6 border rounded" style="padding:1%;">
                 <ul class="text-left">
                     <ol class="text-center"><b>Билет №</b>{{ ticket.id }}</ol>
                     <ol><b>Кинотеатр: </b> {{ ticket.film_session.hall.cinema_id.cinema_name }}</ol>
@@ -22,8 +22,10 @@
             {% endfor %}
         </div>
         <div class="col-md-12 text-center">
-            <p><b>Стоимость услуги бронирования - 3 грн. за каждое место</b></p>
-            <p>ЗАБРОНИРОВАННЫЕ БИЛЕТЫ НУЖНО ВЫКУПИТЬ В КАССЕ КИНОТЕАТРА НЕ ПОЗДНЕЕ ЧЕМ ЗА ПОЛЧАСА ДО НАЧАЛА СЕАНСА НАЗВАВ НОМЕР БРОНИ</p>
+            <p>Предьявите билет на входе или уточните номер заказа</p>
+            {% if request.user.is_authenticated %}
+            <p>БИЛЕТЫ ТАК-ЖЕ ДОСТУПНЫ В ВАШЕМ <a href="{% url 'user_account' request.user.pk %}">КАБИНЕТЕ</a></p>
+            {% endif %}
         </div>
 
 

@@ -1,0 +1,106 @@
+{% extends 'userpage/base_userpage.html' %}
+{% load static %}
+{% block title %}Редактирование{% endblock %}
+
+{% block content %}
+<div class="add-user text-white">
+  <form method="POST">
+    {% csrf_token %}
+      <div class="mb-3 row" hidden="hidden">
+           <label class="col-sm-2 col-form-label text-right">Имя пользователя: </label>
+           <div class="col-sm-10">
+                {{ user_form.username }}
+           </div>
+       </div><br>
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label text-right">email: </label>
+           <div class="col-sm-10">
+               {{ user_form.email }}
+           </div>
+      </div><br>
+
+      <div class="mb-3 row">
+          <label class="col-sm-2 col-form-label text-right">Пароль: </label>
+          <div class="col-sm-10">
+               {{ user_form.password }}
+          </div>
+      </div><br>
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label text-right">Имя: </label>
+           <div class="col-sm-10">
+                {{ user_form.first_name }}
+           </div>
+      </div><br>
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label text-right">Фамилия: </label>
+           <div class="col-sm-10">
+                {{ user_form.last_name }}
+           </div>
+      </div><br>
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label text-right">Псевдоним: </label>
+           <div class="col-sm-10">
+                {{ profile_form.pseudonym }}
+           </div>
+       </div><br>
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label text-right">Адрес: </label>
+           <div class="col-sm-10">
+                {{ profile_form.address }}
+           </div>
+       </div><br>
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label text-right">Номер карты: </label>
+           <div class="col-sm-10">
+                {{ profile_form.card_number }}
+           </div>
+       </div><br>
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label text-right">Язык: </label>
+           <div class="col-sm-10">
+                {{ profile_form.language }}
+           </div>
+       </div><br>
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label text-right">Пол: </label>
+           <div class="col-sm-10">
+                {{ profile_form.male }}
+           </div>
+       </div><br>
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label text-right">Телефон: </label>
+           <div class="col-sm-10">
+                {{ profile_form.phone }}
+           </div>
+       </div><br>
+
+<!--      <div class="mb-3 row">-->
+<!--           <label class="col-sm-2 col-form-label text-right">Дата рождения: </label>-->
+<!--           <div class="col-sm-10">-->
+<!--                {{ profile_form.birth_date }}-->
+<!--           </div>-->
+<!--       </div><br>-->
+
+      <div class="mb-3 row">
+           <label class="col-sm-2 col-form-label text-right">Город: </label>
+           <div class="col-sm-10">
+                {{ profile_form.city }}
+           </div>
+       </div><br>
+
+
+      <div class="mb-3 text-center">
+          <input type="submit" class="button-add-mass btn btn-dark col-md-4" value="Добавить/Сохранить"><br>
+      </div>
+  </form>
+</div>
+{% endblock %}

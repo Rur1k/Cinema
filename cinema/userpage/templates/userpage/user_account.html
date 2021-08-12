@@ -21,11 +21,41 @@
             </ul>
         </div>
         <div class="col-md-4 text-right">
-            <button type="button" class="btn btn-dark" onclick="location.href=''">Редактировать</button>
+            <button type="button" class="btn btn-dark" onclick="location.href='{% url 'edit_user_account' request.user.pk %}'">Редактировать</button>
         </div>
     </div>
-    <div class="col-md-12">
-        <h2>Мои билеты:</h2>
+    <div class="col-md-12 text-center">
+        <h2>Мои билеты</h2>
+         <table class="table table-bordered text-white">
+                <thead>
+                    <th scope="col" class="text-center">№</th>
+                    <th scope="col" class="text-center">Кинотеатр</th>
+                    <th scope="col" class="text-center">Зал</th>
+                    <th scope="col" class="text-center">Фильм</th>
+                    <th scope="col" class="text-center">Время</th>
+                    <th scope="col" class="text-center">Ряд-Место</th>
+                    <th scope="col" class="text-center">Цена</th>
+                    <th scope="col" class="text-center">Состояние</th>
+                </thead>
+                {% for ticket in tickets %}
+                    <tbody>
+                        <td scope="col" class="text-center">{{ ticket.id }}</td>
+                        <td scope="col">{{ ticket.film_session.hall.cinema_id.cinema_name}}</td>
+                        <td scope="col">{{ ticket.film_session.hall.number_hall }}</td>
+                        <td scope="col" class="text-center">{{ ticket.film_session.film.film_name }}</td>
+                        <td scope="col" class="text-center">{{ ticket.film_session.datetime }}</td>
+                        <td scope="col" class="text-center">{{ ticket.row }}-{{ ticket.seat }}</td>
+                        <td scope="col" class="text-center">{{ ticket.film_session.price_ticket }}</td>
+                        {% if ticket.status == '2' %}
+                        <td scope="col" class="text-center">Куплено</td>
+                        {% elif ticket.status == '1' %}
+                        <td scope="col" class="text-center">Забронировано</td>
+                        {% else %}
+                        <td scope="col" class="text-center">Не определено</td>
+                        {% endif %}
+                     </tbody>
+                {% endfor %}
+            </table>
     </div>
 
 </div>

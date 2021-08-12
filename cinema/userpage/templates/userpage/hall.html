@@ -83,8 +83,8 @@
 </div>
 
 <div class="text-center js-seat-container">
-    <button form="save-reserve" type="submit" class="btn btn-info js-reserve-seats" onclick="location.href='{% url 'save_reserve' SessionInfo.id %}'">Забронировать</button>
-    <button class="btn btn-warning js-bue-seats">Купить</button>
+    <button form="save-reserve"  name="save" value="reserve" type="submit" class="btn btn-info js-reserve-seats">Забронировать</button>
+    <button form="save-reserve"  name="save" value="buy" type="submit" class="btn btn-warning js-bue-seats">Купить</button>
 </div>
 
 

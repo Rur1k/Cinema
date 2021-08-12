@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from adminpanel.models import Film, FilmSession, Cinema_hall, BackgroundSetting, Slider, NewsAndStocksBanners, MainPage, Cinema
 from adminpanel.models import Page, Stock, News, ContactCinema, Ticket
 from account.models import Profile, User
 from .models import SeatsReserveAndBuy, StatusSeat
+from account.forms import UserForm, ProfileForm
 import datetime
 import random
 
@@ -98,7 +99,6 @@ def session_hall_info(request, session_id):
 def save_reserve(request, session_id):
     Seats = SeatsReserveAndBuy.objects.filter(session=session_id)
     session = FilmSession.objects.get(id=session_id)
-    status = StatusSeat.objects.get(id=1)
     randon_number = random.randint(1, 999999999999999)
     SeatList = []
     TicketList = []
@@ -107,8 +107,16 @@ def save_reserve(request, session_id):
 
     if request.method == 'POST':
         print('прошли проверу на пост запрос')
+        status = 0
         CheckSeat = request.POST.getlist('SeatList')
         print(CheckSeat)
+
+        if request.POST.get('save') == 'reserve':
+            status = StatusSeat.objects.get(id=1)
+        elif request.POST.get('save') == 'buy':
+            status = StatusSeat.objects.get(id=2)
+        else:
+            print('Не определенно')
 
         for seat in Seats:
             SeatList.append(seat.seat)
@@ -124,7 +132,11 @@ def save_reserve(request, session_id):
                 rowAndSet = seat.split('-')
                 row = rowAndSet[0]
                 seat = rowAndSet[1]
-                saveTicket = Ticket.objects.create(film_session=session, row=row, seat=seat, status=1)
+                if request.user.is_authenticated:
+                    user = request.user.pk
+                else:
+                    user = 1
+                saveTicket = Ticket.objects.create(film_session=session, row=row, seat=seat, status=status.id, user_id=user)
                 TicketList.append(saveTicket)
                 saveTicket.save()
                 print(TicketList)
@@ -140,7 +152,13 @@ def save_reserve(request, session_id):
         'random': randon_number,
     }
 
-    return render(request, 'userpage/reserve.html', data)
+    if request.POST.get('save') == 'reserve':
+        return render(request, 'userpage/reserve.html', data)
+    elif request.POST.get('save') == 'buy':
+        return render(request, 'userpage/buy_ticket.html', data)
+    else:
+        return render(request, 'userpage/test.html', data)
+
 
 
 def timetable(request):
@@ -293,13 +311,87 @@ def news_info(request, news_id):
 
 def user_account(request, user_id):
     ProfileInfo = Profile.objects.get(user=user_id)
+    TicketList = Ticket.objects.filter(user_id=user_id)
+
+    for ticket in TicketList:
+        print(ticket.status)
 
     data = {
         'pages': Page.objects.filter(status_page=1),
         'MainInfo': MainPage.objects.get(id=1),
         'backgroundSite': backSetting(),
 
-        'profile': ProfileInfo
+        'profile': ProfileInfo,
+        'tickets': TicketList,
     }
     return render(request, 'userpage/user_account.html', data)
+
+
+def UpdateUserViewUserPage(request, user_id):
+    UserInfo = User.objects.get(id=user_id)
+    ProfileInfo = Profile.objects.get(user=user_id)
+
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        pseudonym = request.POST.get('pseudonym')
+        address = request.POST.get('address')
+        card_number = request.POST.get('card_number')
+        language = request.POST.get('language')
+        male = request.POST.get('male')
+        phone = request.POST.get('phone')
+        birth_date = request.POST.get('birth_date')
+        city = request.POST.get('city')
+
+        User.objects.filter(id=user_id).update(
+                email=email,
+                password=password,
+                first_name=first_name,
+                last_name=last_name,
+            )
+        Profile.objects.filter(user=user_id).update(
+                pseudonym=pseudonym,
+                address=address,
+                card_number=card_number,
+                language=language,
+                male=male,
+                phone=phone,
+                birth_date=birth_date,
+                city=city
+        )
+
+        return redirect('user_account', user_id=user_id)
+
+    user_form = UserForm(initial={
+        'username': UserInfo.username,
+        'email': UserInfo.email,
+        'password': UserInfo.password,
+        'first_name': UserInfo.first_name,
+        'last_name': UserInfo.last_name,
+    })
+    profile_form = ProfileForm(initial={
+        'pseudonym': ProfileInfo.pseudonym,
+        'address': ProfileInfo.address,
+        'card_number': ProfileInfo.card_number,
+        'language': ProfileInfo.language,
+        'male': ProfileInfo.male,
+        'phone': ProfileInfo.phone,
+        # 'birth_date': ProfileInfo.birth_date,
+        'city': ProfileInfo.city,
+    })
+
+    data = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'backgroundSite': backSetting(),
+
+        'user_form': user_form,
+        'profile_form': profile_form
+    }
+    return render(request, 'userpage/edit_user.html', data)
+
+
+
 

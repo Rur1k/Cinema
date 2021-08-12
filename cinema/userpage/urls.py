@@ -19,4 +19,5 @@ urlpatterns = [
     path('stock/<int:stock_id>', views.stock_info, name='stock_info_userpage'),
     path('news_info/<int:news_id>', views.news_info, name='news_info_userpage'),
     path('user_account/<int:user_id>', views.user_account, name='user_account'),
+path('user_account/edit/<int:user_id>', views.UpdateUserViewUserPage, name='edit_user_account'),
 ]
