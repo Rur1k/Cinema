@@ -28,6 +28,7 @@ def admin(request):
     allSeat = 0
     buySeat = 0
     activeProfit = 0
+    percentBuySeat = 0
 
     for data in activ_session_list:
         allSeat = allSeat + (data.hall.row * data.hall.col)
