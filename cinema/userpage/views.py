@@ -393,5 +393,23 @@ def UpdateUserViewUserPage(request, user_id):
     return render(request, 'userpage/edit_user.html', data)
 
 
+def register_done(request):
+    data = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'backgroundSite': backSetting(),
+    }
+
+    return render(request, 'account/register_done.html', data)
+
+
+def login_error(request):
+    data = {
+        'pages': Page.objects.filter(status_page=1),
+        'MainInfo': MainPage.objects.get(id=1),
+        'backgroundSite': backSetting(),
+    }
+
+    return render(request, 'account/login_error.html', data)
 
 

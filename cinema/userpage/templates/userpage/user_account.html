@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="row text-white">
+    {% if request.user.is_authenticated %}
     <div class="col-md-12 text-center"><h2 class="text-white">Страница клиента, {{ profile.user.username }}</h2></div>
     <div class="col-md-12 row">
         <div class="col-md-8">
@@ -57,6 +58,9 @@
                 {% endfor %}
             </table>
     </div>
-
+    {% else %}
+    <div class="text-center">
+        <p>Вы не авторизованы, пожалуйста<a href="{% url 'login' %}"> авторизуйтесь</a></p>
+    </div>
 </div>
 {% endblock %}
