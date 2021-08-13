@@ -22,7 +22,7 @@ def admin(request):
     sessions = FilmSession.objects.count()
     # Активные сеансы
     activ_session = FilmSession.objects.all().extra(where=["datetime>='"+str(now)+"'"]).count()
-    activ_session_list = FilmSession.objects.all().extra(where=["datetime>='"+str(now)+"'"])
+    activ_session_list = FilmSession.objects.all().extra(where=["datetime>='"+str(now)+"'"]).order_by('datetime')
 
     # Просчет мест в сеансах, занятых, сводобных и тд
     allSeat = 0
@@ -173,7 +173,7 @@ def add_cinema_hall(request, cinema_id):
 
 def hall_info(request, hall_id):
     hall_info_all = Cinema_hall.objects.get(id=hall_id)
-    session = FilmSession.objects.filter(hall=hall_id).extra(where=["datetime>='"+str(now)+"'"])
+    session = FilmSession.objects.filter(hall=hall_id).extra(where=["datetime>='"+str(now)+"'"]).order_by('datetime')
 
     row = hall_info_all.row + 1
     col = hall_info_all.col + 1
