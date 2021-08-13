@@ -34,8 +34,12 @@
                     <td>{{ user.pseudonym }}</td>
                     <td>{{ user.city }}</td>
                     <td class="text-center">
-                        <a href="{% url 'edit_user' user.pk %}"><i class="nav-icon fas fa-pen fa-2x"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        {% if user.user.is_superuser %}
+                        <a href="{% url 'edit_user' user.pk %}"><i class="nav-icon fas fa-pen fa-2x"></i></a>
+                        {% else %}
+                        <a href="{% url 'edit_user' user.pk %}"><i class="nav-icon fas fa-pen fa-2x"></i></a>
                         <a href="{% url 'delete_user' user.pk %}"><i class="nav-icon fas fa-trash fa-2x"></i></a></td>
+                        {% endif %}
                 </tbody>
             {% endfor %}
         </table>

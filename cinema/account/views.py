@@ -84,7 +84,7 @@ def add_new_user(request):
 
 
 def users(request):
-
+    add_user_in_profile()
     ProfileUser = Profile.objects.all()
 
     data = {
