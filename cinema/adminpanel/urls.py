@@ -35,6 +35,7 @@ urlpatterns = [
     path('email/', views.contact_view, name='email'),
     path('success/', views.success_view, name='success'),
     path('select_user_contact/', views.select_user_contact, name='select_user_contact'),
+    path('select_user_email/', views.select_user_email, name='select_user_email'),
     path('delete_slider/<int:pk>', views.SliderDeleteView.as_view(), name='delete_slider'),
     path('delete_background/<int:pk>', views.BackgroundDeleteView.as_view(), name='delete_background'),
     path('delete_newsslider/<int:pk>', views.NewsSliderDeleteView.as_view(), name='delete_newsslider'),
@@ -43,5 +44,6 @@ urlpatterns = [
     path('deletecontactcinema/<int:pk>', views.ContactCinemaDeleteView.as_view(), name='delete_contact_cinema'),
     path('deletepage/<int:pk>', views.PageDeleteView.as_view(), name='delete_page'),
     path('save_phone_sms/', views.save_phone_sms, name='save_phones'),
+    path('save_email/', views.save_email_mail, name='save_email'),
 
 ]

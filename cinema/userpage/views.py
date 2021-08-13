@@ -253,13 +253,14 @@ def cinema_info(request, cinema_id):
     for session in HallInfo:
         FilmSessionList.extend(FilmSession.objects.filter(hall=session.id).extra(where=["datetime>='"+str(now)+"'"]).order_by('datetime'))
 
+
     data = {
         'pages': Page.objects.filter(status_page=1),
         'MainInfo': MainPage.objects.get(id=1),
         'backgroundSite': backSetting(),
         'cinema': CinemaInfo,
         'halls': HallInfo,
-        'session_list': FilmSessionList,
+        'session_list': FilmSessionList
     }
 
     return render(request, 'userpage/cinema.html', data)

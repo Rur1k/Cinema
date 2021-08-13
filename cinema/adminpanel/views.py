@@ -33,7 +33,6 @@ def admin(request):
     for data in activ_session_list:
         allSeat = allSeat + (data.hall.row * data.hall.col)
         buySeat = buySeat + Ticket.objects.filter(film_session=data).count()
-        activeProfit = activeProfit + (buySeat*data.price_ticket)
 
     if (allSeat | buySeat) != 0:
         percentBuySeat = ((buySeat*100)/allSeat)
@@ -58,7 +57,6 @@ def admin(request):
         'buySeat': buySeat,
         'freeSeat': allSeat-buySeat,
         'percentBuySeat': percentBuySeat,
-        'activeProfit': activeProfit,
         'films': films,
         'activeFilms': activeFilms,
         'soonFilms': soonFilms,
@@ -497,6 +495,37 @@ def save_phone_sms(request):
             AutoSMS.objects.create(id_group=new_id, phone=phone)
 
     return redirect('mailing')
+
+
+def save_email_mail(request):
+    print('Зашли в представление')
+    if request.method == 'POST':
+        print('ПРошли проверу на пост')
+        email_list = request.POST.getlist('email-list')
+        print(email_list)
+
+        last = []
+
+        for id in AutoEmail.objects.all():
+            last.append(id.id_group)
+
+        new_id = int(max(last))+1
+
+        for email in email_list:
+            AutoEmail.objects.create(id_group=new_id, email=email)
+
+    return redirect('mailing')
+
+
+def select_user_email(request):
+    Users = Profile.objects.all()
+
+    data = {
+        'users': Users
+    }
+
+    return render(request, 'adminpanel/select_user_email.html', data)
+
 
 def start_sms(request):
     pass

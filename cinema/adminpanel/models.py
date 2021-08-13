@@ -229,4 +229,12 @@ class AutoSMS(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
 
 
+class AutoEmail(models.Model):
+    id = models.AutoField(unique=True, primary_key=True)
+    id_group = models.IntegerField('Ид группы рассылки', default=1, null=False)
+    email = models.EmailField("Email отправки", max_length=64)
+    template_mail = models.TextField('Текст рассылки', blank=True, null=True)
+    datetime = models.DateTimeField(auto_now_add=True)
+
+
 
